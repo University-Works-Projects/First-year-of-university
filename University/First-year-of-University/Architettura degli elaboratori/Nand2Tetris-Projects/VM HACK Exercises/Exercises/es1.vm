@@ -1,0 +1,59 @@
+// es1 test
+// Translate:
+
+// Code to translate
+ /*
+    function mult (x,y){
+        int sum, j;
+        sum = 0;
+        j = y;
+        while (j != 0){
+            sum = sum + x;
+            j = j - 1;
+        }
+        return sum;
+    } 
+*/
+
+// Complete VM HACK code
+
+// Memory segments used: STACK, LOCAL and ARGUMENT (ARG)
+
+function es1.mult 2 // 2 function's argument --> ARG 0| x  ;;; ARG 1| y
+
+// sum = 0
+push constant 0     // STACK| 0   ;;; LOCAL 0|        ;;; LOCAL 1|      ;;; ARG 0| x  ;;; ARG 1| y
+pop local 0         // STACK| 0   ;;; LOCAL 0| sum=0  ;;; LOCAL 1|      ;;; ARG 0| x  ;;; ARG 1| y
+
+// j = y
+push argument 1     // STACK| y   ;;; LOCAL 0| sum=0  ;;; LOCAL 1|      ;;; ARG 0| x  ;;; ARG 1| y
+pop local 1         // STACK|     ;;; LOCAL 0| sum=0  ;;; LOCAL 1| j=y  ;;; ARG 0| x  ;;; ARG 1| y
+
+label control          // Declaration of control label
+// control: j != 0
+push local 1        // STACK| j   ;;; LOCAL 0| sum  ;;; LOCAL 1| j    ;;; ARG 0| x  ; ARG 1| y
+push constant 0     // STACK| y 0 ;;; LOCAL 0| sum  ;;; LOCAL 1| j    ;;; ARG 0| x  ; ARG 1| y
+eq                  // STACK| t/f ;;; LOCAL 0| sum  ;;; LOCAL 1| j    ;;; ARG 0| x  ; ARG 1| y
+if-goto end         // STACK|     ;;; LOCAL 0| sum  ;;; LOCAL 1| j    ;;; ARG 0| x  ; ARG 1| y
+
+// case y == 0 is true
+// sum += x
+push local 0        // STACK| sum   ;;; LOCAL 0| sum    ;;; LOCAL 1| y    ;;; ARG 0| x  ; ARG 1| y
+push argument 0     // STACK| sum x ;;; LOCAL 0| sum    ;;; LOCAL 1| y    ;;; ARG 0| x  ; ARG 1| y
+add                 // STACK| sum+x ;;; LOCAL 0| sum    ;;; LOCAL 1| y    ;;; ARG 0| x  ; ARG 1| y
+pop local 0         // STACK|       ;;; LOCAL 0| sum+x  ;;; LOCAL 1| y    ;;; ARG 0| x  ; ARG 1| y
+
+// j--
+push local 1        // STACK| y     ;;; LOCAL 0| sum+x  ;;; LOCAL 1| y    ;;; ARG 0| x  ; ARG 1| y
+push constant 1     // STACK| y 1   ;;; LOCAL 0| sum+x  ;;; LOCAL 1| y    ;;; ARG 0| x  ; ARG 1| y
+sub                 // STACK| y-1   ;;; LOCAL 0| sum+x  ;;; LOCAL 1| y    ;;; ARG 0| x  ; ARG 1| y
+pop local 1         // STACK|       ;;; LOCAL 0| sum+x  ;;; LOCAL 1| y-1  ;;; ARG 0| x  ; ARG 1| y
+
+goto control           // go to control label
+
+// return sum
+label end           // case y == 0 is false
+push local 0        // STACK| su    ;;; LOCAL 0| sum    ;;; LOCAL 1| y    ;;; ARG 0| x  ; ARG 1| y
+return              // return sum
+
+

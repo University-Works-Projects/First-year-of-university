@@ -1,0 +1,26 @@
+TEST EXERCISES
+
+EXERCISE #1 V - Transale C code
+
+    Write the relative VM HACK code of this C program:
+
+        int f (int x, int y){
+            while (x > 0){
+                y += 3;
+                x -= 2;
+            }
+            return x;
+        }
+
+EXERCISE #2 V - Transale C code
+
+    Write the relative VM HACK code of this C program:
+
+        int fun(int a){
+            while (a<15){
+                a+=4;
+            }
+            return(-a);
+        }
+
+

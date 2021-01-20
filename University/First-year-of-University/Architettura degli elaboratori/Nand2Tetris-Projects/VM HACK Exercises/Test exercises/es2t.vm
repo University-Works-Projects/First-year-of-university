@@ -1,0 +1,38 @@
+// es2 test - Translate exercises
+
+// Code to translate
+/*
+    int fun(int a){
+        while (a < 15){
+            a += 4;
+        }
+        return(-a);
+    }
+*/
+
+// Complete VM HACK code
+
+// Memory segments used: STACK and ARGUMENT (ARG)
+
+function es1t.f 1   // 1 function's argument --> ARG 0| a
+
+// controll a < 15
+label control       // declaration of control label
+push constant 15    // STACK| 15    ;;; ARG 0| a
+push argument 0     // STACK| 15 a  ;;; ARG 0| a
+gt                  // STACK| t/f   ;;; ARG 0| a
+not                 // STACK| -t/-f ;;; ARG 0| a
+if-goto end         // STACK|       ;;; ARG 0| a
+
+// a += 4
+push argument 0     // STACK| a     ;;; ARG 0| a
+push constant 4     // STACK| a 4   ;;; ARG 0| a
+add                 // STACK| a+4   ;;; ARG 0| a
+pop argument 0      // STACK|       ;;; ARG 0| a+4
+goto control        // go to control label
+
+// return -a
+label end           // declaration of end label
+push argument 0     // STACK| a     ;;; ARG 0| a
+neg                 // STACK| -a    ;;; ARG 0| a
+return              // return -a

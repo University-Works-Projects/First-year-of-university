@@ -1,0 +1,46 @@
+// es1 test - Translate exercises
+
+// Code to translate
+/*
+    int f (int x, int y){
+        while (x > 0){
+            y += 3;
+            x -= 2;
+        }
+        return x;
+    }
+*/
+
+// Complete VM HACK code
+
+// Memory segments used: STACK and ARGUMENT (ARG)
+
+function es1t.f 2   // 2 function's argument --> ARG 0| x  ;;; ARG 1| y
+
+label control       // control label declaration
+// control x > 0
+push argument 0     // STACK| x    ;;; ARG 0| x  ;;; ARG 1| y
+push constant 0     // STACK| x 0  ;;; ARG 0| x  ;;; ARG 1| y
+gt                  // STACK| t/f  ;;; ARG 0| x  ;;; ARG 1| y
+if-goto loop        // STACK|      ;;; ARG 0| x  ;;; ARG 1| y
+
+goto end            // case x > 0 is false
+
+label loop          // case x > 0 is true
+// y += 3
+push argument 1     // STACK| y    ;;; ARG 0| x  ;;; ARG 1| y
+push constant 3     // STACK| y 3  ;;; ARG 0| x  ;;; ARG 1| y
+add                 // STACK| y+3  ;;; ARG 0| x  ;;; ARG 1| y
+pop argument 1      // STACK|      ;;; ARG 0| x  ;;; ARG 1| y=y+3
+
+// x -= 2
+push argument 0     // STACK| x    ;;; ARG 0| x    ;;; ARG 1| y
+push constant 2     // STACK| x 2  ;;; ARG 0| x    ;;; ARG 1| y
+sub                 // STACK| x-2  ;;; ARG 0| x    ;;; ARG 1| y
+pop argument 0      // STACK|      ;;; ARG 0| x-2  ;;; ARG 1| y
+goto control        // goto control label
+
+// return x
+label end
+push argument 0     // STACK| ... x
+return

@@ -1,0 +1,12 @@
+# Semantica del codice
+
+1. Prende in input in file da tradurre
+2. Prendendo in considerazione una riga alla volta, elimina i commenti e spazi inutili, riscrivendo il file di testo
+   "pulito" sul workFile
+3. Prendendo in considerazione riga per riga del workFile si scrive sull'outFile l'equivalente istruzione in assembly
+
+# Traduzione delle istruzioni
+
+Vedi cartella contenente i codici in Assembly HACK
+
+

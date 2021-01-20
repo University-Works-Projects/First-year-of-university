@@ -1,0 +1,24 @@
+TEST EXERCISES
+
+EXERCISE #1 V - Transale C code
+
+    Write the relative VM HACK code of this C program:
+
+    function mult (x,y){
+        int sum, j;
+        sum = 0;
+        j = y;
+        while (j != 0){
+            sum = sum + x;
+            j = j - 1;
+        }
+        return sum;
+    }
+
+EXERCISE #2 X - Write a VM HACK program
+
+    Write a VM HACK program that puts numbers less than 20 into stack memory with a loop
+
+EXERCISE #3 X - Write a VM HACK program
+
+    Write a VM HACK program that puts prime numbers less than 20 into stack memory

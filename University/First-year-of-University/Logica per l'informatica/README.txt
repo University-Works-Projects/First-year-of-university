@@ -1,0 +1,1 @@
+Esercizi di programmazione svolti durante il corso di Logica per l'informatica.

@@ -1,0 +1,45 @@
+// Puts numbers less than 20 into stack memory using a loop
+// WORK IN PROGRESS
+
+// Theoretical C program:
+ /*
+    void write(){
+        n = 0;
+        while(n < 20){
+            int t = n;
+            n++;
+        }
+    }
+*/
+
+// Memory segments used: STACK and LOCAL 
+
+function write 0
+
+// n = 0
+push constant 0     // STACK| 0    ;;; LOCAL 0|
+pop local 0         // STACK|      ;;; LOCAL 0| n=0
+
+
+// control: n < 20
+label control
+push local 0        // STACK| n    ;;; LOCAL 0| n
+push constant 20    // STACK| n 20 ;;; LOCAL 0| n
+lt                  // STACK| t/f  ;;; LOCAL 0| n
+if-goto loop
+
+goto end            // case x < 20 is false
+
+label loop          // case x < 20 is true
+// int t = n
+push local 0        // STACK| ... t=n   ;;; LOCAL 0| n --> Every time the loop is executed, an another var was insert in stack bottom
+
+// n++
+push local 0        // STACK| ... t n   ;;; LOCAL 0| n
+push constant 1     // STACK| ... t n 1 ;;; LOCAL 0| n
+add                 // STACK| ... t n+1 ;;; LOCAL 0| n
+pop local 0         // STACK| ... t     ;;; LOCAL 0| n+1
+
+goto control
+
+label end

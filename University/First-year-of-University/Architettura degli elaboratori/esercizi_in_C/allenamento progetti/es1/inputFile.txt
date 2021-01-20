@@ -1,0 +1,2 @@
+File dato in input al programma.
+Contiene il testo da copiare nel file di output del medesimo programma.
