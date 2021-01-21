@@ -77,7 +77,6 @@ void eq(FILE *in_outFile){
     fprintf(in_outFile, "%s", "(CONTINUE)\n");
     incrementSP(in_outFile);
 }
-
 void gt(FILE *in_outFile){
     goToPreviousSV(in_outFile);
     fprintf(in_outFile, "%s", "D=M\n");
@@ -94,7 +93,6 @@ void gt(FILE *in_outFile){
     fprintf(in_outFile, "%s", "(CONTINUE)\n");
     incrementSP(in_outFile);
 }
-
 void lt(FILE *in_outFile){
     goToPreviousSV(in_outFile);
     fprintf(in_outFile, "%s", "D=M\n");
@@ -242,11 +240,52 @@ void goto_(FILE *in_outFile, char in_label[]){
     incrementSP(in_outFile);
 }
 
-// Forse da aggiungere una cosa analoga al label, per il nome della funzione
-void function(FILE *in_outFile){
+void call(FILE *in_outFile, char nArgs){
+    // ???
+
+    
+    // push return-address
+
+    
+    // push LCL
+    fprintf(in_outFile, "%s", "@LCL\n");
+    fprintf(in_outFile, "%s", "D=M\n");       // BISOGNA fare il push soltanto del contenuto
+    takeLastSV(in_outFile);
+    incrementSP(in_outFile);
+
+    // push ARG
+    fprintf(in_outFile, "%s", "@ARG\n");
+    fprintf(in_outFile, "%s", "D=M\n");
+    takeLastSV(in_outFile);
+    incrementSP(in_outFile);
+
+    // push THIS
+    fprintf(in_outFile, "%s", "@THIS\n");
+    fprintf(in_outFile, "%s", "D=M\n");
+    takeLastSV(in_outFile);
+    incrementSP(in_outFile);
+
+    // push THAT
+    fprintf(in_outFile, "%s", "@THAT\n");
+    fprintf(in_outFile, "%s", "D=M\n");
+    takeLastSV(in_outFile);
+    incrementSP(in_outFile);
+
+    // push ARG = SP - n - 5
+    takeAddress(in_outFile, nArgs);
+
+
+    // LCL = SP
+
+
+    // goto f
+
+
+    // push (return-address)
     
 }
-void call(FILE *in_outFile){
+// Forse da aggiungere una cosa analoga al label, per il nome della funzione
+void function(FILE *in_outFile){
     
 }
 void return_(FILE *in_outFile){

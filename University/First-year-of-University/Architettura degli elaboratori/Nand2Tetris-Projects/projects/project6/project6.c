@@ -17,6 +17,9 @@
     - Se si dichiara una label del tipo: "label aaagoto" so cazzi amari (probabile problema ignorabile)
     - Stampa due volte la traduzione del comando dell'ultima istruzione
     - Fra eq, gt e lt stampa sempre le istruzioni di eq, stessa cosa per gli altri blocchi di istruzioni
+
+ATTENZIONE:
+    - Controllare la funzione: stringCharNumber
 */
 
 
@@ -158,6 +161,13 @@ void stringNumeber(char in_row[], char specialCharacter, char emptyString[]){
     }
     emptyString[p] = '\0';                          // Si mette in fondo ad emptyString il carattere '\0' altrimenti sono cazzi amari
 }
+// Assegna ad un carattere la cifra finale di una stringa data. 
+void stringCharNumber(char in_row[], char specialCharacter, char emptyChar){
+    int i = 0;
+    for (i = 0; ( in_row[i] != specialCharacter || (!(charEqNum(in_row[i+2])) && in_row[i+3] == '\0') ); i++){}      // Incrementa i sino ad arrivare a due posizioni prima del numero
+    i += 2;
+    emptyChar = in_row[i];      // emptyChar = ultima cifra della stringa
+}
 // Data una stringa vuota ci inserisce il nome del label dichiarato
 void createLabel(char in_row[], char in_labelName[]){
     int i = 0, j = 0;
@@ -273,8 +283,19 @@ void translateRow(FILE *in_outFile, char in_row[]){
                 fprintf(in_outFile, "%s", "function\n");
 
             } 
-            else if (isString2inString1(in_row, "call")){
-                fprintf(in_outFile, "%s", "call\n");
+            else if (isString2inString1(in_row, "call")){   // call func nArgs
+
+                /*
+                - si prende l'ultima ed unica cifra nArgs
+                - si converte in int
+                - si somma 5
+                - si ricornverte in char
+                */
+                char nArgs;                             // improbabile se non infattibile che il numero di argomenti siano maggiori di 9
+                stringCharNumber(in_row, 'l', nArgs);   // CONTROLLO
+            
+            
+                call(in_outFile, nArgs);                // CONTROLLO
 
             }
             else if (isString2inString1(in_row, "return")){
@@ -283,8 +304,6 @@ void translateRow(FILE *in_outFile, char in_row[]){
             }
             else fprintf(in_outFile, "%s", "ERROR INVALID ROW (else case)\n");
         }
-
-    // VERSIONE ALTERNATIVA: si controlla ogni caso senza stare a guardare la lunghezza della parola.
     }
 
 }
