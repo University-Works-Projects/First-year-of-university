@@ -46,8 +46,7 @@ void goToPreviousSV(FILE *in_outFile){
     fprintf(in_outFile, "%s", "AM=M-1\n");
 }
 void takeAddress(FILE *in_outFile, char in_address[]){
-    fprintf(in_outFile, "%c", '@');
-    fprintf(in_outFile, "%s", in_address);
+    fprintf(in_outFile, "%c%s", '@', in_address);
     fprintf(in_outFile, "%s", "D=A\n");
 }
 void assignmentToLastSV(FILE *in_outFile){
@@ -63,25 +62,28 @@ void addressFromR13(FILE *in_outFile){
     fprintf(in_outFile, "%s", "@13\n");
     fprintf(in_outFile, "%s", "A=M\n");
     fprintf(in_outFile, "%s", "M=D\n");
-}
+}/*
 void nameFile_nomeFunction(FILE *in_outFile, char in_nameFile[], char in_nameFunction[]){
     fprintf(in_outFile, "%s", in_nameFile);
     fprintf(in_outFile, "%c", '.');
     fprintf(in_outFile, "%s", in_nameFunction);
-}
+}*/
 
-void eq(FILE *in_outFile){
-    takeLastSV(in_outFile);
-    goToPreviousSV(in_outFile);
-    fprintf(in_outFile, "%s", "D=D-M\n");
+void jumpConditions(FILE *in_outFile, char in_jmpCond[]){
     fprintf(in_outFile, "%s", "@TRUE\n");
-    fprintf(in_outFile, "%s", "D;JEQ\n");
+    fprintf(in_outFile, "%s%s%c", "D;", in_jmpCond, '\n');
     fprintf(in_outFile, "%s", "M=0\n");
     fprintf(in_outFile, "%s", "@CONTINUE\n");
     fprintf(in_outFile, "%s", "0;JMP\n");
     fprintf(in_outFile, "%s", "(TRUE)\n");
     fprintf(in_outFile, "%s", "M=1\n");
     fprintf(in_outFile, "%s", "(CONTINUE)\n");
+}
+void eq(FILE *in_outFile){
+    takeLastSV(in_outFile);
+    goToPreviousSV(in_outFile);
+    fprintf(in_outFile, "%s", "D=D-M\n");
+    jumpConditions(in_outFile, "JEQ");
     incrementSP(in_outFile);
 }
 void gt(FILE *in_outFile){
@@ -90,14 +92,7 @@ void gt(FILE *in_outFile){
     goToNextSV(in_outFile);
     fprintf(in_outFile, "%s", "D=D-M\n");
     goToPreviousSV(in_outFile);
-    fprintf(in_outFile, "%s", "@TRUE\n");
-    fprintf(in_outFile, "%s", "D;JLT\n");
-    fprintf(in_outFile, "%s", "M=0\n");
-    fprintf(in_outFile, "%s", "@CONTINUE\n");
-    fprintf(in_outFile, "%s", "0;JMP\n");
-    fprintf(in_outFile, "%s", "(TRUE)\n");
-    fprintf(in_outFile, "%s", "M=1\n");
-    fprintf(in_outFile, "%s", "(CONTINUE)\n");
+    jumpConditions(in_outFile, "JLT");
     incrementSP(in_outFile);
 }
 void lt(FILE *in_outFile){
@@ -106,14 +101,7 @@ void lt(FILE *in_outFile){
     goToNextSV(in_outFile);
     fprintf(in_outFile, "%s", "D=D-M\n");
     goToPreviousSV(in_outFile);
-    fprintf(in_outFile, "%s", "@TRUE\n");
-    fprintf(in_outFile, "%s", "D;JgT\n");
-    fprintf(in_outFile, "%s", "M=0\n");
-    fprintf(in_outFile, "%s", "@CONTINUE\n");
-    fprintf(in_outFile, "%s", "0;JMP\n");
-    fprintf(in_outFile, "%s", "(TRUE)\n");
-    fprintf(in_outFile, "%s", "M=1\n");
-    fprintf(in_outFile, "%s", "(CONTINUE)\n");
+    jumpConditions(in_outFile, "JGT");
     incrementSP(in_outFile);
 }
 
@@ -224,37 +212,30 @@ void pop(FILE *in_outFile, int casistic, char in_address[]){
 }
 
 void label(FILE *in_outFile, char in_label[]){
-    fprintf(in_outFile, "%c", '(');
-    printf("%s", "After: "); printf("%s", in_label); printf("%c", '\n');
     modifyLabel(in_label);                  // Rimosso '\n' da in_label
-    fprintf(in_outFile, "%s", in_label);
-    fprintf(in_outFile, "%s", ")\n");
+    fprintf(in_outFile, "%c%s%s", '(', in_label, ")\n");
     incrementSP(in_outFile);
 }
 void ifgoto(FILE *in_outFile, char in_label[]){
     takeLastSV(in_outFile);
     //goToPreviousSV(in_outFile);           // Ci va o no il decrememento???
-    fprintf(in_outFile, "%c", '@');
-    fprintf(in_outFile, "%s", in_label);
+    fprintf(in_outFile, "%c%s", '@', in_label);
+    //fprintf(in_outFile, "%s", in_label);
     fprintf(in_outFile, "%s", "D;JGT\n");
     //incrementSP(in_outFile);              // Ci va l'incremento???
 }
 void goto_(FILE *in_outFile, char in_label[]){
-    fprintf(in_outFile, "%c", '@');
-    fprintf(in_outFile, "%s", in_label);
+    fprintf(in_outFile, "%c%s", '@', in_label);
+    //fprintf(in_outFile, "%s", in_label);
     fprintf(in_outFile, "%s", "0;JMP\n");
     incrementSP(in_outFile);
 }
 
 void printCall(FILE *in_outFile, char in_nameFile[], char in_nameFunction[], char nArgs){
     // push return-address          <--->   @nameFile.nameFunction   (per il return: (nameFile.nameFunction))
-    // @return-address
-    fprintf(in_outFile, "%c", '@');
-    nameFile_nomeFunction(in_outFile, in_nameFile, in_nameFunction);
-    fprintf(in_outFile, "%c", '\n');
-
+    fprintf(in_outFile, "%c%s%c%s%c", '@', in_nameFile, '.', in_nameFunction, '\n');    // @return-address
     fprintf(in_outFile, "%s", "D=A\n");
-    assignmentToLastSV8in_outFile);
+    assignmentToLastSV(in_outFile);
     incrementSP(in_outFile);
     
     // push LCL
@@ -295,7 +276,8 @@ void printCall(FILE *in_outFile, char in_nameFile[], char in_nameFunction[], cha
     fprintf(in_outFile, "%s", "M=D\n");
 
     // goto f
-    fprintf(in_outFile, "%c", "@"); fprintf(in_outFile, "%s", nameFunction); fprintf(in_outFile, "%c", "\n");
+    fprintf(in_outFile, "%c%s%c", "@", in_nameFunction, '\n');
+    // fprintf(in_outFile, "%c", "@"); fprintf(in_outFile, "%s", in_nameFunction); fprintf(in_outFile, "%c", "\n");
     fprintf(in_outFile, "%s", "0;JMP\n");
 
     // (return-address) <-- retirn-address dichiarato all'inizio @return-address
@@ -308,19 +290,35 @@ void printCall(FILE *in_outFile, char in_nameFile[], char in_nameFunction[], cha
 // Forse da aggiungere una cosa analoga al label, per il nome della funzione
 void printFunction(FILE *in_outFile, char in_nameFunction[], int nTimes){
     // (nameFunction)
-    fprintf(in_outFile, "%c", "(");
-    fprintf(in_outFile, "%s", in_nameFunction);
-    fprintf(in_outFile, "%s", ")\n");
+    fprintf(in_outFile, "%c%s%s", "(", in_nameFunction, ")\n");
 
+    // Repeat k times
     for (int i = 0; i < nTimes; i++){
         fprintf(in_outFile, "%s", "@SP");
         fprintf(in_outFile, "%s", "A=M");
-        fprintf(in_outFile, "%s", "M=0");
-        incrementSP8in_outFile);
+        fprintf(in_outFile, "%s", "M=0");   // push 0, si inizializzano (e var locali) a 0
+        incrementSP(in_outFile);
     }
 }
 void return_(FILE *in_outFile){
+    // FRAME=LCL - 5
     
+    // RET = FRAME
+
+    // *ARG=pop()
+
+    // SP=ARG+1
+
+    // THAT=*(FRAME-1)
+
+    // THIS=*(FRAME-2)
+
+    // ARG=*(FRAME-3)
+
+    // LCL=*(FRAME-4)
+
+    // goto RET          <-- a quanto pare RET è un numero
+
 }
 
 #endif

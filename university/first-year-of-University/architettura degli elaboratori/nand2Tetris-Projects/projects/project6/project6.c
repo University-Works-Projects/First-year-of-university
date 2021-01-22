@@ -174,21 +174,8 @@ void translateRow(FILE *in_outFile, char in_row[]){
                 char nameFile[SIZE], nameFunction[SIZE], nArgs;
                 nArgs = callFunction(in_row, nameFile, nameFunction);
                 // Ora si hanno separatamente tutte i dati necessari per continuare
+
                 printCall(in_outFile, nameFile, nameFunction, nArgs);
-
-                /*
-                - si prende l'ultima ed unica cifra nArgs
-                - si converte in int
-                - si somma 5
-                - si ricornverte in char
-                
-
-                char nArgs;                                 // improbabile se non infattibile che il numero di argomenti siano maggiori di 9
-                stringCharNumber(in_row, 'l', nArgs);       // nArgs = n   <-- call f n  CONTROLLO ULTIMO CARATTERE SPECIALE
-                int int_nArgs = charToInt(int_nArgs) + 5;   // int_nArgs = n + 5
-                nArgs = intToChar(int_nArgs);               // nArgs = n + 5
-                call(in_outFile, nArgs);                    // CONTROLLO
-                */
             }
             else if (isString2inString1(in_row, "function")){
                 char nameFunction[SIZE];
@@ -201,6 +188,7 @@ void translateRow(FILE *in_outFile, char in_row[]){
             }
             else fprintf(in_outFile, "%s", "ERROR INVALID ROW (else case)\n");
         }
+        
     }
 
 }

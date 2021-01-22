@@ -77,6 +77,7 @@ char callFunction(char in_row[], char emptyFileName[], char emptyFunctionName[],
 int function(char in_row[], char emptyFunctionName[]){
     int i = 0, j = 0;
     while(in_row[i] != '.') i++;            // function nameFile.
+    i++;
     while(in_row[i] != ' '){                // function nameFile.nameFunction
         emptyFunctionName[j] = in_row[i];
         i++; j++;
@@ -89,8 +90,12 @@ int function(char in_row[], char emptyFunctionName[]){
 int main(){
 
     // DA testare function
+    char row[DIM]; strcpy(row, "function file.function 3");
+    char functionName[DIM];
+    int nTimes = function(row, functionName);
+    printf("%s%d%c%s%c", "nTimes: ", nTimes, '\n', functionName, '\n');
 
-    /*
+    /* callFunction testing
     char row[DIM]; strcpy(row, "call file.function 3");
     char fileName[DIM], functionName[DIM];
     char nArgs;

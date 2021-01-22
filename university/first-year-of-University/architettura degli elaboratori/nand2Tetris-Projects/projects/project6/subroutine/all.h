@@ -48,7 +48,8 @@ void takeAddress(FILE *in_outFile, char in_address[]);
 void assignmentToLastSV(FILE *in_outFile);
 void saveInR13(FILE *in_outFile);
 void addressFromR13(FILE *in_outFile);
-void nameFile_nomeFunction(FILE *in_outFile, char in_nameFile[], char in_nameFunction[]);
+//void nameFile_nomeFunction(FILE *in_outFile, char in_nameFile[], char in_nameFunction[]);
+void jumpConditions(FILE *in_outFile, char in_jmpCond[]);
 
 void eq(FILE *in_outFile);
 void gt(FILE *in_outFile);

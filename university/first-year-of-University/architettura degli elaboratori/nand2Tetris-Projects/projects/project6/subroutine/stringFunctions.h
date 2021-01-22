@@ -1,20 +1,24 @@
+#ifndef stringFunctions_h
+#define stringFunctions_h
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#define LENGTH 20
+#include "all.h"
 
-// Controlla se la stringa data string1 contiene la stringa da string2
+// Controlla se la stringa string1 contiene la stringa string2
 int isString2inString1 (char in_string1[], char in_string2[]){
     int i = 0, s1Length = strlen(in_string1);          // index per s1
     int j = 0, s2Length = strlen(in_string2);          // index per s2
 
-    // Debug lines
+    /*// Debug lines
     printf("%s", "\nstring1 lenght: "); printf("%d",s1Length);
     printf("%s", "\nstring2 lenght: "); printf("%d",s2Length);
     //printf("%s", "string1: "); printf("%s", in_string1);
     //printf("%s", "\nstring2: "); printf("%s", in_string2);
     printf("%c",'\n');
+    */
 
     if (s1Length >= s2Length && s1Length >= 0 && s2Length >= 0){ // Ho messo >= 0 perchè credo che si possa fare: "char s1[0];" (== "char c;")
         while (in_string1[i] != '\0'){
@@ -33,13 +37,19 @@ int isString2inString1 (char in_string1[], char in_string2[]){
 
 }
 
-// Torna 1 se il carattere rappresenta un numero, 0 altrimenti
-int charEqNum(char c){
-    if (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9') return 1;
-    else return 0;
+// S -> S - Data una stringa vuota ci inserisce il nome del label dichiarato
+void createLabel(char in_row[], char in_labelName[]){
+    int i = 0, j = 0;
+    while(in_row[i] != ' '){i++;}
+    i++;
+    while(in_row[i] |= '\0'){
+        in_labelName[j] = in_row[i];
+        i++; j++;
+    }
+
 }
 
-// Riempe una stringa con la parte numerica di una stringa data.
+// S -> S - Riempe una stringa (vuota) data con la parte numerica di una stringa data.
 void stringNumeber(char in_row[], char specialCharacter, char emptyString[]){
     int i = 0;
     for (i = 0; ( in_row[i] != specialCharacter || !(charEqNum(in_row[i+2])) ); i++){}      // Incrementa i sino ad arrivare a due posizioni prima del numero
@@ -51,22 +61,50 @@ void stringNumeber(char in_row[], char specialCharacter, char emptyString[]){
     emptyString[p] = '\0';                          // Si mette in fondo ad emptyString il carattere '\0' altrimenti sono cazzi amari
 }
 
-int main(){
+// Data una riga: call nameFile.nameFunction nArgs ritorna in char nArgs, riempe stringhe con nameFile e nameFunction
+char call(char in_row[], char emptyFileName[], char emptyFunctionName[]){
+    int i = 0, j = 0;
+    char nArgs;
 
-    char string1[LENGTH];
-    char string2[LENGTH/2];
-    fgets(string1, LENGTH, stdin);
+    while(in_row[i] != ' ' && in_row[i] != '\0'){
+        i++;
+    }
+    i++;                                    // Scorre fino ad arrivare all'inizio di fileName
 
-    stringNumeber(string1, 'l', string2);
-    
-    printf("%s", string2);
-    
-    //printf("%s", "\nstring1: "); printf("%s",string1);
-    //printf("%s", "string2: "); printf("%s",string2);
+    while(in_row[i] != '.'){                // emptyFileName
+        emptyFileName[j] = in_row[i];
+        i++; j++;
+    }
+    emptyFileName[j] = '\0';
+    i++; j = 0;
 
-    //printf("%d", isString2inString1(string1, string2));
+    while(in_row[i] != ' '){                // emptyFunctionName
+        emptyFunctionName[j] = in_row[i];
+        i++; j++;
+    }
+    emptyFunctionName[j] = '\0';
+    i++;
 
-    return 0;
+    nArgs = in_row[i];                      // char nArgs = char n
+    int int_nArgs = charToInt(nArgs) + 5;   // charToInt --> int int_nArgs = int n + 5
+
+    return nArgs;
+}
+
+// 
+int function(char in_row[], char emptyFunctionName[]){
+    int i = 0, j = 0;
+    while(in_row[i] != '.') i++;            // function nameFile.
+    i++;
+    while(in_row[i] != ' '){                // function nameFile.nameFunction
+        emptyFunctionName[j] = in_row[i];
+        i++; j++;
+    }
+    emptyFunctionName[j] = '\0';
+    i++;                                    // function nameFile.nameFunction n
+    return (charToInt(in_row[i]));
 }
 
 
+
+#endif
