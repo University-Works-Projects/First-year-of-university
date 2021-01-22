@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "all.h"
+
 // SV = Stack Value
 // in_address contiene già come ultimo carattere '\n'
 
@@ -61,6 +63,11 @@ void addressFromR13(FILE *in_outFile){
     fprintf(in_outFile, "%s", "@13\n");
     fprintf(in_outFile, "%s", "A=M\n");
     fprintf(in_outFile, "%s", "M=D\n");
+}
+void nameFile_nomeFunction(FILE *in_outFile, char in_nameFile[], char in_nameFunction[]){
+    fprintf(in_outFile, "%s", in_nameFile);
+    fprintf(in_outFile, "%c", '.');
+    fprintf(in_outFile, "%s", in_nameFunction);
 }
 
 void eq(FILE *in_outFile){
@@ -216,7 +223,6 @@ void pop(FILE *in_outFile, int casistic, char in_address[]){
     incrementSP(in_outFile);
 }
 
-
 void label(FILE *in_outFile, char in_label[]){
     fprintf(in_outFile, "%c", '(');
     printf("%s", "After: "); printf("%s", in_label); printf("%c", '\n');
@@ -240,53 +246,78 @@ void goto_(FILE *in_outFile, char in_label[]){
     incrementSP(in_outFile);
 }
 
-void call(FILE *in_outFile, char nArgs){
-    // ???
+void printCall(FILE *in_outFile, char in_nameFile[], char in_nameFunction[], char nArgs){
+    // push return-address          <--->   @nameFile.nameFunction   (per il return: (nameFile.nameFunction))
+    // @return-address
+    fprintf(in_outFile, "%c", '@');
+    nameFile_nomeFunction(in_outFile, in_nameFile, in_nameFunction);
+    fprintf(in_outFile, "%c", '\n');
 
-    
-    // push return-address
-
+    fprintf(in_outFile, "%s", "D=A\n");
+    assignmentToLastSV8in_outFile);
+    incrementSP(in_outFile);
     
     // push LCL
     fprintf(in_outFile, "%s", "@LCL\n");
     fprintf(in_outFile, "%s", "D=M\n");       // BISOGNA fare il push soltanto del contenuto
-    takeLastSV(in_outFile);
+    assignmentToLastSV(in_outFile);
     incrementSP(in_outFile);
 
     // push ARG
     fprintf(in_outFile, "%s", "@ARG\n");
     fprintf(in_outFile, "%s", "D=M\n");
-    takeLastSV(in_outFile);
+    assignmentToLastSV(in_outFile);
     incrementSP(in_outFile);
 
     // push THIS
     fprintf(in_outFile, "%s", "@THIS\n");
     fprintf(in_outFile, "%s", "D=M\n");
-    takeLastSV(in_outFile);
+    assignmentToLastSV(in_outFile);
     incrementSP(in_outFile);
 
     // push THAT
     fprintf(in_outFile, "%s", "@THAT\n");
     fprintf(in_outFile, "%s", "D=M\n");
-    takeLastSV(in_outFile);
+    assignmentToLastSV(in_outFile);
     incrementSP(in_outFile);
 
     // push ARG = SP - n - 5
     takeAddress(in_outFile, nArgs);
-
+    fprintf(in_outFile, "%s", "@SP\n");
+    fprintf(in_outFile, "%s", "D=M-D\n");
+    fprintf(in_outFile, "%s", "@ARG\n");
+    fprintf(in_outFile, "%s", "M=D\n");
 
     // LCL = SP
-
+    fprintf(in_outFile, "%s", "@SP\n");
+    fprintf(in_outFile, "%s", "D=M\n");
+    fprintf(in_outFile, "%s", "@LCL\n");
+    fprintf(in_outFile, "%s", "M=D\n");
 
     // goto f
+    fprintf(in_outFile, "%c", "@"); fprintf(in_outFile, "%s", nameFunction); fprintf(in_outFile, "%c", "\n");
+    fprintf(in_outFile, "%s", "0;JMP\n");
 
+    // (return-address) <-- retirn-address dichiarato all'inizio @return-address
+    fprintf(in_outFile, "%c", "(");
+    nameFile_nomeFunction(in_outFile, in_nameFile, in_nameFunction);
+    fprintf(in_outFile, "%s", ")\n");
 
-    // push (return-address)
-    
+    // Un incremento di SP non ci và?
 }
 // Forse da aggiungere una cosa analoga al label, per il nome della funzione
-void function(FILE *in_outFile){
-    
+void printFunction(FILE *in_outFile, char in_nameFunction[], int nTimes){
+    // (nameFunction)
+    fprintf(in_outFile, "%c", "(");
+    fprintf(in_outFile, "%s", in_nameFunction);
+    fprintf(in_outFile, "%s", ")\n");
+
+    for (int i = 0; i < nTimes; i++){
+        fprintf(in_outFile, "%s", "@SP");
+        fprintf(in_outFile, "%s", "A=M");
+        fprintf(in_outFile, "%s", "M=0");
+        incrementSP8in_outFile);
+    }
 }
 void return_(FILE *in_outFile){
     

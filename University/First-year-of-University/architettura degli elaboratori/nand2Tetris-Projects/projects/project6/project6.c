@@ -1,12 +1,11 @@
+#include "subroutine/all.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "project6.h"
-#include "translations.h"
-
 #define SIZE 128
-#define WORD 32
+#define WORD 32     // Inutilizzata
 #define NUM 6
 
 // make clean per pulire dai file di scarto
@@ -19,9 +18,9 @@
     - Fra eq, gt e lt stampa sempre le istruzioni di eq, stessa cosa per gli altri blocchi di istruzioni
 
 ATTENZIONE:
-    - Controllare la funzione: stringCharNumber
+    - Controllare dove sia possibile eliminare librerie inutilizzate
+    - Testare la funzione function
 */
-
 
 // (INUTILIZZATA) Ritorna la lunghezza (numero di righe) di un file
 int fileRows(FILE* in_file){
@@ -39,85 +38,7 @@ int fileRows(FILE* in_file){
     return (rows);
     
 }
-// Rimuove i commenti da una riga
-char removeComment (char row[]){
-    int counter = 0, characters = 0;
-    while (row[counter] != '\0'){
-        if (row[counter] == '/' && row[counter + 1] == '/'){
-            if (characters > 0){
-                row[counter] = '\n';
-                row[counter + 1] = '\0';
-            } else row[counter] = '\0';
-        } else {
-            characters++;
-            counter++;
-        }
-    }
-
-}
-// Rimuove le righe composte solamente da "\n\0" || " \0"
-void removeSpace (char in_row[]){
-    //if (row[0] == '\n') row[0] = '\0';
-    if (in_row[0] == '\n' || in_row[0] == ' ') in_row[0] = '\0';
-
-    // Per eliminare anche gli spazi inutili (funziona al 90%)
-    int flag = 1, character = 0, stop = 0;
-    for (int i = 0; in_row[i] != '\0'; i++){
-        // Non si considera la casistca p.e: "pop   argument 3" perchè si da per scontato l'assenza di questi casi
-        if (in_row[i] == ' ' && (in_row[i + 1] == ' ' || in_row[i + 1] == '\0') ){
-            in_row[i] = '\n';
-            in_row[i + 1] = '\0';
-        }
-    }
-
-}
-
-// Controlla se la stringa data string1 contiene la stringa da string2
-int isString2inString1 (char in_string1[], char in_string2[]){
-    int i = 0, s1Length = strlen(in_string1);          // index per s1
-    int j = 0, s2Length = strlen(in_string2);          // index per s2
-
-    /*// Debug lines
-    printf("%s", "\nstring1 lenght: "); printf("%d",s1Length);
-    printf("%s", "\nstring2 lenght: "); printf("%d",s2Length);
-    //printf("%s", "string1: "); printf("%s", in_string1);
-    //printf("%s", "\nstring2: "); printf("%s", in_string2);
-    printf("%c",'\n');
-    */
-
-    if (s1Length >= s2Length && s1Length >= 0 && s2Length >= 0){ // Ho messo >= 0 perchè credo che si possa fare: "char s1[0];" (== "char c;")
-        while (in_string1[i] != '\0'){
-            if (in_string1[i] == in_string2[0]){          // in_string2[0] == in_string2[j] perchè j = 0
-                int tmp = i;                              // tmp = i per incrementare localmente il valore di i
-                while (in_string2[j] != '\0' && in_string2[j] == in_string1[tmp]){
-                    tmp++; j++;
-                }
-                if (in_string2[j] == '\0' || in_string2[j+1] == '\0') return 1;    // Se lo scorrimento è arrivato fino alla fine di in_string2 (+ 1 per constrollare la posione di '\0' qualora non sia in ultima posizione di in_string1), allora in_string2 è presente in in_string1.
-                j = 0;                                    // Se il programma arrvia qui vuol dire che in_string2 non è in quella porzione di in_string1 e dunque si resetta j a 0.
-            }
-            i++;                                          // Si va avanti con la lettera in analisi della in_string1
-        }
-        return 0;              // Se l'esecuzione della funzione arriva fino a qua vuol dire che in s1 non c'è s2, dunque ritorna 0.
-    } else return 0;           // Se i parametri minimi da rispettare non sono validi ritorna subito 0.
-
-}
-// (INUTILIZZATA) Converte un numero sottoforma di carattere nel medesimo numero ma sottoforma di intero
-int charToInt(char c){
-    int n = 0;
-    if (c == '0') n = 0;
-    else if (c == '1') n = 1;
-    else if (c == '2') n = 2;
-    else if (c == '3') n = 3;
-    else if (c == '4') n = 4;
-    else if (c == '5') n = 5;
-    else if (c == '6') n = 6;
-    else if (c == '7') n = 7;
-    else if (c == '8') n = 8;
-    else if (c == '9') n = 9;
-    return n;
-
-}
-// (INUTILIZZATA) Converte un numero sottoforma di stringa nel medesimo numero ma sottoforma di intero 
+// (INUTILIZZATA) S -> I - Converte un numero sottoforma di stringa nel medesimo numero ma sottoforma di intero 
 int stringToInt(char in_row[], char finalCharacter){
     // La funzione ritorna -1 se alla fine della strnga non c'è un numero, si da dunque per scontato che ci sia.
 
@@ -150,36 +71,6 @@ int charEqNum(char c){
     if (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9') return 1;
     else return 0;
 }
-// Riempe una stringa (vuota) data con la parte numerica di una stringa data.
-void stringNumeber(char in_row[], char specialCharacter, char emptyString[]){
-    int i = 0;
-    for (i = 0; ( in_row[i] != specialCharacter || !(charEqNum(in_row[i+2])) ); i++){}      // Incrementa i sino ad arrivare a due posizioni prima del numero
-    i += 2; int p = 0;                                                                      // Si posizione i all'indizce di inizio del numero
-    for (i; in_row[i] != '\0'; i++){                // Si inserisce nella stringa vuota tutti i caratteri numerici fino alla fine di in_row
-        emptyString[p] = in_row[i];
-        p++;
-    }
-    emptyString[p] = '\0';                          // Si mette in fondo ad emptyString il carattere '\0' altrimenti sono cazzi amari
-}
-// Assegna ad un carattere la cifra finale di una stringa data. 
-void stringCharNumber(char in_row[], char specialCharacter, char emptyChar){
-    int i = 0;
-    for (i = 0; ( in_row[i] != specialCharacter || (!(charEqNum(in_row[i+2])) && in_row[i+3] == '\0') ); i++){}      // Incrementa i sino ad arrivare a due posizioni prima del numero
-    i += 2;
-    emptyChar = in_row[i];      // emptyChar = ultima cifra della stringa
-}
-// Data una stringa vuota ci inserisce il nome del label dichiarato
-void createLabel(char in_row[], char in_labelName[]){
-    int i = 0, j = 0;
-    while(in_row[i] != ' '){i++;}
-    i++;
-    while(in_row[i] |= '\0'){
-        in_labelName[j] = in_row[i];
-        i++; j++;
-    }
-
-}
-
 
 // Per ora non ritorna niente e scrive direttamente sur file de output (vedi se deve esser modificata)
 void translateRow(FILE *in_outFile, char in_row[]){
@@ -188,18 +79,18 @@ void translateRow(FILE *in_outFile, char in_row[]){
     printf("%s", "Row length: "); printf("%d",in_rowLength); printf("%c", '\n');
 
     if (in_rowLength == 3){                       // Il +1 è lo spazio per '\0'
-        if (strcmp(in_row, "eq")) { eq(in_outFile); }
-        else if (strcmp(in_row, "gt")) { gt(in_outFile); }
-        else if (strcmp(in_row, "lt")) { lt(in_outFile); }
-        else if (strcmp(in_row, "or")) { or(in_outFile); }
+        if (strcmp(in_row, "eq") == 0) { eq(in_outFile); }
+        else if (strcmp(in_row, "gt") == 0) { gt(in_outFile); }
+        else if (strcmp(in_row, "lt") == 0) { lt(in_outFile); }
+        else if (strcmp(in_row, "or") == 0) { or(in_outFile); }
         else fprintf(in_outFile, "%s", "ERROR LENGTH 2");}
 
     else if (in_rowLength == 4){                  // Il +1 è lo spazio per '\0'
-        if (strcmp(in_row, "add")) { add(in_outFile); }    
-        else if (strcmp(in_row, "sub")) { sub(in_outFile); }    
-        else if (strcmp(in_row, "neg")) { neg(in_outFile); }    
-        else if (strcmp(in_row, "and")) { and(in_outFile); }      
-        else if (strcmp(in_row, "not")) { not(in_outFile); }
+        if (strcmp(in_row, "add") == 0) { add(in_outFile); }    
+        else if (strcmp(in_row, "sub") == 0) { sub(in_outFile); }    
+        else if (strcmp(in_row, "neg") == 0) { neg(in_outFile); }    
+        else if (strcmp(in_row, "and") == 0) { and(in_outFile); }      
+        else if (strcmp(in_row, "not") == 0) { not(in_outFile); }
         else fprintf(in_outFile, "%s", "ERROR LENGTH 3\n");}
 
     else {
@@ -279,28 +170,34 @@ void translateRow(FILE *in_outFile, char in_row[]){
                 createLabel(in_row, labelName);
                 goto_(in_outFile, labelName);
             }
-            else if (isString2inString1(in_row, "function")){
-                fprintf(in_outFile, "%s", "function\n");
-
-            } 
             else if (isString2inString1(in_row, "call")){   // call func nArgs
+                char nameFile[SIZE], nameFunction[SIZE], nArgs;
+                nArgs = callFunction(in_row, nameFile, nameFunction);
+                // Ora si hanno separatamente tutte i dati necessari per continuare
+                printCall(in_outFile, nameFile, nameFunction, nArgs);
 
                 /*
                 - si prende l'ultima ed unica cifra nArgs
                 - si converte in int
                 - si somma 5
                 - si ricornverte in char
-                */
-                char nArgs;                             // improbabile se non infattibile che il numero di argomenti siano maggiori di 9
-                stringCharNumber(in_row, 'l', nArgs);   // CONTROLLO
-            
-            
-                call(in_outFile, nArgs);                // CONTROLLO
+                
 
+                char nArgs;                                 // improbabile se non infattibile che il numero di argomenti siano maggiori di 9
+                stringCharNumber(in_row, 'l', nArgs);       // nArgs = n   <-- call f n  CONTROLLO ULTIMO CARATTERE SPECIALE
+                int int_nArgs = charToInt(int_nArgs) + 5;   // int_nArgs = n + 5
+                nArgs = intToChar(int_nArgs);               // nArgs = n + 5
+                call(in_outFile, nArgs);                    // CONTROLLO
+                */
+            }
+            else if (isString2inString1(in_row, "function")){
+                char nameFunction[SIZE];
+                int nTimes = function(in_row, nameFunction);
+                printFunction(in_outFile, nameFunction, nTimes);
             }
             else if (isString2inString1(in_row, "return")){
                 fprintf(in_outFile, "%s", "return\n");
-                
+                // DA FAR ORco dio
             }
             else fprintf(in_outFile, "%s", "ERROR INVALID ROW (else case)\n");
         }

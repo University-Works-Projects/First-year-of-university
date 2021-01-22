@@ -9,14 +9,15 @@ List callFunction(const char nameF[], const char nArgs[], int funcN, int *error)
     else {
         *error = 0;
         
-        // ???
+        // Serve nomeFile nomeFunzione
+
+        // push return-address
         strcpy(text, "@return$");
         strcat(text, nameF);
         strcat(text, ".");
         strcat(text, itoaMine(funcN));
         push(&out, text);
-
-        // push return-address
+        // @return$nameFile.nameFunction ------- function nomeProgramma.nomeFunzione nArgs
         push(&out, "D=A");
         push(&out, "@SP");
         push(&out, "A=M");
@@ -71,17 +72,17 @@ List callFunction(const char nameF[], const char nArgs[], int funcN, int *error)
         push(&out, "@ARG");
         push(&out, "M=D");
 
-        // push LCL = SP
+        // LCL = SP
         push(&out, "@SP");
         push(&out, "D=M");
         push(&out, "@LCL");
         push(&out, "M=D");
 
         // goto f
-        strcpy(text, "@");
-        strcat(text, nameF);
-        push(&out, text);
-        push(&out, "0;JMP");
+        strcpy(text, "@");              // text = @
+        strcat(text, nameF);            // text = @nomeFunzione
+        push(&out, text);               // @nomeFunzione
+        push(&out, "0;JMP");            // 0;JMP
 
         // (return-address)
         strcpy(text, "(return$");
@@ -89,7 +90,7 @@ List callFunction(const char nameF[], const char nArgs[], int funcN, int *error)
         strcat(text, ".");
         strcat(text, itoaMine(funcN));
         strcat(text, ")");
-        push(&out, text);
+        push(&out, text);               // (return-address)
     }
 
     return out;
@@ -107,22 +108,20 @@ List function(const char nameF[], const char nVars[], int *error){
     else {
         *error = 0;
 
-        // (f) >-- f == functionName ??
+        // (functionName)
         strcpy(text, "(");
         strcat(text, nameF);
         strcat(text, ")");
         push(&out, text);
 
         // repeat k times
-        for (int i = 0; i < intVars; i++)
-        {
+        for (int i = 0; i < intVars; i++){
             push(&out, "@SP");
             push(&out, "A=M");
-            push(&out, "M=0");
+            push(&out, "M=0");      // push 0 <-- inizializzi le var locali a 0
             push(&out, "@SP");
             push(&out, "M=M+1");
         }
-        // push 0 nun ce stà daje
     }
 
     return out;
@@ -132,17 +131,18 @@ List returnFunction(int *error){
     List out;
     init(&out);
 
-    // FRAME=LCL
+    // FRAME=LCL - 5
     push(&out, "// RIPRISTINO @R14");
     push(&out, "@5");
-    push(&out, "D=A");
+    push(&out, "D=A");          // D = 5
     push(&out, "@LCL");
-    push(&out, "A=M-D");
+    push(&out, "A=M-D");        // @ (RAM[LCL] - 5)
     push(&out, "D=M");
+    // RET = FRAME
     push(&out, "@R14");
     push(&out, "M=D");
 
-    // RET=*(FRAME-5) <-- ???
+    // *ARG=pop()
     push(&out, "// ESEGUO IL POP ARGUMENT 0");
     List popArg0 = popCmd(NULL, "argument", "0", error);
     while (popArg0.head != NULL){
@@ -150,8 +150,6 @@ List returnFunction(int *error){
         popArg0.head = popArg0.head->next;
     }
     delete (&popArg0);
-
-    // *ARG=pop() <-- ???
     push(&out, "// IMPOSTO @R13 (TEMP) = LCL");
     push(&out, "@LCL");
     push(&out, "D=M");
@@ -207,7 +205,7 @@ List returnFunction(int *error){
 
     // goto RET     <-- a quanto pare RET è un numero
     push(&out, "@R14");
-    push(&out, "A=M");
+    push(&out, "A=M");          // goto @RAM[14]
     push(&out, "0;JMP");
 
     return out;
