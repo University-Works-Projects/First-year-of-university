@@ -23,6 +23,8 @@ int charToInt(char c);
 char intToChar(int in_num);
 // S -> C - Assegna ad un carattere la cifra finale di una stringa data. 
 void stringCharNumber(char in_row[], char specialCharacter, char emptyChar);
+// Torna 1 se il carattere rappresenta un numero, 0 altrimenti
+int charEqNum(char c);
 
 // stringFunctions.h
 // Controlla se la stringa string1 contiene la stringa string2
@@ -67,7 +69,7 @@ void pop(FILE *in_outFile, int casistic, char in_address[]);
 void label(FILE *in_outFile, char in_label[]);
 void ifgoto(FILE *in_outFile, char in_label[]);
 void goto_(FILE *in_outFile, char in_label[]);
-void printCall(FILE *in_outFile, char in_nameFile[], char in_nameFunction[], char nArgs)
+void printCall(FILE *in_outFile, char in_nameFile[], char in_nameFunction[], char nArgs);
 void printFunction(FILE *in_outFile, char in_nameFunction[], int nTimes);
 void return_(FILE *in_outFile);
 

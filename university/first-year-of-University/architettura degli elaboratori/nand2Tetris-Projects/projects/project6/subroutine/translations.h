@@ -45,7 +45,7 @@ void goToPreviousSV(FILE *in_outFile){
     fprintf(in_outFile, "%s", "@SP\n");
     fprintf(in_outFile, "%s", "AM=M-1\n");
 }
-void takeAddress(FILE *in_outFile, char in_address[]){
+void takeAddress(FILE *in_outFile, char in_address[]){  // char address[]
     fprintf(in_outFile, "%c%s", '@', in_address);
     fprintf(in_outFile, "%s", "D=A\n");
 }
@@ -62,12 +62,7 @@ void addressFromR13(FILE *in_outFile){
     fprintf(in_outFile, "%s", "@13\n");
     fprintf(in_outFile, "%s", "A=M\n");
     fprintf(in_outFile, "%s", "M=D\n");
-}/*
-void nameFile_nomeFunction(FILE *in_outFile, char in_nameFile[], char in_nameFunction[]){
-    fprintf(in_outFile, "%s", in_nameFile);
-    fprintf(in_outFile, "%c", '.');
-    fprintf(in_outFile, "%s", in_nameFunction);
-}*/
+}
 
 void jumpConditions(FILE *in_outFile, char in_jmpCond[]){
     fprintf(in_outFile, "%s", "@TRUE\n");
@@ -190,19 +185,19 @@ void pop(FILE *in_outFile, int casistic, char in_address[]){
             break;
         case 1:     // pop argument n
             fprintf(in_outFile, "%s", "@ARG\n");
-            fprintf(in_outFile, "%s", "D=M+D\n");     // D = @local n
+            fprintf(in_outFile, "%s", "D=M+D\n");     // D = @argument n
             break;
         case 2:     // pop static n
             fprintf(in_outFile, "%s", "@16\n");
-            fprintf(in_outFile, "%s", "D=A+D\n");     // D = @local n
+            fprintf(in_outFile, "%s", "D=A+D\n");     // D = @static n
             break;
         case 3:     // pop this n
             fprintf(in_outFile, "%s", "@THIS\n");
-            fprintf(in_outFile, "%s", "D=M+D\n");     // D = @local n
+            fprintf(in_outFile, "%s", "D=M+D\n");     // D = @this n
             break;
         case 4:     // pop that n
             fprintf(in_outFile, "%s", "@THAT\n");
-            fprintf(in_outFile, "%s", "D=M+D\n");     // D = @local n
+            fprintf(in_outFile, "%s", "D=M+D\n");     // D = @thst n
             break;
     }
     saveInR13(in_outFile);
@@ -263,7 +258,8 @@ void printCall(FILE *in_outFile, char in_nameFile[], char in_nameFunction[], cha
     incrementSP(in_outFile);
 
     // push ARG = SP - n - 5
-    takeAddress(in_outFile, nArgs);
+    fprintf(in_outFile, "%c%c", '@', nArgs);
+    fprintf(in_outFile, "%s", "D=A\n");
     fprintf(in_outFile, "%s", "@SP\n");
     fprintf(in_outFile, "%s", "D=M-D\n");
     fprintf(in_outFile, "%s", "@ARG\n");
@@ -276,13 +272,13 @@ void printCall(FILE *in_outFile, char in_nameFile[], char in_nameFunction[], cha
     fprintf(in_outFile, "%s", "M=D\n");
 
     // goto f
-    fprintf(in_outFile, "%c%s%c", "@", in_nameFunction, '\n');
+    fprintf(in_outFile, "%c%s%c", '@', in_nameFunction, '\n');
     // fprintf(in_outFile, "%c", "@"); fprintf(in_outFile, "%s", in_nameFunction); fprintf(in_outFile, "%c", "\n");
     fprintf(in_outFile, "%s", "0;JMP\n");
 
     // (return-address) <-- retirn-address dichiarato all'inizio @return-address
-    fprintf(in_outFile, "%c", "(");
-    nameFile_nomeFunction(in_outFile, in_nameFile, in_nameFunction);
+    fprintf(in_outFile, "%c", '(');
+    fprintf(in_outFile, "%s%c%s", in_nameFile, '.', in_nameFunction);
     fprintf(in_outFile, "%s", ")\n");
 
     // Un incremento di SP non ci và?
@@ -290,7 +286,7 @@ void printCall(FILE *in_outFile, char in_nameFile[], char in_nameFunction[], cha
 // Forse da aggiungere una cosa analoga al label, per il nome della funzione
 void printFunction(FILE *in_outFile, char in_nameFunction[], int nTimes){
     // (nameFunction)
-    fprintf(in_outFile, "%c%s%s", "(", in_nameFunction, ")\n");
+    fprintf(in_outFile, "%c%s%s", '(', in_nameFunction, ")\n");
 
     // Repeat k times
     for (int i = 0; i < nTimes; i++){
@@ -301,23 +297,64 @@ void printFunction(FILE *in_outFile, char in_nameFunction[], int nTimes){
     }
 }
 void return_(FILE *in_outFile){
-    // FRAME=LCL - 5
-    
-    // RET = FRAME
+    // FRAME = RAM[13] ; RET = RAM[14]
 
-    // *ARG=pop()
+    // FRAME = LCL - 5      <-- FRAME = tmp var in RAM[13]
+    fprintf(in_outFile, "%s", "@5\n");
+    fprintf(in_outFile, "%s", "D=A\n");
+    fprintf(in_outFile, "%s", "D=-D\n");
+    fprintf(in_outFile, "%s", "@LCL\n");
+    fprintf(in_outFile, "%s", "D=D+M\n");
+    fprintf(in_outFile, "%s", "@13\n");
+    fprintf(in_outFile, "%s", "M=D\n");
+
+    // RET = FRAME          <-- RET = tmp var in RAM[14]
+    fprintf(in_outFile, "%s", "@14\n");
+    fprintf(in_outFile, "%s", "M=D\n");
+
+    // *ARG=pop()   <-- vedasi come pop argument 0
+    pop(in_outFile, 1, "0");    //  pop argument 0
 
     // SP=ARG+1
+    fprintf(in_outFile, "%s", "@ARG\n");
+    fprintf(in_outFile, "%s", "D=M+1\n");
+    fprintf(in_outFile, "%s", "@SP\n");
+    fprintf(in_outFile, "%s", "M=D\n");
 
-    // THAT=*(FRAME-1)
+    // THAT=*(FRAME-1) (vedasi come: THAT = FRAME-1)
+    fprintf(in_outFile, "%s", "@13\n");
+    fprintf(in_outFile, "%s", "D=M-1\n");
+    fprintf(in_outFile, "%s", "@THAT\n");
+    fprintf(in_outFile, "%s", "M=D\n");
 
-    // THIS=*(FRAME-2)
+    // THIS=*(FRAME-2) (vedasi come: THIS = FRAME-2)
+    fprintf(in_outFile, "%s", "@13\n");
+    fprintf(in_outFile, "%s", "D=M\n");         // D = FRAME
+    fprintf(in_outFile, "%s", "@2\n");
+    fprintf(in_outFile, "%s", "D=D-A\n");       // D = FRAME - 2
+    fprintf(in_outFile, "%s", "@THIS\n");
+    fprintf(in_outFile, "%s", "M=D\n");         // THIS = FRAME - 3
 
-    // ARG=*(FRAME-3)
+    // ARG=*(FRAME-3) (vedasi come: ARG = FRAME-3)
+    fprintf(in_outFile, "%s", "@13\n");
+    fprintf(in_outFile, "%s", "D=M\n");
+    fprintf(in_outFile, "%s", "@3\n");
+    fprintf(in_outFile, "%s", "D=D-A\n");       // D = FRAME - 3
+    fprintf(in_outFile, "%s", "@ARG\n");
+    fprintf(in_outFile, "%s", "M=D\n");
 
-    // LCL=*(FRAME-4)
+    // LCL=*(FRAME-4) (vedasi come: LCL = FRAME-4)
+    fprintf(in_outFile, "%s", "@13\n");
+    fprintf(in_outFile, "%s", "D=M\n");
+    fprintf(in_outFile, "%s", "@4\n");
+    fprintf(in_outFile, "%s", "D=D-A\n");       // D = FRAME - 4
+    fprintf(in_outFile, "%s", "@LCL\n");
+    fprintf(in_outFile, "%s", "M=D\n");
 
-    // goto RET          <-- a quanto pare RET è un numero
+    // goto RET
+    fprintf(in_outFile, "%s", "@14\n");
+    fprintf(in_outFile, "%s", "A=M\n");
+    //fprintf(in_outFile, "%s", "0;JMP\n");
 
 }
 

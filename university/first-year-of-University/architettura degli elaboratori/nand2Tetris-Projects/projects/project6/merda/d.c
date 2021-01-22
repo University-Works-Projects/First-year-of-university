@@ -136,9 +136,9 @@ List returnFunction(int *error){
     push(&out, "@5");
     push(&out, "D=A");          // D = 5
     push(&out, "@LCL");
-    push(&out, "A=M-D");        // @ (RAM[LCL] - 5)
+    push(&out, "A=M-D");        // @(RAM[LCL] - 5)
     push(&out, "D=M");
-    // RET = FRAME
+    // RET = FRAME              // RET = tmp var in RAM[14]
     push(&out, "@R14");
     push(&out, "M=D");
 

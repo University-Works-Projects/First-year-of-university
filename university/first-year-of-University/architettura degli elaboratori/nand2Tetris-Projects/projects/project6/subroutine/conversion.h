@@ -7,6 +7,12 @@
 
 #include "all.h"
 
+// Torna 1 se il carattere rappresenta un numero, 0 altrimenti
+int charEqNum(char c){
+    if (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9') return 1;
+    else return 0;
+}
+
 // C -> I - Converte un numero sottoforma di carattere nel medesimo numero ma sottoforma di intero
 int charToInt(char c){
     int n = 0;

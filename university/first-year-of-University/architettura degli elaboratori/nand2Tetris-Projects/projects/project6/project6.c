@@ -66,12 +66,6 @@ int stringToInt(char in_row[], char finalCharacter){
 
 }
 
-// Torna 1 se il carattere rappresenta un numero, 0 altrimenti
-int charEqNum(char c){
-    if (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9') return 1;
-    else return 0;
-}
-
 // Per ora non ritorna niente e scrive direttamente sur file de output (vedi se deve esser modificata)
 void translateRow(FILE *in_outFile, char in_row[]){
     int in_rowLength = strlen(in_row), i = 0, space = 0;
@@ -79,11 +73,11 @@ void translateRow(FILE *in_outFile, char in_row[]){
     printf("%s", "Row length: "); printf("%d",in_rowLength); printf("%c", '\n');
 
     if (in_rowLength == 3){                       // Il +1 è lo spazio per '\0'
-        if (strcmp(in_row, "eq") == 0) { eq(in_outFile); }
-        else if (strcmp(in_row, "gt") == 0) { gt(in_outFile); }
-        else if (strcmp(in_row, "lt") == 0) { lt(in_outFile); }
-        else if (strcmp(in_row, "or") == 0) { or(in_outFile); }
-        else fprintf(in_outFile, "%s", "ERROR LENGTH 2");}
+        if (strcmp(in_row, "eq") == 0 ) { eq(in_outFile); }
+        else if (strcmp(in_row, "gt") == 0 ) { gt(in_outFile); }
+        else if (strcmp(in_row, "lt") == 0 ) { lt(in_outFile); }
+        else if (strcmp(in_row, "or") == 0 ) { or(in_outFile); }
+        else fprintf(in_outFile, "%s%s", "ERROR LENGTH 3", in_row); }
 
     else if (in_rowLength == 4){                  // Il +1 è lo spazio per '\0'
         if (strcmp(in_row, "add") == 0) { add(in_outFile); }    
@@ -91,7 +85,7 @@ void translateRow(FILE *in_outFile, char in_row[]){
         else if (strcmp(in_row, "neg") == 0) { neg(in_outFile); }    
         else if (strcmp(in_row, "and") == 0) { and(in_outFile); }      
         else if (strcmp(in_row, "not") == 0) { not(in_outFile); }
-        else fprintf(in_outFile, "%s", "ERROR LENGTH 3\n");}
+        else fprintf(in_outFile, "%s", "ERROR LENGTH 4"); }
 
     else {
 
@@ -172,7 +166,7 @@ void translateRow(FILE *in_outFile, char in_row[]){
             }
             else if (isString2inString1(in_row, "call")){   // call func nArgs
                 char nameFile[SIZE], nameFunction[SIZE], nArgs;
-                nArgs = callFunction(in_row, nameFile, nameFunction);
+                nArgs = call(in_row, nameFile, nameFunction);
                 // Ora si hanno separatamente tutte i dati necessari per continuare
 
                 printCall(in_outFile, nameFile, nameFunction, nArgs);
@@ -229,6 +223,10 @@ int main (int argc, char **argv){
         fprintf(outFile, "%s", "******************************************************\n");
     }
 
+
+    printf("%d", strcmp("lol", "kek"));
+    printf("%c", '\n');
+    printf("%d", strcmp("lol", "lol"));
 
     // CHIUDERE TUTTI I FILE ----------------------------------------------------------------------------------------------------
     // elimina il file di lavoro
