@@ -307,9 +307,7 @@ void printReturn(FILE *in_outFile){
     fprintf(in_outFile, "%s", "M=D\n");
 
     // *ARG=pop()   <-- vedasi come pop argument 0
-    pop(in_outFile, 1, "0");    //  pop argument 0
-    pop(in_outFile, 1, "0\n");
-    //fprintf(in_outFile, "%c", '\n');
+    pop(in_outFile, 1, "0\n");    //  pop argument 0
 
     // SP=ARG+1
     fprintf(in_outFile, "%s", "@ARG\n");
