@@ -27,6 +27,8 @@ void stringCharNumber(char in_row[], char specialCharacter, char emptyChar);
 int charEqNum(char c);
 
 // stringFunctions.h
+// Cambio estensione del file
+void newExtension(char in_nameFile[], char emptyNameFile[]){
 // Controlla se la stringa string1 contiene la stringa string2
 int isString2inString1 (char in_string1[], char in_string2[]);
 // S -> S - Data una stringa vuota ci inserisce il nome del label dichiarato
@@ -50,7 +52,6 @@ void takeAddress(FILE *in_outFile, char in_address[]);
 void assignmentToLastSV(FILE *in_outFile);
 void saveInR13(FILE *in_outFile);
 void addressFromR13(FILE *in_outFile);
-//void nameFile_nomeFunction(FILE *in_outFile, char in_nameFile[], char in_nameFunction[]);
 void jumpConditions(FILE *in_outFile, char in_jmpCond[]);
 
 void eq(FILE *in_outFile);
@@ -71,6 +72,6 @@ void ifgoto(FILE *in_outFile, char in_label[]);
 void goto_(FILE *in_outFile, char in_label[]);
 void printCall(FILE *in_outFile, char in_nameFile[], char in_nameFunction[], char nArgs);
 void printFunction(FILE *in_outFile, char in_nameFunction[], int nTimes);
-void return_(FILE *in_outFile);
+void printReturn(FILE *in_outFile);
 
 #endif

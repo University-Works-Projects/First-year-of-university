@@ -19,5 +19,8 @@ pop this 999
 pop that 999
 pop static 999
 label LABEL
-ig-goto IFGOTO
+if-goto IFGOTO
 goto GOTO
+function fnameFile.fnameFunction 4
+call cnameFile.cnameFunction 5
+return

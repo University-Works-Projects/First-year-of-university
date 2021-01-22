@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "all.h"
+#include "allFunctions.h"
 
 // SV = Stack Value
 // in_address contiene già come ultimo carattere '\n'
@@ -207,23 +207,18 @@ void pop(FILE *in_outFile, int casistic, char in_address[]){
 }
 
 void label(FILE *in_outFile, char in_label[]){
-    modifyLabel(in_label);                  // Rimosso '\n' da in_label
+    modifyLabel(in_label);                              // Rimosso '\n' da in_label
     fprintf(in_outFile, "%c%s%s", '(', in_label, ")\n");
     incrementSP(in_outFile);
 }
 void ifgoto(FILE *in_outFile, char in_label[]){
-    takeLastSV(in_outFile);
-    //goToPreviousSV(in_outFile);           // Ci va o no il decrememento???
+    takeLastSV(in_outFile);                             // Ci va l'incrementoda qualche parte???
     fprintf(in_outFile, "%c%s", '@', in_label);
-    //fprintf(in_outFile, "%s", in_label);
     fprintf(in_outFile, "%s", "D;JGT\n");
-    //incrementSP(in_outFile);              // Ci va l'incremento???
 }
-void goto_(FILE *in_outFile, char in_label[]){
+void goto_(FILE *in_outFile, char in_label[]){          // Ci va l'incrementoda qualche parte???
     fprintf(in_outFile, "%c%s", '@', in_label);
-    //fprintf(in_outFile, "%s", in_label);
     fprintf(in_outFile, "%s", "0;JMP\n");
-    incrementSP(in_outFile);
 }
 
 void printCall(FILE *in_outFile, char in_nameFile[], char in_nameFunction[], char nArgs){
@@ -283,20 +278,19 @@ void printCall(FILE *in_outFile, char in_nameFile[], char in_nameFunction[], cha
 
     // Un incremento di SP non ci và?
 }
-// Forse da aggiungere una cosa analoga al label, per il nome della funzione
 void printFunction(FILE *in_outFile, char in_nameFunction[], int nTimes){
     // (nameFunction)
     fprintf(in_outFile, "%c%s%s", '(', in_nameFunction, ")\n");
 
-    // Repeat k times
+    // Repeat k times --> Si inizializzano tutte le k variabili locali a 0.
     for (int i = 0; i < nTimes; i++){
-        fprintf(in_outFile, "%s", "@SP");
-        fprintf(in_outFile, "%s", "A=M");
-        fprintf(in_outFile, "%s", "M=0");   // push 0, si inizializzano (e var locali) a 0
+        fprintf(in_outFile, "%s", "@SP\n");
+        fprintf(in_outFile, "%s", "A=M\n");
+        fprintf(in_outFile, "%s", "M=0\n");   // push 0, si inizializzano (e var locali) a 0
         incrementSP(in_outFile);
     }
 }
-void return_(FILE *in_outFile){
+void printReturn(FILE *in_outFile){
     // FRAME = RAM[13] ; RET = RAM[14]
 
     // FRAME = LCL - 5      <-- FRAME = tmp var in RAM[13]
@@ -314,6 +308,8 @@ void return_(FILE *in_outFile){
 
     // *ARG=pop()   <-- vedasi come pop argument 0
     pop(in_outFile, 1, "0");    //  pop argument 0
+    pop(in_outFile, 1, "0\n");
+    //fprintf(in_outFile, "%c", '\n');
 
     // SP=ARG+1
     fprintf(in_outFile, "%s", "@ARG\n");
@@ -354,7 +350,7 @@ void return_(FILE *in_outFile){
     // goto RET
     fprintf(in_outFile, "%s", "@14\n");
     fprintf(in_outFile, "%s", "A=M\n");
-    //fprintf(in_outFile, "%s", "0;JMP\n");
+    fprintf(in_outFile, "%s", "0;JMP\n");
 
 }
 

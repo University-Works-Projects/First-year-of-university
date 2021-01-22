@@ -5,9 +5,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "all.h"
+#include "allFunctions.h"
+
+// Cambio estensione del file
+void newExtension(char in_nameFile[], char emptyNameFile[]){
+    int i = 0, j = 0;
+    while (in_nameFile[i] != '.'){
+        emptyNameFile[j] = in_nameFile[i];
+        i++; j++;
+    }
+    strcat(emptyNameFile, ".asm");
+}
 
 // Controlla se la stringa string1 contiene la stringa string2
+// if (s2 is in s1() return 1; else return 0 
 int isString2inString1 (char in_string1[], char in_string2[]){
     int i = 0, s1Length = strlen(in_string1);          // index per s1
     int j = 0, s2Length = strlen(in_string2);          // index per s2
@@ -46,7 +57,7 @@ void createLabel(char in_row[], char in_labelName[]){
         in_labelName[j] = in_row[i];
         i++; j++;
     }
-
+    in_labelName[j] = '\0';
 }
 
 // S -> S - Riempe una stringa (vuota) data con la parte numerica di una stringa data.

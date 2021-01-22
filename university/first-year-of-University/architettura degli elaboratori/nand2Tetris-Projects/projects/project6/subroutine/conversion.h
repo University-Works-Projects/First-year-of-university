@@ -1,11 +1,11 @@
-#ifndef consersion_h
-#define consersion_h
+#ifndef convsersion_h
+#define convsersion_h
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "all.h"
+#include "allFunctions.h"
 
 // Torna 1 se il carattere rappresenta un numero, 0 altrimenti
 int charEqNum(char c){

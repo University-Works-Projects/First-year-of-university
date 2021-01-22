@@ -1,4 +1,4 @@
-#include "subroutine/all.h"
+#include "subroutine/allFunctions.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -70,21 +70,21 @@ int stringToInt(char in_row[], char finalCharacter){
 void translateRow(FILE *in_outFile, char in_row[]){
     int in_rowLength = strlen(in_row), i = 0, space = 0;
 
-    printf("%s", "Row length: "); printf("%d",in_rowLength); printf("%c", '\n');
+    //printf("%s%d%c", "Row length: ", in_rowLength, '\n');
 
     if (in_rowLength == 3){                       // Il +1 è lo spazio per '\0'
-        if (strcmp(in_row, "eq") == 0 ) { eq(in_outFile); }
-        else if (strcmp(in_row, "gt") == 0 ) { gt(in_outFile); }
-        else if (strcmp(in_row, "lt") == 0 ) { lt(in_outFile); }
-        else if (strcmp(in_row, "or") == 0 ) { or(in_outFile); }
-        else fprintf(in_outFile, "%s%s", "ERROR LENGTH 3", in_row); }
+        if (isString2inString1(in_row, "eq")) { eq(in_outFile); }
+        else if (isString2inString1(in_row, "gt")) { gt(in_outFile); }
+        else if (isString2inString1(in_row, "lt")) { lt(in_outFile); }
+        else if (isString2inString1(in_row, "or")) { or(in_outFile); }
+        else fprintf(in_outFile, "%s", "ERROR LENGTH 3"); }
 
     else if (in_rowLength == 4){                  // Il +1 è lo spazio per '\0'
-        if (strcmp(in_row, "add") == 0) { add(in_outFile); }    
-        else if (strcmp(in_row, "sub") == 0) { sub(in_outFile); }    
-        else if (strcmp(in_row, "neg") == 0) { neg(in_outFile); }    
-        else if (strcmp(in_row, "and") == 0) { and(in_outFile); }      
-        else if (strcmp(in_row, "not") == 0) { not(in_outFile); }
+        if (isString2inString1(in_row, "add")) { add(in_outFile); }
+        else if (isString2inString1(in_row, "sub")) { sub(in_outFile); }    
+        else if (isString2inString1(in_row, "neg")) { neg(in_outFile); }    
+        else if (isString2inString1(in_row, "and")) { and(in_outFile); }      
+        else if (isString2inString1(in_row, "not")) { not(in_outFile); }
         else fprintf(in_outFile, "%s", "ERROR LENGTH 4"); }
 
     else {
@@ -164,7 +164,7 @@ void translateRow(FILE *in_outFile, char in_row[]){
                 createLabel(in_row, labelName);
                 goto_(in_outFile, labelName);
             }
-            else if (isString2inString1(in_row, "call")){   // call func nArgs
+            else if (isString2inString1(in_row, "call")){   // call nameFile.nameFunction nArgs
                 char nameFile[SIZE], nameFunction[SIZE], nArgs;
                 nArgs = call(in_row, nameFile, nameFunction);
                 // Ora si hanno separatamente tutte i dati necessari per continuare
@@ -177,10 +177,9 @@ void translateRow(FILE *in_outFile, char in_row[]){
                 printFunction(in_outFile, nameFunction, nTimes);
             }
             else if (isString2inString1(in_row, "return")){
-                fprintf(in_outFile, "%s", "return\n");
-                // DA FAR ORco dio
+                printReturn(in_outFile);
             }
-            else fprintf(in_outFile, "%s", "ERROR INVALID ROW (else case)\n");
+            else fprintf(in_outFile, "%s", "ERROR INVALID ROW (final else case)\n");
         }
         
     }
@@ -214,20 +213,15 @@ int main (int argc, char **argv){
     fprintf(outFile, "%s", "@D=A\n");
     fprintf(outFile, "%s", "@SP\n");
     fprintf(outFile, "%s", "M=D\n");
-    fprintf(outFile, "%s", "******************************************************\n");
+    fprintf(outFile, "%s", "//////////////////////////////////////////\n");
 
     // readWorkFile è vuoto a quanto pare, <-- Credo che con fclose(workFile) non si abbia più questo problema
     while (!feof(readWorkFile)){
         fgets(row, SIZE, readWorkFile);
         translateRow(outFile, row);
-        fprintf(outFile, "%s", "******************************************************\n");
+        fprintf(outFile, "%s", "//////////////////////////////////////////\n");
     }
-
-
-    printf("%d", strcmp("lol", "kek"));
-    printf("%c", '\n');
-    printf("%d", strcmp("lol", "lol"));
-
+   
     // CHIUDERE TUTTI I FILE ----------------------------------------------------------------------------------------------------
     // elimina il file di lavoro
     fclose(readWorkFile);
@@ -236,5 +230,4 @@ int main (int argc, char **argv){
     return 0;
 
 }
-
 
