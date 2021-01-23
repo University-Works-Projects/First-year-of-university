@@ -46,13 +46,13 @@ void incrementSP(FILE *in_outFile);
 void decrementSP(FILE *in_outFile);
 void takeLastSV(FILE *in_outFile);
 void takePenultimateSV(FILE *in_outFile);
-void goToNextSV(FILE *in_outFile);
 void goToPreviousSV(FILE *in_outFile);
 void takeAddress(FILE *in_outFile, char in_address[]);
 void assignmentToLastSV(FILE *in_outFile);
 void saveInR13(FILE *in_outFile);
 void addressFromR13(FILE *in_outFile);
 void jumpConditions(FILE *in_outFile, char in_jmpCond[]);
+void cleanRegister(FILE *in_outFile);
 
 void eq(FILE *in_outFile);
 void gt(FILE *in_outFile);

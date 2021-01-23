@@ -226,8 +226,8 @@ int main (int argc, char **argv){
     FILE *readWorkFile = fopen("workfile.vm", "r");
 
     // boostrap
-    fprintf(outFile, "%s", "@256\n");
-    fprintf(outFile, "%s", "@D=A\n");
+    fprintf(outFile, "%s", "@20\n");
+    fprintf(outFile, "%s", "D=A\n");
     fprintf(outFile, "%s", "@SP\n");
     fprintf(outFile, "%s", "M=D\n");
 
@@ -236,7 +236,10 @@ int main (int argc, char **argv){
         fgets(row, SIZE, readWorkFile);
         translateRow(outFile, row);
     }
-   
+    fprintf(outFile, "%s", "// end program\n");
+    fprintf(outFile, "%s", "(END)\n");
+    fprintf(outFile, "%s", "@END\n");
+    fprintf(outFile, "%s", "0;JMP\n");
     // CHIUDERE TUTTI I FILE ----------------------------------------------------------------------------------------------------
     // elimina il file di lavoro
     fclose(readWorkFile);

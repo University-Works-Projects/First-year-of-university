@@ -11,11 +11,15 @@ If RAM[x] = RAM[x] + RAM[y]
 */
 
 // Commented code
-
+    
+    // SP++
+    @SP
+    M=M-1
+    
     // Move to RAM[y]
     @SP
     A=M         // Go to RAM[y]
-    D=M         // D = y
+    D=M         // D = RAM[y]
     
     // Move to RAM[x]
     @SP
@@ -27,7 +31,10 @@ If RAM[x] = RAM[x] + RAM[y]
 
     // SP++
     @SP
-    M=M+1
+    AM=M+1
+
+    // RAM[y] = 0
+    M=0
     
     // Others instructions
 

@@ -1,32 +1,9 @@
-eq
-gt
-lt
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/07/StackArithmetic/SimpleAdd/SimpleAdd.vm
 
+// Pushes and adds two constants.
+push constant 7
+push constant 8
 add
-sub
-neg
-
-or
-and
-not
-
-push constant 999
-push local 999
-push argument 999
-push this 999
-push that 999
-push static 999
-
-pop local 999
-pop argument 999
-pop this 999
-pop that 999
-pop static 999
-
-label LABEL
-if-goto IFGOTO
-goto GOTO
-
-function fnameFile.fnameFunction 4
-call cnameFile.cnameFunction 5
-return

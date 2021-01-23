@@ -37,10 +37,6 @@ void takePenultimateSV(FILE *in_outFile){
     fprintf(in_outFile, "%s", "A=M-1\n");
     fprintf(in_outFile, "%s", "D=M\n");
 }
-void goToNextSV(FILE *in_outFile){
-    fprintf(in_outFile, "%s", "@SP\n");
-    fprintf(in_outFile, "%s", "AM=M+1\n");
-}
 void goToPreviousSV(FILE *in_outFile){
     fprintf(in_outFile, "%s", "@SP\n");
     fprintf(in_outFile, "%s", "AM=M-1\n");
@@ -63,6 +59,9 @@ void addressFromR13(FILE *in_outFile){
     fprintf(in_outFile, "%s", "A=M\n");
     fprintf(in_outFile, "%s", "M=D\n");
 }
+void cleanRegister(FILE *in_outFile){
+    fprintf(in_outFile, "%s", "M=0\n");
+}
 
 void jumpConditions(FILE *in_outFile, char in_jmpCond[]){
     fprintf(in_outFile, "%s", "@TRUE\n");
@@ -84,7 +83,7 @@ void eq(FILE *in_outFile){
 void gt(FILE *in_outFile){
     goToPreviousSV(in_outFile);
     fprintf(in_outFile, "%s", "D=M\n");
-    goToNextSV(in_outFile);
+    incrementSP(in_outFile);
     fprintf(in_outFile, "%s", "D=D-M\n");
     goToPreviousSV(in_outFile);
     jumpConditions(in_outFile, "JLT");
@@ -93,7 +92,7 @@ void gt(FILE *in_outFile){
 void lt(FILE *in_outFile){
     goToPreviousSV(in_outFile);
     fprintf(in_outFile, "%s", "D=M\n");
-    goToNextSV(in_outFile);
+    incrementSP(in_outFile);
     fprintf(in_outFile, "%s", "D=D-M\n");
     goToPreviousSV(in_outFile);
     jumpConditions(in_outFile, "JGT");
@@ -101,11 +100,13 @@ void lt(FILE *in_outFile){
 }
 
 void add(FILE *in_outFile){
+    decrementSP(in_outFile);
     takeLastSV(in_outFile);
     goToPreviousSV(in_outFile);
     fprintf(in_outFile, "%s", "D=D+M\n");
     fprintf(in_outFile, "%s", "M=D\n");
     incrementSP(in_outFile);
+    cleanRegister(in_outFile);
 }
 void sub(FILE *in_outFile){
     takeLastSV(in_outFile);
@@ -253,7 +254,7 @@ void printCall(FILE *in_outFile, char in_nameFile[], char in_nameFunction[], cha
     incrementSP(in_outFile);
 
     // push ARG = SP - n - 5
-    fprintf(in_outFile, "%c%c", '@', nArgs);
+    fprintf(in_outFile, "%c%c%c", '@', nArgs, '\n');
     fprintf(in_outFile, "%s", "D=A\n");
     fprintf(in_outFile, "%s", "@SP\n");
     fprintf(in_outFile, "%s", "D=M-D\n");
