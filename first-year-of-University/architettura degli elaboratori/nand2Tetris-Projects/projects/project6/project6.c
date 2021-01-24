@@ -70,7 +70,7 @@ int stringToInt(char in_row[], char finalCharacter){
 void translateRow(FILE *in_outFile, char in_row[]){
     int in_rowLength = strlen(in_row), i = 0, space = 0;
 
-    //printf("%s%d%c", "Row length: ", in_rowLength, '\n');
+    printf("%s%s%s%d%c", "Row: ", in_row, "length: ", in_rowLength, '\n');
 
     if (in_rowLength == 3){                       // Il +1 è lo spazio per '\0'
         if (isString2inString1(in_row, "eq")) { fprintf(in_outFile, "%s", "// eq\n"); eq(in_outFile); }
@@ -226,7 +226,7 @@ int main (int argc, char **argv){
     FILE *readWorkFile = fopen("workfile.vm", "r");
 
     // boostrap
-    fprintf(outFile, "%s", "@20\n");
+    fprintf(outFile, "%s", "@10\n");
     fprintf(outFile, "%s", "D=A\n");
     fprintf(outFile, "%s", "@SP\n");
     fprintf(outFile, "%s", "M=D\n");

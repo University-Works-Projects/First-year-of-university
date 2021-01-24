@@ -12,6 +12,10 @@ If RAM[x] = RAM[x] - RAM[y]
 
 // Commented code
 
+    // SP--
+    @SP
+    M=M-1
+
     // Move to RAM[y]
     @SP
     A=M         // Go to RAM[y]
@@ -21,14 +25,16 @@ If RAM[x] = RAM[x] - RAM[y]
     @SP
     AM=M-1      // Now SP point to RAM[x] and we move to it
     
-    // D = y - x
-    D=D-M       // x -= y
-    M=D         // RAM[x] = y - x
+    // RAM[x] = x - y
+    M=M-D
 
     // SP++
     @SP
     M=M+1
-    
+
+    // RAM[y] = 0
+    M=0
+
     // Others instructions
 
  (END)
@@ -37,12 +43,14 @@ If RAM[x] = RAM[x] - RAM[y]
 
 /* // Code for project 6
     @SP
+    AM=M+1
+    @SP
     A=M
     D=M
     @SP
     AM=M-1
-    D=D-M
-    M=D
+    M=M-D
     @SP
-    M=M+1
+    AM=M+1
+    M=0
 */

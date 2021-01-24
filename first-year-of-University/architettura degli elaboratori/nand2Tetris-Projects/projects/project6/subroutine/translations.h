@@ -19,6 +19,10 @@ void modifyLabel(char in_label[]){      // Toglie il carattere '\n' dalla fine d
 
 }
 
+void incrementSPAndGo(FILE *in_outFile){
+    fprintf(in_outFile, "%s", "@SP\n");
+    fprintf(in_outFile, "%s", "AM=M+1\n");
+}
 void incrementSP(FILE *in_outFile){
     fprintf(in_outFile, "%s", "@SP\n");
     fprintf(in_outFile, "%s", "M=M+1\n");
@@ -36,6 +40,10 @@ void takePenultimateSV(FILE *in_outFile){
     fprintf(in_outFile, "%s", "@SP\n");
     fprintf(in_outFile, "%s", "A=M-1\n");
     fprintf(in_outFile, "%s", "D=M\n");
+}
+void goToLastSV(FILE *in_outFile){
+    fprintf(in_outFile, "%s", "@SP\n");
+    fprintf(in_outFile, "%s", "A=M\n");
 }
 void goToPreviousSV(FILE *in_outFile){
     fprintf(in_outFile, "%s", "@SP\n");
@@ -64,58 +72,86 @@ void cleanRegister(FILE *in_outFile){
 }
 
 void jumpConditions(FILE *in_outFile, char in_jmpCond[]){
-    fprintf(in_outFile, "%s", "@TRUE\n");
+    fprintf(in_outFile, "%s", "@TRUE\n");                   // A = @(riga dove verràa scritto (TRUE))
     fprintf(in_outFile, "%s%s%c", "D;", in_jmpCond, '\n');
+    goToLastSV(in_outFile);                                 // Ora A punta nuovamente all'ultimo elemento dello stack
     fprintf(in_outFile, "%s", "M=0\n");
     fprintf(in_outFile, "%s", "@CONTINUE\n");
     fprintf(in_outFile, "%s", "0;JMP\n");
     fprintf(in_outFile, "%s", "(TRUE)\n");
+    goToLastSV(in_outFile);                                 // Ora A punta nuovamente all'ultimo elemento dello stack
     fprintf(in_outFile, "%s", "M=1\n");
     fprintf(in_outFile, "%s", "(CONTINUE)\n");
 }
 void eq(FILE *in_outFile){
+    decrementSP(in_outFile);
     takeLastSV(in_outFile);
     goToPreviousSV(in_outFile);
     fprintf(in_outFile, "%s", "D=D-M\n");
     jumpConditions(in_outFile, "JEQ");
-    incrementSP(in_outFile);
+    incrementSPAndGo(in_outFile);
+    cleanRegister(in_outFile);
 }
 void gt(FILE *in_outFile){
+    decrementSP(in_outFile);
+    takeLastSV(in_outFile);
+    goToPreviousSV(in_outFile);
+    fprintf(in_outFile, "%s", "D=M-D\n");
+    jumpConditions(in_outFile, "JGT");
+    incrementSPAndGo(in_outFile);
+    cleanRegister(in_outFile);
+}
+void lt(FILE *in_outFile){
+    decrementSP(in_outFile);
+    takeLastSV(in_outFile);
+    goToPreviousSV(in_outFile);
+    fprintf(in_outFile, "%s", "D=M-D\n");
+    jumpConditions(in_outFile, "JLT");
+    incrementSPAndGo(in_outFile);
+    cleanRegister(in_outFile);
+}
+/*
+void gt(FILE *in_outFile){
+    decrementSP(in_outFile);
     goToPreviousSV(in_outFile);
     fprintf(in_outFile, "%s", "D=M\n");
     incrementSP(in_outFile);
     fprintf(in_outFile, "%s", "D=D-M\n");
     goToPreviousSV(in_outFile);
     jumpConditions(in_outFile, "JLT");
-    incrementSP(in_outFile);
+    incrementSPAndGo(in_outFile);
+    cleanRegister(in_outFile);
 }
 void lt(FILE *in_outFile){
+    decrementSP(in_outFile);
     goToPreviousSV(in_outFile);
     fprintf(in_outFile, "%s", "D=M\n");
     incrementSP(in_outFile);
     fprintf(in_outFile, "%s", "D=D-M\n");
     goToPreviousSV(in_outFile);
     jumpConditions(in_outFile, "JGT");
-    incrementSP(in_outFile);
+    incrementSPAndGo(in_outFile);
+    cleanRegister(in_outFile);
 }
-
+*/
 void add(FILE *in_outFile){
     decrementSP(in_outFile);
     takeLastSV(in_outFile);
     goToPreviousSV(in_outFile);
-    fprintf(in_outFile, "%s", "D=D+M\n");
-    fprintf(in_outFile, "%s", "M=D\n");
-    incrementSP(in_outFile);
+    fprintf(in_outFile, "%s", "M=M+D\n");
+    incrementSPAndGo(in_outFile);
     cleanRegister(in_outFile);
 }
 void sub(FILE *in_outFile){
+    decrementSP(in_outFile);
     takeLastSV(in_outFile);
     goToPreviousSV(in_outFile);
-    fprintf(in_outFile, "%s", "D=D-M\n");
-    fprintf(in_outFile, "%s", "M=D\n");
-    incrementSP(in_outFile);
+    fprintf(in_outFile, "%s", "M=M-D\n");
+    incrementSPAndGo(in_outFile);
+    cleanRegister(in_outFile);
 }
 void neg(FILE *in_outFile){
+    decrementSP(in_outFile);
     fprintf(in_outFile, "%s", "@SP\n");
     fprintf(in_outFile, "%s", "A=M\n");
     fprintf(in_outFile, "%s", "M=-M\n");
@@ -123,20 +159,23 @@ void neg(FILE *in_outFile){
 }
 
 void or(FILE *in_outFile){
+    decrementSP(in_outFile);
     takeLastSV(in_outFile);
     goToPreviousSV(in_outFile);
-    fprintf(in_outFile, "%s", "D=D|M\n");
-    fprintf(in_outFile, "%s", "M=D\n");
-    incrementSP(in_outFile);
+    fprintf(in_outFile, "%s", "M=D|M\n");
+    incrementSPAndGo(in_outFile);
+    cleanRegister(in_outFile);
 }
 void and(FILE *in_outFile){
+    decrementSP(in_outFile);
     takeLastSV(in_outFile);
     goToPreviousSV(in_outFile);
-    fprintf(in_outFile, "%s", "D=D&M\n");
-    fprintf(in_outFile, "%s", "M=D\n");
-    incrementSP(in_outFile);
+    fprintf(in_outFile, "%s", "M=D&M\n");
+    incrementSPAndGo(in_outFile);
+    cleanRegister(in_outFile);
 }
 void not(FILE *in_outFile){
+    decrementSP(in_outFile);
     fprintf(in_outFile, "%s", "@SP\n");
     fprintf(in_outFile, "%s", "A=M\n");
     fprintf(in_outFile, "%s", "M=!M\n");
@@ -178,6 +217,7 @@ void push(FILE *in_outFile, int casistic, char in_address[]){
     incrementSP(in_outFile);
 }
 void pop(FILE *in_outFile, int casistic, char in_address[]){
+    decrementSP(in_outFile);
     takeAddress(in_outFile, in_address);
     switch(casistic){
         case 0:     // pop local n

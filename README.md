@@ -1,2 +1,2 @@
-# University
-Programming exercises carried out during the course of university studies.
+# First-year-of-University
+Collection of all the programs and projects carried out during my first university year.
