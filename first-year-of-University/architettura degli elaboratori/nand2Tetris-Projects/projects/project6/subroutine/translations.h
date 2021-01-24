@@ -110,30 +110,7 @@ void lt(FILE *in_outFile){
     incrementSPAndGo(in_outFile);
     cleanRegister(in_outFile);
 }
-/*
-void gt(FILE *in_outFile){
-    decrementSP(in_outFile);
-    goToPreviousSV(in_outFile);
-    fprintf(in_outFile, "%s", "D=M\n");
-    incrementSP(in_outFile);
-    fprintf(in_outFile, "%s", "D=D-M\n");
-    goToPreviousSV(in_outFile);
-    jumpConditions(in_outFile, "JLT");
-    incrementSPAndGo(in_outFile);
-    cleanRegister(in_outFile);
-}
-void lt(FILE *in_outFile){
-    decrementSP(in_outFile);
-    goToPreviousSV(in_outFile);
-    fprintf(in_outFile, "%s", "D=M\n");
-    incrementSP(in_outFile);
-    fprintf(in_outFile, "%s", "D=D-M\n");
-    goToPreviousSV(in_outFile);
-    jumpConditions(in_outFile, "JGT");
-    incrementSPAndGo(in_outFile);
-    cleanRegister(in_outFile);
-}
-*/
+
 void add(FILE *in_outFile){
     decrementSP(in_outFile);
     takeLastSV(in_outFile);
@@ -183,7 +160,7 @@ void not(FILE *in_outFile){
 }
 
 void push(FILE *in_outFile, int casistic, char in_address[]){
-    takeAddress(in_outFile, in_address);    // D = n
+    takeAddress(in_outFile, in_address);              // D = n
     switch(casistic){
         case 0:     // push constant n
             break;

@@ -11,7 +11,6 @@
 // make clean per pulire dai file di scarto
 
 // Constrollare se la quantitatà di file creati è minimizzabile
-// Informasi sul boostrap (va aggiunto? cos'è?)
 /* PROBLEMONI:
     - Se si dichiara una label del tipo: "label aaagoto" so cazzi amari (probabile problema ignorabile)
     - Stampa due volte la traduzione del comando dell'ultima istruzione

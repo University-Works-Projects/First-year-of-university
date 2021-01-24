@@ -1,4 +1,11 @@
-push constant 3
-push constant 2
-gt
-gt
+function inputFile.test 2
+push local 0
+push local 1
+add
+not
+push argument 0
+add
+push argument 1
+sub
+return
+return
