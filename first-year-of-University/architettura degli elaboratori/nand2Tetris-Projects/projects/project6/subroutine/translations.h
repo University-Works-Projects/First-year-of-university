@@ -7,9 +7,26 @@
 
 #include "allFunctions.h"
 
+#define DIM 32
+
 // SV = Stack Value
 // in_address contiene già come ultimo carattere '\n'
 
+int labelCounter = 0, continueCounter = 0;
+
+int addCountertoLabel(char in_label[], int in_counter){
+    char num = intToChar(in_counter);
+    int i = 0;
+    
+    while (in_label[i] != '\0'){i++;}
+
+    in_label[i] = num;
+    in_label[i+1] = '\0';
+
+    in_counter++;
+
+    return (in_counter);
+}
 void modifyLabel(char in_label[]){      // Toglie il carattere '\n' dalla fine della stinga
     int i = 0;
     while (in_label[i] != 0){
@@ -31,6 +48,7 @@ void decrementSP(FILE *in_outFile){
     fprintf(in_outFile, "%s", "@SP\n");
     fprintf(in_outFile, "%s", "M=M-1\n");
 }
+
 void takeLastSV(FILE *in_outFile){
     fprintf(in_outFile, "%s", "@SP\n");
     fprintf(in_outFile, "%s", "A=M\n");
@@ -41,6 +59,11 @@ void takePenultimateSV(FILE *in_outFile){
     fprintf(in_outFile, "%s", "A=M-1\n");
     fprintf(in_outFile, "%s", "D=M\n");
 }
+void takeAddress(FILE *in_outFile, char in_address[]){  // char address[]
+    fprintf(in_outFile, "%c%s", '@', in_address);
+    fprintf(in_outFile, "%s", "D=A\n");
+}
+
 void goToLastSV(FILE *in_outFile){
     fprintf(in_outFile, "%s", "@SP\n");
     fprintf(in_outFile, "%s", "A=M\n");
@@ -49,15 +72,13 @@ void goToPreviousSV(FILE *in_outFile){
     fprintf(in_outFile, "%s", "@SP\n");
     fprintf(in_outFile, "%s", "AM=M-1\n");
 }
-void takeAddress(FILE *in_outFile, char in_address[]){  // char address[]
-    fprintf(in_outFile, "%c%s", '@', in_address);
-    fprintf(in_outFile, "%s", "D=A\n");
-}
+
 void assignmentToLastSV(FILE *in_outFile){
     fprintf(in_outFile, "%s", "@SP\n");
     fprintf(in_outFile, "%s", "A=M\n");
     fprintf(in_outFile, "%s", "M=D\n");
 }
+
 void saveInR13(FILE *in_outFile){
     fprintf(in_outFile, "%s", "@13\n");
     fprintf(in_outFile, "%s", "M=D\n");
@@ -71,17 +92,24 @@ void cleanRegister(FILE *in_outFile){
     fprintf(in_outFile, "%s", "M=0\n");
 }
 
+
 void jumpConditions(FILE *in_outFile, char in_jmpCond[]){
-    fprintf(in_outFile, "%s", "@TRUE\n");                   // A = @(riga dove verràa scritto (TRUE))
+    char newLabel[DIM]; strcpy(newLabel, "CASE");
+    labelCounter = addCountertoLabel(newLabel, labelCounter);
+    char newContinue [DIM]; strcpy(newContinue, "CONTINUE");
+    continueCounter = addCountertoLabel(newContinue, continueCounter);
+
+    fprintf(in_outFile, "%c%s%c", '@', newLabel, '\n');     // A = @(riga dove verràa scritto (TRUE))
     fprintf(in_outFile, "%s%s%c", "D;", in_jmpCond, '\n');
     goToLastSV(in_outFile);                                 // Ora A punta nuovamente all'ultimo elemento dello stack
     fprintf(in_outFile, "%s", "M=0\n");
-    fprintf(in_outFile, "%s", "@CONTINUE\n");
+    fprintf(in_outFile, "%c%s%c", '@', newContinue, '\n');
     fprintf(in_outFile, "%s", "0;JMP\n");
-    fprintf(in_outFile, "%s", "(TRUE)\n");
+    fprintf(in_outFile, "%c%s%s", '(', newLabel, ")\n");
     goToLastSV(in_outFile);                                 // Ora A punta nuovamente all'ultimo elemento dello stack
+    //fprintf(in_outFile, "%s", "M=-1\n");
     fprintf(in_outFile, "%s", "M=1\n");
-    fprintf(in_outFile, "%s", "(CONTINUE)\n");
+    fprintf(in_outFile, "%c%s%s", '(', newContinue, ")\n");
 }
 void eq(FILE *in_outFile){
     decrementSP(in_outFile);

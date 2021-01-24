@@ -37,23 +37,30 @@ void createLabel(char in_row[], char in_labelName[]);
 void stringNumeber(char in_row[], char specialCharacter, char emptyString[]);
 // Data una riga: call nameFile.nameFunction nArgs ritorna in char nArgs, riempe stringhe con nameFile e nameFunction
 char call(char in_row[], char emptyFileName[], char emptyFunctionName[]);
-//S
+// S
 int function(char in_row[], char emptyFunctionName[]);
 
 // translation.h
+int addCountertoLabel(char in_label[], int in_counter);
 void modifyLabel(char in_label[]);
+
+void incrementSPAndGo(FILE *in_outFile);
 void incrementSP(FILE *in_outFile);
 void decrementSP(FILE *in_outFile);
+
 void takeLastSV(FILE *in_outFile);
 void takePenultimateSV(FILE *in_outFile);
-void goToPreviousSV(FILE *in_outFile);
 void takeAddress(FILE *in_outFile, char in_address[]);
+
+void goToLastSV(FILE *in_outFile);
+void goToPreviousSV(FILE *in_outFile);
 void assignmentToLastSV(FILE *in_outFile);
+
 void saveInR13(FILE *in_outFile);
 void addressFromR13(FILE *in_outFile);
-void jumpConditions(FILE *in_outFile, char in_jmpCond[]);
 void cleanRegister(FILE *in_outFile);
 
+void jumpConditions(FILE *in_outFile, char in_jmpCond[]);
 void eq(FILE *in_outFile);
 void gt(FILE *in_outFile);
 void lt(FILE *in_outFile);
@@ -67,6 +74,7 @@ void not(FILE *in_outFile);
 
 void push(FILE *in_outFile, int casistic, char in_address[]);
 void pop(FILE *in_outFile, int casistic, char in_address[]);
+
 void label(FILE *in_outFile, char in_label[]);
 void ifgoto(FILE *in_outFile, char in_label[]);
 void goto_(FILE *in_outFile, char in_label[]);

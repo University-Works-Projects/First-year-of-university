@@ -34,7 +34,12 @@ char intToChar(int in_num){
     if (in_num < 0) printf("%s", "ERROR call f n, n è negativo.");
     else {
         char charNum;
-        if (in_num == 5) charNum = '5';
+        if (in_num == 0) charNum = '0';
+        else if (in_num == 1) charNum = '1';
+        else if (in_num == 2) charNum = '2';
+        else if (in_num == 3) charNum = '3';
+        else if (in_num == 4) charNum = '4';
+        else if (in_num == 5) charNum = '5';
         else if (in_num == 6) charNum = '6';
         else if (in_num == 7) charNum = '7';
         else if (in_num == 8) charNum = '8';
