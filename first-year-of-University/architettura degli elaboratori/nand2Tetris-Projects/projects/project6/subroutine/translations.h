@@ -259,6 +259,7 @@ void ifgoto(FILE *in_outFile, char in_label[]){
     takeLastSV(in_outFile);                             // Ci va l'incrementoda qualche parte???
     fprintf(in_outFile, "%c%s", '@', in_label);
     fprintf(in_outFile, "%s", "D;JLT\n");               // JLT perchè un'espressione vera ha valore -1
+    //fprintf(in_outFile, "%s", "D;JNE\n");               // JNE perchè un'espressione vera ha valore diverso da 0
 }
 void goto_(FILE *in_outFile, char in_label[]){          // Ci va l'incrementoda qualche parte???
     fprintf(in_outFile, "%c%s", '@', in_label);
@@ -392,7 +393,7 @@ void printReturn(FILE *in_outFile){
     // goto RET
     fprintf(in_outFile, "%s", "@14\n");
     fprintf(in_outFile, "%s", "A=M\n");
-    fprintf(in_outFile, "%s", "0;JMP\n");
+    //fprintf(in_outFile, "%s", "0;JMP\n");
 
 }
 
