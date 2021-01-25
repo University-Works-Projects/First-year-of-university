@@ -225,7 +225,7 @@ int main (int argc, char **argv){
     FILE *readWorkFile = fopen("workfile.vm", "r");
 
     // boostrap
-    fprintf(outFile, "%s", "@10\n");
+    fprintf(outFile, "%s", "@256\n");
     fprintf(outFile, "%s", "D=A\n");
     fprintf(outFile, "%s", "@SP\n");
     fprintf(outFile, "%s", "M=D\n");

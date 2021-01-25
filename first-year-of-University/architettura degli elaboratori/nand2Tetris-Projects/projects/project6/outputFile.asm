@@ -26,7 +26,8 @@ D=M
 A=M
 M=D
 @SP
-M=M+1
+A=M
+M=0
 // push constant
 @21
 D=A
@@ -59,7 +60,8 @@ D=M
 A=M
 M=D
 @SP
-M=M+1
+A=M
+M=0
 // pop argument
 @SP
 M=M-1
@@ -76,7 +78,8 @@ D=M
 A=M
 M=D
 @SP
-M=M+1
+A=M
+M=0
 // push constant
 @36
 D=A
@@ -101,7 +104,8 @@ D=M
 A=M
 M=D
 @SP
-M=M+1
+A=M
+M=0
 // push constant
 @42
 D=A
@@ -134,7 +138,8 @@ D=M
 A=M
 M=D
 @SP
-M=M+1
+A=M
+M=0
 // pop static
 @SP
 M=M-1
@@ -151,7 +156,8 @@ D=M
 A=M
 M=D
 @SP
-M=M+1
+A=M
+M=0
 // push constant
 @510
 D=A
@@ -176,7 +182,8 @@ D=M
 A=M
 M=D
 @SP
-M=M+1
+A=M
+M=0
 // push local
 @0
 D=A

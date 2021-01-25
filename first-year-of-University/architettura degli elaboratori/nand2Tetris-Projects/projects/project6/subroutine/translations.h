@@ -88,9 +88,6 @@ void addressFromR13(FILE *in_outFile){
     fprintf(in_outFile, "%s", "A=M\n");
     fprintf(in_outFile, "%s", "M=D\n");
 }
-void cleanRegister(FILE *in_outFile){
-    fprintf(in_outFile, "%s", "M=0\n");
-}
 
 
 void jumpConditions(FILE *in_outFile, char in_jmpCond[]){
@@ -107,8 +104,7 @@ void jumpConditions(FILE *in_outFile, char in_jmpCond[]){
     fprintf(in_outFile, "%s", "0;JMP\n");
     fprintf(in_outFile, "%c%s%s", '(', newLabel, ")\n");
     goToLastSV(in_outFile);                                 // Ora A punta nuovamente all'ultimo elemento dello stack
-    //fprintf(in_outFile, "%s", "M=-1\n");
-    fprintf(in_outFile, "%s", "M=1\n");
+    fprintf(in_outFile, "%s", "M=-1\n");
     fprintf(in_outFile, "%c%s%s", '(', newContinue, ")\n");
 }
 void eq(FILE *in_outFile){
@@ -118,7 +114,7 @@ void eq(FILE *in_outFile){
     fprintf(in_outFile, "%s", "D=D-M\n");
     jumpConditions(in_outFile, "JEQ");
     incrementSPAndGo(in_outFile);
-    cleanRegister(in_outFile);
+    fprintf(in_outFile, "%s", "M=0\n");
 }
 void gt(FILE *in_outFile){
     decrementSP(in_outFile);
@@ -127,7 +123,7 @@ void gt(FILE *in_outFile){
     fprintf(in_outFile, "%s", "D=M-D\n");
     jumpConditions(in_outFile, "JGT");
     incrementSPAndGo(in_outFile);
-    cleanRegister(in_outFile);
+    fprintf(in_outFile, "%s", "M=0\n");
 }
 void lt(FILE *in_outFile){
     decrementSP(in_outFile);
@@ -136,7 +132,7 @@ void lt(FILE *in_outFile){
     fprintf(in_outFile, "%s", "D=M-D\n");
     jumpConditions(in_outFile, "JLT");
     incrementSPAndGo(in_outFile);
-    cleanRegister(in_outFile);
+    fprintf(in_outFile, "%s", "M=0\n");
 }
 
 void add(FILE *in_outFile){
@@ -145,7 +141,7 @@ void add(FILE *in_outFile){
     goToPreviousSV(in_outFile);
     fprintf(in_outFile, "%s", "M=M+D\n");
     incrementSPAndGo(in_outFile);
-    cleanRegister(in_outFile);
+    fprintf(in_outFile, "%s", "M=0\n");
 }
 void sub(FILE *in_outFile){
     decrementSP(in_outFile);
@@ -153,7 +149,7 @@ void sub(FILE *in_outFile){
     goToPreviousSV(in_outFile);
     fprintf(in_outFile, "%s", "M=M-D\n");
     incrementSPAndGo(in_outFile);
-    cleanRegister(in_outFile);
+    fprintf(in_outFile, "%s", "M=0\n");
 }
 void neg(FILE *in_outFile){
     decrementSP(in_outFile);
@@ -169,7 +165,7 @@ void or(FILE *in_outFile){
     goToPreviousSV(in_outFile);
     fprintf(in_outFile, "%s", "M=D|M\n");
     incrementSPAndGo(in_outFile);
-    cleanRegister(in_outFile);
+    fprintf(in_outFile, "%s", "M=0\n");
 }
 void and(FILE *in_outFile){
     decrementSP(in_outFile);
@@ -177,7 +173,7 @@ void and(FILE *in_outFile){
     goToPreviousSV(in_outFile);
     fprintf(in_outFile, "%s", "M=D&M\n");
     incrementSPAndGo(in_outFile);
-    cleanRegister(in_outFile);
+    fprintf(in_outFile, "%s", "M=0\n");
 }
 void not(FILE *in_outFile){
     decrementSP(in_outFile);
@@ -223,7 +219,7 @@ void push(FILE *in_outFile, int casistic, char in_address[]){
 }
 void pop(FILE *in_outFile, int casistic, char in_address[]){
     decrementSP(in_outFile);
-    takeAddress(in_outFile, in_address);
+    takeAddress(in_outFile, in_address);              // D = n
     switch(casistic){
         case 0:     // pop local n
             fprintf(in_outFile, "%s", "@LCL\n");
@@ -246,10 +242,12 @@ void pop(FILE *in_outFile, int casistic, char in_address[]){
             fprintf(in_outFile, "%s", "D=M+D\n");     // D = @thst n
             break;
     }
-    saveInR13(in_outFile);
+    saveInR13(in_outFile);          // Save in RAM[13] address of segment n
     takeLastSV(in_outFile);
     addressFromR13(in_outFile);
-    incrementSP(in_outFile);
+    goToLastSV(in_outFile);
+    fprintf(in_outFile, "%s", "M=0\n");
+    //incrementSP(in_outFile);
 }
 
 void label(FILE *in_outFile, char in_label[]){
@@ -260,7 +258,7 @@ void label(FILE *in_outFile, char in_label[]){
 void ifgoto(FILE *in_outFile, char in_label[]){
     takeLastSV(in_outFile);                             // Ci va l'incrementoda qualche parte???
     fprintf(in_outFile, "%c%s", '@', in_label);
-    fprintf(in_outFile, "%s", "D;JGT\n");
+    fprintf(in_outFile, "%s", "D;JLT\n");               // JLT perchè un'espressione vera ha valore -1
 }
 void goto_(FILE *in_outFile, char in_label[]){          // Ci va l'incrementoda qualche parte???
     fprintf(in_outFile, "%c%s", '@', in_label);
