@@ -14,7 +14,6 @@
 /* PROBLEMONI:
     - Se si dichiara una label del tipo: "label aaagoto" so cazzi amari (probabile problema ignorabile)
     - Stampa due volte la traduzione del comando dell'ultima istruzione
-    - Fra eq, gt e lt stampa sempre le istruzioni di eq, stessa cosa per gli altri blocchi di istruzioni
 
 ATTENZIONE:
     - Controllare dove sia possibile eliminare librerie inutilizzate
