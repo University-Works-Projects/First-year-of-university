@@ -3,6 +3,7 @@
     -- GRAMMATICA LISTE:   L ::= [] | X : L
     
     -- SOTTOINSIEMI
+
         {- 1.1  UNIONE Di 2 LISTE
             Problema 1.1: date due liste pensate come
             insiemi, calcolare la lista che ne
@@ -62,11 +63,15 @@
             p [] = ...
             p (x : l) = ... p l ...
         -}
-        p [] = [] : []
-        p (x : l) = u (p l) (hi x (p l))
+        p [] = [] : []                      -- CM1
+        p (x : l) = u (p l) (hi x (p l))    -- CM2
+
+        -- CM1: 
+        -- CM2: 
     
     
     -- PERMUTAZIONI
+
         {- 2.1  INSERIMENTO IN OGNI POSIZIONE
             Problema 2.1: dati un elemento x e una lista l,
             restituire la lista di tutti i possibili modi
@@ -156,9 +161,11 @@
         -- CM1: L'insieme di tutte le permutazioni della lista vuotà è il singoletto contenente solo la lista vuota.
         -- CM2: ddd
 
+
     -- SOTTOLISTA
+
         {- 3.1  PREFISSO
-            Problema 3.: date due liste l1 e l2
+            Problema 3.1: date due liste l1 e l2
             decidere se l2 è prefisso di l1
             
             Es pre (1 : 2 : 3 : 4 : []) (1 : 2 : []) = True
@@ -183,10 +190,10 @@
                 della lista riducendosi prima o poi ad uno dei primi tre casi.
 
         {- 3.0  PRESENZA DI UNA SOTTOLISTA
-            Problema 3: date due liste l1 e l2
-            decidere se l2 e' una sottolista di l1
+            Problema 3.0: date due liste l1 e l2
+            decidere se l2 è una sottolista di l1
             decidere = restituire true oppure false
-            sottolista e' una sottosequenza
+            sottolista è una sottosequenza
             
             Es sottl (1 : 2 : 3 : 4 : []) (2 : 3 : []) = True
             Es sottl (1 : 2 : 3 : 4 : []) (1 : 3 : []) = False
@@ -198,15 +205,65 @@
             ma non è interessante sapere la presenza di un singolo "pezzo".
 
             sottl [] l2 = ...
-            sottl (x : l) l2 = --- sottl l ? ...
+            sottl (x : l) l2 = ... sottl l ? ...
 
         -}
-        sottl [] l2 = l2 == []        -- CM!
-        sottl (x : l) l2 = --- sottl l ? ...-- CM2
+        sottl [] l2 = l2 == []                               -- CM1
+        sottl (x : l) l2 = sottl l l2 || pref (x : l) l2     -- CM2
 
         -- CM1: l2 è una sottolista della lista vuota sse l2 è anch'essa una lista vuota,
                 e per verificarlo lo si verifica con un controllo che ritornerà T or F.
-        -- CM2: 
+        -- CM2: l2 è all'interno di l1 quando l2 è all'interno di l OPPURE quando è il
+                prefisso di l1
+
+
+    -- LUNGEZZA DELLA SOTTOLISTA DI ELEMENTI UGUALI
+        
+        {- 4.1  LUNGHEZZA PREFISSO MASSIMALE
+        Problema 4.1: dato un n e una lista l,
+        calcolare la lunghezza del prefisso
+        massimale di l formato da soli n
+        
+        Es. mpre 2 (2 : 2 : 3 : 2 : 2 : 2 : []) = 2
+        Soluzione: mpre n l1
+
+        Ricorsione strutturale su l1
+        mpre n [] = ...
+        mpre n (x : l) = ... mpre ? l ...
+
+        -}
+        mpre n [] = 0                                           -- CM1
+        mpre n (x : l) = if n == x then 1 + mpre x l else 0     -- CM2
+
+        -- CM1: I prefissi della lista vuota hanno lunghezza 0
+        -- CM2:
+
+        {- 4.0  LUNGHEZZA SOTTOLISTA DI ELEMENTI UGUALI
+            Problema 4.0: data una lista l calcolare la
+            lunghezza della sottolista di l composta da
+            elementi tutti uguali di lunghezza massimale
+            
+            Es: meq (1 : 1 : 2 : 2 : 2 : 3 : []) = 3
+            Soluzione: meq l
+
+            Nota: Differenza tra massimo e massimale, il massimo è unico,
+            una lista di lungezza massima implica che sia una lista con
+            lunghezza maggiore rispetto alle altre. Liste con lunghezza
+            massimale è una delle possibili più liste con il più alto
+            valore di lunghezza.
+            
+            Es: meq (1 : 1 : 2 : 2 : 2 : 3 : []) = 3
+            Soluzione: meq l
+            
+            Ricorsione strutturale su l
+            meq [] = ...
+            meq (x : l) = ... meq l ...
+        -}
+        meq [] = 0                                  -- CM1
+        meq (x : l) = max (meq l) (1 + mpre x l)    -- CM2
+
+        -- CM1: La lista vuota ritorna lunghezza 0
+        -- CM2:
 
 -}
 
@@ -283,28 +340,3 @@
         --      si fa un confronto binario percontrollare la monotonia di foglia in foglia
 
 -}
-
-
-
-
-
-
-
-
-
-{- 3.0  AAA
-        Problema 11: date due liste l1 e l2
-        decidere se l2 e' prefisso di l1
-        
-        Es pre (1 : 2 : 3 : 4 : []) (1 : 2 : []) = True
-        Es pre (1 : 2 : 3 : 4 : []) (2 : 3 : []) = False
-        Soluzione: pre l1 l2
-        
-        Ricorsione strutturale su ...
-
-    -}
-    code -- CM1
-    code -- CM2
-
-    -- CM1: Cercando di inserire x in una lista vuota si ottiene x (dunque x : [] per inserire x, e [] per la fine della lista).
-    -- CM2:
