@@ -35,10 +35,10 @@
 
 
 
--- ESERCIZI HASKELL
+-- ESERCIZI RICORSIONE STRUTTURALE HASKELL/PSEUDO-LINGUAGGIO
 
     -- Es1
-        -- Problema: Implementare:
+        -- Implementare:
         -- F ::= X | F + F | F * F
         -- size (x) = 1
         -- size (F1 + F2) = size (F1) + size (F2)
@@ -51,4 +51,40 @@
     size (Mult f1 f2) = size f1 + size f2
 
     -- Es2
-        -- pag 39
+        -- Grammatica: X ::= [] | aXa | bXb
+        -- Problema: Implementare una funzione che ritorni la lungezza di una stringa
+        -- NON VA ERRORE NELLA DICHIARAZIONE DELLA GRAMMATICA
+
+    data X = [] | aXa | bXb deriving Show
+    length ([]) = 0
+    length (aXa) = 2 + length(X)
+    length (bXb) = 2 + length(X)
+
+    -- Es3
+        -- Grammatica: X ::= [] | aXa | bXb (già definita)
+        -- Problema: Implementare una funzione che ritorni True se viene usato aXa, False altrimenti
+        -- NON VA ERRORE NELLA DICHIARAZIONE DELLA GRAMMATICA
+
+    usesA ([]) = False
+    usesA (aXa) = True
+    usesA (bXb) = usesA (X)
+
+    -- Es4
+        -- Grammatica: X ::= [] | aXa | bXb (già definita)
+        -- Problema: Implementare una funzione che ritorni True se viene usato solo aXa, False altrimenti
+        -- NON VA ERRORE NELLA DICHIARAZIONE DELLA GRAMMATICA
+
+    allA ([]) = True
+    allA (aXa) = allA (X)
+    allA (bXb) = False
+
+    -- Es5
+        -- Grammatica: X ::= [] | aXa | bXb (già definita)
+        -- Problema: Implementare una funzione che ritorni True se vi è bXb esattamente a metà della stringa, False altrimenti.
+        -- NON SO SE SIA CORRETTA
+
+    middleB ([]) = False
+    middleB (bb) = True 
+    middleB (aa) = False
+    middleB (aXa) = middleB (X)
+    middleB (bXb) = middleB (X)
