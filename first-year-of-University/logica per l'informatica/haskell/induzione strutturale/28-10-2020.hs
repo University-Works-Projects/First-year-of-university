@@ -102,15 +102,16 @@
                 ovvero:
                     forall l2, forall x, x == y || isIn x (concat l l2) =?= x == y || isIn x l || isIn x l2
 
-                sia l2 lista, sia x numero
-                dobbiamo dimostrare:
-                    x == y || isIn x (concat l l2) =?= x == y || isIn x l || isIn x l2
-                ovvio per II e per le proprietà dell ||
+                Dimostrazione standard:
+                    sia l2 lista, sia x numero
+                    dobbiamo dimostrare:
+                        x == y || isIn x (concat l l2) =?= x == y || isIn x l || isIn x l2
+                    ovvio per II e per le proprietà dell ||
 
                 qed.
 
             Teorema proprieta' dell'|| citata prima:
-            forall b1,b2,b3. b2 = b3 => b1 || b2 = b1 || b3
+            forall b1,b2,b3. b2 = b3 --> b1 || b2 = b1 || b3
 
     -}
 
@@ -125,14 +126,14 @@
         Soluzione: nth i l
 
         nth i [] = ipotesi falsa, concludo qualsiasi cosa --> booooom orco dio
-        nth i (x : l) = if i == 1 then y else nth (i-1) l   -- CM1
+        nth i (x : l) = if i == 1 then x else nth (i-1) l   -- CM1
 
         -- CM1: Poco chiaro il motivo del decremento di i
 
     Induzione strutturale
     
         Teorema:
-            forall l1, forall l2, forall i, 1 =< i /\ i =< length l1 => nth i l1 = nth i (concat l1 l2)
+            forall l1, forall l2, forall i, 1 =< i /\ i =< length l1 --> nth i l1 = nth i (concat l1 l2)
 
         Esempio teorema:
             l1 = (1 : 2 : 3 : [])
@@ -143,55 +144,69 @@
 
         Dimostrazione:
             Si procede per induzione strutturale su l1 per dimostrare:
-                forall l2, forall i, 1 =< i /\ i =< length l1 => nth i l1 = nth i (concat l1 l2)
+                forall l2, forall i, 1 =< i /\ i =< length l1 ?--> nth i l1 = nth i (concat l1 l2)
                 
             caso [] (l1 = []):
                 Non si hanno ipotesi induttive in questo caso.
 
                 BISOGNA DIMOSTRARE:
-                    forall l2, forall i, 1 =< i /\ i =< length [] => nth i [] =?= nth i (concat [] l2)
+                    forall l2, forall i, 1 =< i /\ i =< length [] ?--> nth i [] = nth i (concat [] l2)
                 ovvero:
-                    forall l2, forall i, 1 =< i /\ i =< 0 => boom =?= nth i l2
+                    forall l2, forall i, 1 =< i /\ i =< 0 ?--> boom = nth i l2
 
-                sia ...
+                Dimostrazione standard:
+                    (forall l2) = Sia l2 una lista ...
+                    (forall i) = ... sia i un intero ...
+                    (H3 --> C1) (implicazione) = ... t.c: H3 dimostrerò C1
+                    (H1 /\ H2) = ... t.c 1 =< i (H1) e i =< 0 (H2) ...
+
+                    Dunque: Sia l2 una lista, sia i un intero t.c: i >= 1 (H1) e i =< 0 (H2)
+                    Bisogna quindi dimostrare C1.
+                    Per H1, H2 e le proprietà del minore uguale si ha: 1 <= 0, ovvero un assurdo,
+                    concludo dunque qualsiasi cosa e concludo C1, ovvero che: boom = nth i l2.
 
 
             caso x : l (ovvero l1 = x : l):
-                (II) forall l2, forall i, 1 =< i /\ i =< length l1 => nth i l1 = nth i (concat l1 l2)  (II)  ipotesi induttiva su l (ricavata dal teorema)
+                (II) forall l2, forall i, 1 =< i /\ i =< length l1 ?--> nth i l1 = nth i (concat l1 l2)  (II)  ipotesi induttiva su l (ricavata dal teorema)
                 
                 BISOGNA DIMOSTRARE:
-                    forall l2, forall i, 1 =< i /\ i =< length (x : l) ?=> nth i (x : l) = nth i (concat (x : l) l2)
+                    forall l2, forall i, 1 =< i /\ i =< length (x : l) ?--> nth i (x : l) = nth i (concat (x : l) l2)
                 ovvero:
-                    forall l2, forall i, 1 =< i /\ i =< 1 + length l ?=> (if i == 1 then y else nth (i-1) l) = nth i ((x : concat l l2) l2)
-                    
+                    forall l2, forall i, 1 =< i /\ i =< 1 + length l ?--> (if i == 1 then x else nth (i-1) l) = nth i (x : concat l l2)
+                ovvero:
+                    forall l2, forall i, 1 =< i /\ i =< 1 + length l ?--> (if i == 1 then x else nth (i-1) l) = if i == 1 then x else nth (i-1) (concat l l2)
+                
+                Dimostrazione standard:
+                    (forall l2) = Sia l2 una lista ...
+                    (forall i) = ... sia i un intero ...
+                    (H3 --> C1) (implicazione) = ... t.c: H3, dimostrerò C1
+                    (H1 /\ H2) = ... t.c i >= 1 (H1) e i =< 1 + length (H2) ...
+
+                    Dunque: Sia l2 una lista, sia i un intero t.c: i >= 1 (H1) e i =< 1 + length (H2)
+                    Bisogna quindi dimostrare C1.
+
+                    Per le proprietà del minore/maggiore uguale i == 0 oppure i =/= 0
+
+                    caso i == 0:
+                        Bisogna dimostrare che:
+                        (if i == 1 then x else nth (i-1) l) = if i == 1 then x else nth (i-1) (concat l l2)
+                        ovvero:
+                        (if True then x else nth (i-1) l) = if True then x else nth (i-1) (concat l l2)
+                        ovvero: x = x
+                        ovvio
+
+                    caso i =/= 0 (La pongo come nuova ipotesi H3):
+                        Bisogna dimostrare che:
+                        (if i == 1 then x else nth (i-1) l) = if i == 1 then x else nth (i-1) (concat l l2)
+                        ovvero:
+                        (if False then x else nth (i-1) l) = if False then x else nth (i-1) (concat l l2)
+                        ovvero: nth (i-1) l = nth (i-1) (concat l l2)
+                        ovvio per II
 
 
 
-
-
-
-
-        
-       
-
-        caso y : l (l1 = y:l):
-            forall l2, forall x, isIn x (concat l l2) = isIn x l || isIn x l2  (II)  ipotesi induttiva su l (ricavata dal teorema)
-
-            dobbiamo dimostrare:
-                forall l2, forall x, isIn x (concat (y : l) l2) =?= isIn x (y : l) || isIn x l2
-            ovvero:
-                forall l2, forall x, isIn x (y : concat l l2) =?= x == y || isIn x l || isIn x l2   <-- (isIn x l2 non si semplifica perchè non vi sono casi al rigurado nella ricorsione strutturale)
-            ovvero:
-                forall l2, forall x, x == y || isIn x (concat l l2) =?= x == y || isIn x l || isIn x l2
-
-            sia l2 lista, sia x numero
-            dobbiamo dimostrare:
-                x == y || isIn x (concat l l2) =?= x == y || isIn x l || isIn x l2
-            ovvio per II e per le proprietà dell ||
-
-            qed.
-
-    Teorema proprieta' dell'|| citata prima:
-    forall b1,b2,b3. b2 = b3 => b1 || b2 = b1 || b3
+                        da H1 e H3 ho 1 <= i - 1 (H4)
+                        da H2 ho i - 1 <= length l (H5)
+                        da H4, H5 e II ho nth (i-1) l = nth (i-1) (concat l l2)
 
     -}
