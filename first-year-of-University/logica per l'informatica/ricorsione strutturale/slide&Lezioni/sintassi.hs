@@ -1,4 +1,6 @@
--- ESERCIZI RICORSIONE STRUTTURALE
+-- Esercizi visti nelle slide 4 Sintassi
+
+-- ESERCIZI RICORSIONE STRUTTURALE ED ALTRO
 
     -- GRAMMATICA LISTA:  L ::= [] | X : L
 

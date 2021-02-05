@@ -1,9 +1,9 @@
 {-
     Premesse:
     Esempio di decomposizione di un problema, ovvero:
-    Dato un problema, si decompone in sotto-problemi più semplici, si risolvono e
-    componendo le souzionioni dei singoli sotto-problemi si giunge ad una soluzione
-    del problema iniziale.
+    Dato un problema, lo si decompone in sotto-problemi più semplici da risolvere e,
+    una volta fatto, unendo i risultati ottenuti dai singoli sotto-problemi si giunge
+    ad una soluzione valida per il quesito iniziale.
 
     Esercizio:
     Una sequenza di numeri può essere:

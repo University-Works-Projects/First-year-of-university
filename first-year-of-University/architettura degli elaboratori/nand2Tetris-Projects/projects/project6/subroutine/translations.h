@@ -14,80 +14,82 @@
 
 int labelCounter = 0, continueCounter = 0;
 
-int addCountertoLabel(char in_label[], int in_counter){
-    char num = intToChar(in_counter);
-    int i = 0;
-    
-    while (in_label[i] != '\0'){i++;}
+// Istruzioni prefissate
 
-    in_label[i] = num;
-    in_label[i+1] = '\0';
+    int addCountertoLabel(char in_label[], int in_counter){
+        char num = intToChar(in_counter);
+        int i = 0;
+        
+        while (in_label[i] != '\0'){i++;}
 
-    in_counter++;
+        in_label[i] = num;
+        in_label[i+1] = '\0';
 
-    return (in_counter);
-}
-void modifyLabel(char in_label[]){      // Toglie il carattere '\n' dalla fine della stinga
-    int i = 0;
-    while (in_label[i] != 0){
-        if (in_label[i] == '\n') in_label[i] = '\0';
-        i++;
+        in_counter++;
+
+        return (in_counter);
+    }
+    void modifyLabel(char in_label[]){      // Toglie il carattere '\n' dalla fine della stinga
+        int i = 0;
+        while (in_label[i] != 0){
+            if (in_label[i] == '\n') in_label[i] = '\0';
+            i++;
+        }
+
     }
 
-}
+    void incrementSPAndGo(FILE *in_outFile){
+        fprintf(in_outFile, "%s", "@SP\n");
+        fprintf(in_outFile, "%s", "AM=M+1\n");
+    }
+    void incrementSP(FILE *in_outFile){
+        fprintf(in_outFile, "%s", "@SP\n");
+        fprintf(in_outFile, "%s", "M=M+1\n");
+    }
+    void decrementSP(FILE *in_outFile){
+        fprintf(in_outFile, "%s", "@SP\n");
+        fprintf(in_outFile, "%s", "M=M-1\n");
+    }
 
-void incrementSPAndGo(FILE *in_outFile){
-    fprintf(in_outFile, "%s", "@SP\n");
-    fprintf(in_outFile, "%s", "AM=M+1\n");
-}
-void incrementSP(FILE *in_outFile){
-    fprintf(in_outFile, "%s", "@SP\n");
-    fprintf(in_outFile, "%s", "M=M+1\n");
-}
-void decrementSP(FILE *in_outFile){
-    fprintf(in_outFile, "%s", "@SP\n");
-    fprintf(in_outFile, "%s", "M=M-1\n");
-}
+    void takeLastSV(FILE *in_outFile){
+        fprintf(in_outFile, "%s", "@SP\n");
+        fprintf(in_outFile, "%s", "A=M\n");
+        fprintf(in_outFile, "%s", "D=M\n");
+    }
+    void takePenultimateSV(FILE *in_outFile){
+        fprintf(in_outFile, "%s", "@SP\n");
+        fprintf(in_outFile, "%s", "A=M-1\n");
+        fprintf(in_outFile, "%s", "D=M\n");
+    }
+    void takeAddress(FILE *in_outFile, char in_address[]){  // char address[]
+        fprintf(in_outFile, "%c%s", '@', in_address);
+        fprintf(in_outFile, "%s", "D=A\n");
+    }
 
-void takeLastSV(FILE *in_outFile){
-    fprintf(in_outFile, "%s", "@SP\n");
-    fprintf(in_outFile, "%s", "A=M\n");
-    fprintf(in_outFile, "%s", "D=M\n");
-}
-void takePenultimateSV(FILE *in_outFile){
-    fprintf(in_outFile, "%s", "@SP\n");
-    fprintf(in_outFile, "%s", "A=M-1\n");
-    fprintf(in_outFile, "%s", "D=M\n");
-}
-void takeAddress(FILE *in_outFile, char in_address[]){  // char address[]
-    fprintf(in_outFile, "%c%s", '@', in_address);
-    fprintf(in_outFile, "%s", "D=A\n");
-}
+    void goToLastSV(FILE *in_outFile){
+        fprintf(in_outFile, "%s", "@SP\n");
+        fprintf(in_outFile, "%s", "A=M\n");
+    }
+    void goToPreviousSV(FILE *in_outFile){
+        fprintf(in_outFile, "%s", "@SP\n");
+        fprintf(in_outFile, "%s", "AM=M-1\n");
+    }
 
-void goToLastSV(FILE *in_outFile){
-    fprintf(in_outFile, "%s", "@SP\n");
-    fprintf(in_outFile, "%s", "A=M\n");
-}
-void goToPreviousSV(FILE *in_outFile){
-    fprintf(in_outFile, "%s", "@SP\n");
-    fprintf(in_outFile, "%s", "AM=M-1\n");
-}
+    void assignmentToLastSV(FILE *in_outFile){
+        fprintf(in_outFile, "%s", "@SP\n");
+        fprintf(in_outFile, "%s", "A=M\n");
+        fprintf(in_outFile, "%s", "M=D\n");
+    }
 
-void assignmentToLastSV(FILE *in_outFile){
-    fprintf(in_outFile, "%s", "@SP\n");
-    fprintf(in_outFile, "%s", "A=M\n");
-    fprintf(in_outFile, "%s", "M=D\n");
-}
-
-void saveInR13(FILE *in_outFile){
-    fprintf(in_outFile, "%s", "@13\n");
-    fprintf(in_outFile, "%s", "M=D\n");
-}
-void addressFromR13(FILE *in_outFile){
-    fprintf(in_outFile, "%s", "@13\n");
-    fprintf(in_outFile, "%s", "A=M\n");
-    fprintf(in_outFile, "%s", "M=D\n");
-}
+    void saveInR13(FILE *in_outFile){
+        fprintf(in_outFile, "%s", "@13\n");
+        fprintf(in_outFile, "%s", "M=D\n");
+    }
+    void addressFromR13(FILE *in_outFile){
+        fprintf(in_outFile, "%s", "@13\n");
+        fprintf(in_outFile, "%s", "A=M\n");
+        fprintf(in_outFile, "%s", "M=D\n");
+    }
 
 
 void jumpConditions(FILE *in_outFile, char in_jmpCond[]){
@@ -338,18 +340,20 @@ void printFunction(FILE *in_outFile, char in_nameFunction[], int nTimes){
 void printReturn(FILE *in_outFile){
     // FRAME = RAM[13] ; RET = RAM[14]
 
-    // FRAME = LCL - 5      <-- FRAME = tmp var in RAM[13]
+    // FRAME = LCL                          <-- FRAME = tmp var in RAM[13]
+    fprintf(in_outFile, "%s", "@LCL\n");
+    fprintf(in_outFile, "%s", "D=M\n");     // D = RAM[LCL]
+    fprintf(in_outFile, "%s", "@13\n");
+    fprintf(in_outFile, "%s", "M=D\n");     // FRAME = LCL
+    
+    // RET = FRAME - 5                      <-- RET = tmp var in RAM[14]
+    fprintf(in_outFile, "%s", "@14\n");
+    fprintf(in_outFile, "%s", "M=D\n");     // RET = FRAME
     fprintf(in_outFile, "%s", "@5\n");
     fprintf(in_outFile, "%s", "D=A\n");
-    fprintf(in_outFile, "%s", "D=-D\n");
-    fprintf(in_outFile, "%s", "@LCL\n");
-    fprintf(in_outFile, "%s", "D=D+M\n");
-    fprintf(in_outFile, "%s", "@13\n");
-    fprintf(in_outFile, "%s", "M=D\n");
-
-    // RET = FRAME          <-- RET = tmp var in RAM[14]
+    fprintf(in_outFile, "%s", "D=-D\n");    // D = -5
     fprintf(in_outFile, "%s", "@14\n");
-    fprintf(in_outFile, "%s", "M=D\n");
+    fprintf(in_outFile, "%s", "M=M+D\n");   // RET = FRMAE -5
 
     // *ARG=pop()   <-- vedasi come pop argument 0
     pop(in_outFile, 1, "0\n");    //  pop argument 0
