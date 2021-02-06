@@ -1,0 +1,32 @@
+Si consideri il seguente ragionamento:
+    1) se la Germania cede (A) o i creditori allentano la morsa (B), allora la Grecia
+    non uscirà dall’euro (¬C) o sarà la fine del sogno europeo (D).
+    2) i creditori allenteranno la stretta (per forza) se la Grecia esce
+    dall’euro 
+    3) il sogno europeo non si infrangerà (speriamo?)
+    quindi
+    4) la Grecia non uscrità dall’euro.
+
+    Verificare la correttezza del ragionamento utilizzando la deduzione naturale. Preferire una prova intuizionista se possibile.
+
+
+    Formalizzazione:
+        1. A V B ⟾ ¬C V D
+        2. C ⟾ B
+        3. ¬D
+        4. ⊢ ¬C
+
+
+                            C ⟾ B       [C]
+                            ————————————————— (⟾ e) 
+                                   B                                      [C]  [¬C]
+                          (Vi1) ———————                                  ——————————  (¬e)
+                                 A V B       A V B ⟾ ¬C V D                 ⊥
+                                ————————————————————————————— (⟾ e)      ——————— (⊥e)
+                                                    ¬C V D                   D               [D]
+                                                   ————————————————————————————————————————————— (Ve)   --> [¬C] [D]
+                        ¬D                                    D
+                        —————————————————————————————————————————  (¬e)
+                                     ⊥
+                                  ——————— (¬ i)                            --> [C]
+                                    ¬C

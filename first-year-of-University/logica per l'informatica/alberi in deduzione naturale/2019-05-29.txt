@@ -1,0 +1,36 @@
+Si consideri il seguente ragionamento:
+    Se il governo cade (A) allora Salvini ha staccato la spina (B) o Di Maio è stato
+    silurato dai suoi (C).
+    Berlusconi resta a bocca asciutta (D) se il governo non è
+    caduto.
+    Se Berlusconi resta a bocca asciutta allora Salvini ha staccato
+    la spina.
+    Quindi se Salvini non ha staccato la spina vuol dire che Di
+    Maio è proprio stato silurato.
+
+    Verificare la correttezza del ragionamento utilizzando la deduzione naturale per la logica proposizionale. Preferire una prova intuizionista se
+    possibile.
+
+
+    Formalizzazione:
+        1. A ⟾ B V C
+        2. ¬A ⟾ D
+        3. D ⟾ B
+        4. ⊢ ¬B ⟾ C
+
+
+                     ¬A ⟾ D  [¬A]
+                     ——————————————— (⟾ e)
+           D ⟾ B    D
+   (⟾ e) —————————————
+                    B        [¬B]
+                    ——————————————  (¬e)
+                          ⊥                    [B]   [¬B]
+                        —————— (RAA) [¬A]      ——————————  (¬e)              --> [¬A]
+            A ⟾ B V C    A                       ⊥
+            —————————————————— (⟾ e)           ————— (⊥e)
+                        B V C                     C             [C]
+                        —————————————————————————————————————————————  (Ve)  --> [B] [C]
+                                    C
+                            ——————————————— (⟾ i)                           --> [¬B]
+                                ¬B ⟾ C
