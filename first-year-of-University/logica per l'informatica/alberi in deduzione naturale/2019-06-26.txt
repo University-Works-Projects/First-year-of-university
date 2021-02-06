@@ -1,0 +1,30 @@
+Si consideri il seguente ragionamento:
+    Se si fa la flat tax (A) e non si disfa quota 100 (¬B), il debito pubblico aumenta (C).
+    O il debito pubblico non aumenta (¬C) o all’Italia verrà comminata una multa (D).
+    Se verrà comminata una multa allora il debito pubblico aumenterà.
+    Quindi, anche se eviteremo la multa ma non disferemo quota 100, la flat tax non si farà.
+
+    Verificare la correttezza del ragionamento utilizzando la deduzione naturale per la logica proposizionale.
+    Preferire una prova intuizionista se possibile.
+
+
+    Formalizzazione:
+        1. A ∧ ¬B ⟾ C
+        2. ¬C V D
+        3. D ⟾ C
+        4. ⊢ ¬D ∧ ¬B ⟾ ¬A
+
+
+                                    [A]
+                                  ——————— (∧e1)
+                  A ∧ ¬B ⟾ C     A ∧ ¬B                            [¬D ∧ ¬B]
+         (⟾ e)  ————————————————————————                          ——————————— (∧e1)
+                                     C       [¬C]            [D]    [¬D] 
+                                    ————————————— (¬e)       ——————————— (¬e)
+                                         ⊥                        ⊥
+                                     ————————— (¬i) --> [A]   ————————— (¬i) --> [A]
+                ¬C V D                  ¬A                       ¬A
+                ————————————————————————————————————————————————————— (Ve)       --> [¬C] [D]
+                                      ¬A
+                               ——————————————— (⟾ i)                            --> [¬D ∧ ¬B]
+                                ¬D ∧ ¬B ⟾ ¬A
