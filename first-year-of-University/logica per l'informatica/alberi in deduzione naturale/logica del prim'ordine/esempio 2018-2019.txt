@@ -1,0 +1,27 @@
+testo:
+    Dimostrare il seguente teorema usando la deduzione naturale al prim’ordine,
+    preferendo una prova intuizionista a una classica ove possibile:
+
+    ∀x.∀y.(f(x) ≤ y ⇒ x ≤ g(y)) ⊢ (∃x.f(h(x)) ≤ x) ⇒ ∃z.∃w.(z ≤ g(w))
+
+
+
+
+
+                             ∀x.∀y.(f(x) ≤ y ⇒ x ≤ g(y))
+                            ————————————————————————————————— (∀e)
+                               ∀y.(f(h(r)) ≤ y ⇒ h(r) ≤ g(y))
+                            ——————————————————————————————————— (∀e)
+                                f(h(r)) ≤ m ⇒ h(r) ≤ g(h)                        [f(h(r)) ≤ m]
+                                ——————————————————————————————————————————————————————— (⟾e)     
+                                             h(r) ≤ g(h)
+                                        ———————————————————— (∃i)
+                                           ∃w.(h(r) ≤ g(w))
+                                        ———————————————————— (∃i)
+                [∃x.f(h(x)) ≤ x]         ∃z.∃w.(z ≤ g(w))
+                —————————————————————————————————————————— (∃e)     --> [f(h(r)) ≤ r]
+                            ∃z.∃w.(z ≤ g(w))
+                ——————————————————————————————————————— (⟾i)       --> [∃x.f(h(x)) ≤ x]
+                   (∃x.f(h(x)) ≤ x) ⇒ ∃z.∃w.(z ≤ g(w))
+
+

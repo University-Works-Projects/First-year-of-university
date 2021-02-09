@@ -1,0 +1,12 @@
+Suggerimento: basarsi sul principio di uguaglianza
+Testo 1:
+    - C'è un solo numero x tale che per ogni y si ha: x + y = y.
+    - C'è un solo copevole e quel colpevole andrà in galera.
+    - Ci sono almeno due innocenti.
+    - Ci sono esattamente due innocenti.
+
+∃x(∀y(x + y = y))
+∃c 
+∃x(I(x)) ∧ ∃y(I(y))
+
+

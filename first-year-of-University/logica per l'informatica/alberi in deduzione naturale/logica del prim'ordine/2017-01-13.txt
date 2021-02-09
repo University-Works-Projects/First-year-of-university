@@ -1,0 +1,26 @@
+Testo:
+    Dimostrare il seguente teorema usando la deduzione naturale al prim’ordine,
+    preferendo una prova intuizionista a una classica ove possibile:
+    ⊢ ¬(∀x.∃y.P(x, y)) ⇒ ∃x.∀y.¬P(x, y)
+
+
+
+
+
+
+
+                                     [P(w, r)]
+                                ————————————————————— (∃i)
+                                     ∃y.P(t, y)
+                                ————————————————————— (∀i)
+       [¬(∀x.∃y.P(x, y))]           ∀x.∃y.P(x, y)
+     ———————————————————————————————————————————————— (¬e)
+                      ⊥
+              ————————————————— (¬i)                         --> [P(w, r)]
+                   ¬P(w, r)
+              ————————————————— (∀i)
+                 ∀y.¬P(w, y)
+              ————————————————— (∃i)
+                ∃x.∀y.¬P(x, y)
+     ——————————————————————————————————————— (⟾i)           --> [¬(∀x.∃y.P(x, y))]
+        ¬(∀x.∃y.P(x, y)) ⇒ ∃x.∀y.¬P(x, y)
