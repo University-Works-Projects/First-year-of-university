@@ -355,7 +355,7 @@ void printReturn(FILE *in_outFile){
     fprintf(in_outFile, "%s", "@14\n");
     fprintf(in_outFile, "%s", "M=M+D\n");   // RET = FRMAE -5
 
-    // *ARG=pop()   <-- vedasi come pop argument 0
+    // *ARG = pop()   <-- vedasi come pop argument 0
     pop(in_outFile, 1, "0\n");    //  pop argument 0
 
     // SP=ARG+1

@@ -18,14 +18,20 @@
 ATTENZIONE:
     - Controllare dove sia possibile eliminare librerie inutilizzate
     - Testare la funzione function
+
+    13 = pop
+    14 = FRAME
+    15 = LCL
 */
+
+
 
 // (INUTILIZZATA) Ritorna la lunghezza (numero di righe) di un file
 int fileRows(FILE* in_file){
     char row[SIZE];
     int rows = 0; 
     
-    while(1) {
+    while (1) {
         char *res = fgets(row, SIZE, in_file);
         if (res == NULL) break;
         if (row[strlen(row) - 1] == '\n'){
@@ -68,14 +74,15 @@ int stringToInt(char in_row[], char finalCharacter){
 void translateRow(FILE *in_outFile, char in_row[]){
     int in_rowLength = strlen(in_row), i = 0, space = 0;
 
-    printf("%s%s%s%d%c", "Row: ", in_row, "length: ", in_rowLength, '\n');
+    printf("%s%d%s%s", "Row length: ", in_rowLength, " ; Row: ", in_row);
 
     if (in_rowLength == 3){                       // Il +1 è lo spazio per '\0'
         if (isString2inString1(in_row, "eq")) { fprintf(in_outFile, "%s", "// eq\n"); eq(in_outFile); }
         else if (isString2inString1(in_row, "gt")) { fprintf(in_outFile, "%s", "// gt\n"); gt(in_outFile); }
         else if (isString2inString1(in_row, "lt")) { fprintf(in_outFile, "%s", "// lt\n"); lt(in_outFile); }
         else if (isString2inString1(in_row, "or")) { fprintf(in_outFile, "%s", "// or\n"); or(in_outFile); }
-        else fprintf(in_outFile, "%s", "ERROR LENGTH 3\n"); }
+        //else fprintf(in_outFile, "%s", "ERROR LENGTH 3\n");
+        }
 
     else if (in_rowLength == 4){                  // Il +1 è lo spazio per '\0'
         if (isString2inString1(in_row, "add")) { fprintf(in_outFile, "%s", "// add\n"); add(in_outFile); }
@@ -83,7 +90,8 @@ void translateRow(FILE *in_outFile, char in_row[]){
         else if (isString2inString1(in_row, "neg")) { fprintf(in_outFile, "%s", "// neg\n"); neg(in_outFile); }    
         else if (isString2inString1(in_row, "and")) { fprintf(in_outFile, "%s", "// and\n"); and(in_outFile); }      
         else if (isString2inString1(in_row, "not")) { fprintf(in_outFile, "%s", "// not\n"); not(in_outFile); }
-        else fprintf(in_outFile, "%s", "ERROR LENGTH 4\n"); }
+        //else fprintf(in_outFile, "%s", "ERROR LENGTH 4\n");
+        }
 
     else {
 
@@ -120,7 +128,7 @@ void translateRow(FILE *in_outFile, char in_row[]){
                 stringNumeber(in_row, 't', address);
                 push(in_outFile, 5, address);
             }
-            else fprintf(in_outFile, "%s", "ERROR POP\n");
+            //else fprintf(in_outFile, "%s", "ERROR POP\n");
         }
 
         else if (isString2inString1(in_row, "pop")){
@@ -154,7 +162,7 @@ void translateRow(FILE *in_outFile, char in_row[]){
                 pop(in_outFile, 4, address);
 
             }
-            else fprintf(in_outFile, "%s", "ERROR PUSH\n");
+            //else fprintf(in_outFile, "%s", "ERROR PUSH\n");
 
         }
 
@@ -194,7 +202,7 @@ void translateRow(FILE *in_outFile, char in_row[]){
                 fprintf(in_outFile, "%s", "// return\n");
                 printReturn(in_outFile);
             }
-            else fprintf(in_outFile, "%s", "ERROR INVALID ROW (final else case)\n");
+            //else fprintf(in_outFile, "%s", "ERROR INVALID ROW (final else case)\n");
         }
         
     }
@@ -204,11 +212,21 @@ void translateRow(FILE *in_outFile, char in_row[]){
 int main (int argc, char **argv){
 
     FILE *inputFile, *workFile, *outFile;
-    //inputFile = fopen(argv[1], "r");
-    //inputFileCopy1 = fopen(argv[1], "r");
+    /*
     inputFile = fopen("inputFile.txt", "r");
-    workFile = fopen("workfile.vm", "w");
+    workFile = fopen("workFile.vm", "w");
     outFile = fopen("outputFile.asm", "w");
+*/
+
+    inputFile = fopen(argv[1], "r");                // leggo il file SimpleAdd
+    workFile = fopen("workFile.vm", "w");
+
+    char inFileName[SIZE]; strcpy(inFileName, argv[1]);
+    char outFileName[SIZE];
+    changeName(inFileName, outFileName);
+    strcat(outFileName, ".asm");
+    
+    outFile = fopen(outFileName, "w");
 
     char row[SIZE];                         // Stringa contenente l'intera riga di codice in VM
 
@@ -221,7 +239,7 @@ int main (int argc, char **argv){
     
     fclose(workFile);                       // Chiudendo il workFile si può leggere da esso
     
-    FILE *readWorkFile = fopen("workfile.vm", "r");
+    FILE *readWorkFile = fopen("workFile.vm", "r");
 
     // boostrap
     fprintf(outFile, "%s", "@256\n");
@@ -234,10 +252,12 @@ int main (int argc, char **argv){
         fgets(row, SIZE, readWorkFile);
         translateRow(outFile, row);
     }
+
     fprintf(outFile, "%s", "// end program\n");
     fprintf(outFile, "%s", "(END)\n");
     fprintf(outFile, "%s", "@END\n");
     fprintf(outFile, "%s", "0;JMP\n");
+    
     // CHIUDERE TUTTI I FILE ----------------------------------------------------------------------------------------------------
     // elimina il file di lavoro
     fclose(readWorkFile);

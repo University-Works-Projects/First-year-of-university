@@ -27,8 +27,8 @@ void stringCharNumber(char in_row[], char specialCharacter, char emptyChar);
 int charEqNum(char c);
 
 // stringFunctions.h
-// Cambio estensione del file
-void newExtension(char in_nameFile[], char emptyNameFile[]);
+// Rimepe una stringa vuota con il nome di un file (si ferma prima del punto)
+void changeName(char in_nameFile[], char emptyNameFile[]);
 // Controlla se la stringa string1 contiene la stringa string2
 int isString2inString1 (char in_string1[], char in_string2[]);
 // S -> S - Data una stringa vuota ci inserisce il nome del label dichiarato

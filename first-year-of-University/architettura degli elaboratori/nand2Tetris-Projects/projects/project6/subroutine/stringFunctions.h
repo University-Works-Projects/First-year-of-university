@@ -7,14 +7,15 @@
 
 #include "allFunctions.h"
 
-// Cambio estensione del file
-void newExtension(char in_nameFile[], char emptyNameFile[]){
+// Rimepe una stringa vuota con il nome di un file (si ferma prima del punto)
+void changeName(char in_nameFile[], char emptyNameFile[]){
     int i = 0, j = 0;
+    while (in_nameFile[i] != '/') i++;
+    i++;
     while (in_nameFile[i] != '.'){
         emptyNameFile[j] = in_nameFile[i];
         i++; j++;
     }
-    strcat(emptyNameFile, ".asm");
 }
 
 // Controlla se la stringa string1 contiene la stringa string2

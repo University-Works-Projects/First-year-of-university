@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 
+using namespace std;
+
 #define STRING 30
 
 /* Es 1
@@ -50,44 +52,73 @@ typedef Automobile *p_atm;
 
 // Si da per scontato che nella lista di macchine vi sia almeno un'auto del modello ricercato
 
-// Da fa :)
-
-
-
+// :)
 p_atm modelloEconomico (char in_marca[], p_atm in_lista){
     p_atm head = in_lista;
     float prezzoMin = 0;
 
-    while (in_lista != NULL && in_lista -> marca != in_marca) in_lista = in_lista -> next;  // Si scorre la lista sino ad arrivare al primo elemento col modello di auto corrispondente a quello cercato
+    while (in_lista != NULL && strcmp(in_lista -> marca, in_marca) != 0) in_lista = in_lista -> next;  // Si scorre la lista sino ad arrivare al primo elemento col modello di auto corrispondente a quello cercato
     
     if (in_lista == NULL) prezzoMin = -1;   // Se non vi sono macchine di quel modello il prezzo viene settato negativo
-    else prezzoMin = in_lista -> prezzo;    // Altrimenti il prezzo viene settato pari a quello della prima macchina di quel modello
+    else {
+        prezzoMin = in_lista -> prezzo;     // Altrimenti il prezzo viene settato pari a quello della prima macchina di quel modello
 
-    while (in_lista != NULL){
-        if (in_marca == in_lista -> marca && in_lista -> prezzo > prezzoMin) prezzoMin = in_lista -> prezzo;    // Se si ha un'auto dello stesso modello e con un prezzo minore prezzoMin viene aggiornato
-        in_lista = in_lista -> next;
-    }
+        while (in_lista != NULL){
+            if (strcmp(in_marca, in_lista -> marca) == 0 && in_lista -> prezzo > prezzoMin) prezzoMin = in_lista -> prezzo;    // Se si ha un'auto dello stesso modello e con un prezzo minore prezzoMin viene aggiornato
+            in_lista = in_lista -> next;
+        }
+
+        int finish = 1;
+
+        while (head != NULL && finish == 1){
+            if (strcmp(in_lista -> marca, in_marca) == 0 && in_lista -> prezzo == prezzoMin) return in_lista;
+            in_lista = in_lista -> next;
+        }
+        
+        return in_lista;
     
-
-
-    return in_lista;
+    }
 
 }
 
 
 
 /* Es 3
-    Definire una classe euroConverter, che contiene una somma di denaro, con
-    un opportuno costruttore e 4 altri metodi:
+    Definire una classe euroConverter, che contiene una somma di denaro,
+    con un opportuno costruttore e 4 altri metodi:
     (a) inserisci la somma di denaro in lire;
     (b) inserisci la somma di denaro in euro;
     (c) leggi la somma di denaro in lire;
     (d) leggi la somma di denaro in euro.
     Si assuma che 1 euro valga 1936.27 lire.
-
-
 */
 
+class EuroConverter{
+protected:
+    float lire;
+    float euro;
+public:
+    EuroConverter(float in_lire, float in_euro){
+        this -> lire = in_lire;
+        this -> euro = in_euro;
+    }
+    
+    void in_lire(float in_lire){
+        this -> lire = in_lire;
+    }
+
+    void in_euro(float in_euro){
+        this -> euro = in_euro;
+    }
+
+    void read_lire(){
+        cout << this -> lire;
+    }
+
+    void read_euro(){
+        cout << this -> euro;
+    }
+};
 
 
 
