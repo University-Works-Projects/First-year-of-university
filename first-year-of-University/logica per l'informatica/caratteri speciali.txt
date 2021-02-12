@@ -1,0 +1,19 @@
+Deduzione naturale
+
+⊢  ∀  ∃
+
+¬  V  ∧  ⟾  ⊥
+
+———————————————
+Insiemistica
+
+∪ ∩
+
+∈  ∅  ≡
+
+⊂  ⊃  ⊆  ⊇
+
+
+
+➜  ⇔
+

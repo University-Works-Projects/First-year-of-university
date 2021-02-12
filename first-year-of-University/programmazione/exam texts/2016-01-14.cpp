@@ -64,7 +64,7 @@ p_atm modelloEconomico (char in_marca[], p_atm in_lista){
         prezzoMin = in_lista -> prezzo;     // Altrimenti il prezzo viene settato pari a quello della prima macchina di quel modello
 
         while (in_lista != NULL){
-            if (strcmp(in_marca, in_lista -> marca) == 0 && in_lista -> prezzo > prezzoMin) prezzoMin = in_lista -> prezzo;    // Se si ha un'auto dello stesso modello e con un prezzo minore prezzoMin viene aggiornato
+            if (strcmp(in_marca, in_lista -> marca) == 0 && in_lista -> prezzo < prezzoMin) prezzoMin = in_lista -> prezzo;    // Se si ha un'auto dello stesso modello e con un prezzo minore prezzoMin viene aggiornato
             in_lista = in_lista -> next;
         }
 
@@ -83,7 +83,7 @@ p_atm modelloEconomico (char in_marca[], p_atm in_lista){
 
 
 
-/* Es 3
+/* Es 3 TESTO PER NULLA CHIARO
     Definire una classe euroConverter, che contiene una somma di denaro,
     con un opportuno costruttore e 4 altri metodi:
     (a) inserisci la somma di denaro in lire;
@@ -96,27 +96,36 @@ p_atm modelloEconomico (char in_marca[], p_atm in_lista){
 class EuroConverter{
 protected:
     float lire;
-    float euro;
+    float euro;    // sdd = somma di denario --> Quantità espressa in euro
 public:
     EuroConverter(float in_lire, float in_euro){
         this -> lire = in_lire;
         this -> euro = in_euro;
     }
-    
+
     void in_lire(float in_lire){
         this -> lire = in_lire;
+        this -> euro = lireEuro(in_lire);
     }
 
     void in_euro(float in_euro){
         this -> euro = in_euro;
+        this -> lire = euroLire(in_euro);
     }
 
-    void read_lire(){
-        cout << this -> lire;
+    int read_lire(){
+        return this -> lire;
     }
 
-    void read_euro(){
-        cout << this -> euro;
+    int read_euro(){
+        return this -> euro;
+    }
+
+    float euroLire(float in_euro){
+        return (in_euro * 1936.27);
+    }
+    float lireEuro(float in_lire){
+        return (in_lire / 1936.27);
     }
 };
 
