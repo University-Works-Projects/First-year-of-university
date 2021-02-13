@@ -36,32 +36,99 @@
 
         negate(A) = ¬A
         negate(B) = ¬B
-        negate(¬A) = ¬¬A
-        negate(¬B) = ¬¬B
+        negate(¬A) = ¬(negate(A))
+        negate(¬B) = ¬(negate(B))
         ...
-        negate(A ∧ B) = negate(A) ∧ negate(B)
         negate(⊥) = ⊥
+        negate(A ∧ B) = negate(A) ∧ negate(B)
 
     Nota:
         v* è un mondo ottenuto a partire da un mondo v in modo che,
         ∀A v*(A) = 0 sse v(A) = 1
 
-    Bisogna dimostrare: ∀F [[negate(F)]]^v = [[F]]^v* , si procede per induzione strutturale F.
+    Bisogna dimostrare: ∀F [[negate(F)]]v = [[F]]v* , si procede per induzione strutturale F.
 
-        (II) Per entrambi i casi si assume come ipotesi induttiva: v*(A) = 0 sse v(A) = 1 (II)
+    SI assume per ipotesi ∀A (v*(A) = 0) ⇔ (v(A) = 1) (H)
+    (II) Assumo v(negate(A)) == (A)v* (II)
 
-        Caso F = 0:
+
+        caso A:
             BISOGNA DIMOSTRARE:
-                [[negate(0)]]^v = [[0]]^v*
+                (negate(A))v =?= (A)v*
             ovvero:
-                [[1]]^v = [[0]]^v*
-            ovvio per II
+                (¬A)v =?= (A)v*
+            ovvio per H e lemma
+        
+        caso B:
+            Analogo al caso A.
+        
+        caso ...:
+            ...
 
-        Caso F = 1:
+        caso ¬A:
             BISOGNA DIMOSTRARE:
-                [[negate(1)]]^v = [[1]]^v*
+                (negate(¬A))v =?= (¬A)v*
             ovvero:
-                [[0]]^v = [[1]]^v*
+                (¬negate(A))v =?= (¬A)v*
+            ovvero, per II si ha:
+                1 - (A)v* =?= 1 - (A)v*
+            ovvio
+
+        caso ⊥:
+            BISOGNA DIMOSTRARE:
+                (negate(⊥))v =?= (⊥)v*
+            ovvero:
+                (⊥)v =?= (⊥)v*
+            ovvero:
+                0 =?= 0
+            ovvio
+
+        caso A ∧ B;
+            BISOGNA DIMOSTRARE:
+                (negate(A ∧ B))v =?= (A ∧ B)v*
+            ovvero:
+                (negate(A) ∧ negate(B))v =?= (A ∧ B)v*
+            Ovvero
+                min{v(negate(F1)), v(negate(F2))} =?= min{v*(F1), v*(F2)}
+            Ovvero, per II si ha:
+                min{v*(F1), v*(F2)} =?= min{v*(F1), v*(F2)}
+            Ovvio
+
+        QED
+
+        Lemma: (∀X. (v*(X) = 0) ⇔ (v(X) = 1)) ⇒ v(¬A) == v*(A)
+
+        Assumo
+            ∀X. (v*(X) = 0) ⇔ (v(X) = 1) (H)
+        Procedo per induzione strutturale su A per dimostrare
+            v(¬A) == v*(A)
+        Ovvero
+           1 - v(A) == v*(A)
+
+        Caso v(A) = 0 (H1):
+            Devo dimostrare
+                1 - v(A) == v*(A)
+            Ovvero
+                v*(A) = 1
+            Per assurdo suppongo
+                v*(A) = 0 (K)
+            Per H e K ho
+                v(A) = 1
+            Assurdo per H1, quindi
+                v*(A) = 1
+
+        Caso v(A) = 1 (H1):
+            Devo dimostrare
+                1 - v(A) == v*(A)
+            Ovvero
+                v*(A) = 0
+            Per H e H1 ho
+                v*(A) = 0
+
+
+
+
+
 
 -}
 

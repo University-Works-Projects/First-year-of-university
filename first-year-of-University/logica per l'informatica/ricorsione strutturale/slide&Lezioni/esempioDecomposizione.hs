@@ -15,8 +15,8 @@
     in L di lunghezza massimale.
 
     Sotto-problemi (derivati dalla decomposizione):
-    1. Scrivere una funzione length(L) che calcoi la lunghezza di L.
-    2. SCrivere una funzione initial(n,L) che restituisce la sequenza iniziale n::L
+    1. Scrivere una funzione length(L) che calcoli la lunghezza di L.
+    2. Scrivere una funzione initial(n,L) che restituisce la sequenza iniziale n::L
 
     Esempio:
     Sequenza in analisi: 13, 14, 24, 28, []
@@ -28,22 +28,15 @@
 f([]) = []      -- La più lunga sotto-sequenza crescente di una sequenza vuota è una a sua volta una (sotto-)sequenza vuota indicata con [] .
 
 -- Caso di sequenza non vuota
-f(n::L) = 
-    if length(initial(n,L)) > length(f(L)) then
-        initial(n,L)
-    else f(L)
+f(n::L) = if length(initial(n,L)) > length(f(L)) then initial(n,L) else f(L)
 
 -- Funzione per il calcolo della lunghezza di una sequenza data L.
-length(L) =
-    lenght([]) = 0      -- La lunghezza della sequenza vuota è 0
-    length(n::L) = 1 + length(L)
+lenght([]) = 0      -- La lunghezza della sequenza vuota è 0
+length(n::L) = 1 + length(L)
 
 -- Funzione che restituisce la sequenza crescente iniziale di n::L
-intial(n, L) =
-    initial(n, []) = n::[]
-    initial(n, m::L) =
-        if n < m then n::initial(m,L)
-        else n::[]
+initial(n, []) = n::[]
+initial(n, m::L) = if n < m then n::initial(m,L) else n::[]
 
 
 

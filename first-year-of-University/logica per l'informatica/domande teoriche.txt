@@ -1,0 +1,12 @@
+1. Sintassi della logica proposizionale
+
+    F ::= ⊥ | T | A | B | ... | ¬F | F ∧ F | F ∨ F | F ⇒ F
+
+2. Sintassi della logica del prim'ordine
+
+    t ::= x | c | f^n (t1, ... , tn)
+    F ::= P^n (t1, ... , tn) | ⊥ | T | ¬F | F ∧ F | F ∨ F | F ⇒ F | ∃x.F | ∀x.F
+
+
+
+

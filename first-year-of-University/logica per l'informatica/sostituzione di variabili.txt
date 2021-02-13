@@ -1,0 +1,26 @@
+Esercizi di programmazione:
+
+    Es 1:
+
+        Codice da sviluppare:
+
+            int f(int z, int y){
+                return g(x+z,y);    // Equivalente a: return g(X+d+c,x)
+            }
+            int main(){
+                int x, c;
+                return f(d+c,x);    
+            }
+
+        Soluzione:
+
+            int main(){
+                int m, c;
+                return g(x+d+c, m);
+            }
+
+Esercizi di logica:
+    0 voglia di scriverli al pc
+
+Esercizi di matematica:
+    0 voglia di scriverli al pc

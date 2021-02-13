@@ -1,12 +1,33 @@
-Suggerimento: basarsi sul principio di uguaglianza
-Testo 1:
-    - C'è un solo numero x tale che per ogni y si ha: x + y = y.
-    - C'è un solo copevole e quel colpevole andrà in galera.
-    - Ci sono almeno due innocenti.
-    - Ci sono esattamente due innocenti.
+∀  ∃
+Es 1
 
-∃x(∀y(x + y = y))
-∃c 
-∃x(I(x)) ∧ ∃y(I(y))
+    1. Ogni quadrilatero con quattro angoli retti è un quadrato.
+    2. Nessuno è padre di se stesso.
+    3. non tutti i numeri primi sono dispari
 
+    1. ∀q.quattroLati(q) ⟾ quadrato(q)
+    2. ¬(∃p.padre(p))
+    3. ∃n.primo(n) ∧ pari(n)
+
+Es 2
+
+    Suggerimento: basarsi sul principio di uguaglianza
+    Testo 1:
+        1. C'è un solo numero x tale che per ogni y si ha: x + y = y.
+        2. C'è un solo copevole e quel colpevole andrà in galera.
+        3. Ci sono almeno due innocenti.
+        4. Ci sono esattamente due innocenti.
+
+    1.  ∃x(∀y(x + y = y)) --> Esiste un x tale che ...
+        ∃x(∀y(x + y = y)) ∧ ¬∃z.(∀y(z + y = y) ∧ ¬(x=z)) --> Esiste un solo x tale che...
+
+    1.1 ∃x(∀y(x + y = y)) ∧ ∀z.(∀y.(z + y = y) ⟾ z=x)
+
+    2. ∃x.(g(x) ∧ ¬∃z.(g(z) ∧ ¬(x=z)))
+        
+    3. ∃x.I(x) ∧ ∃y.I(y) ∧ ¬(x=y) --> Ci sono almeno due innocenti
+
+    4.  ∃x.(I(x) ∧ ∃y.(I(y) ∧ ¬(x=y)) ∧ ¬∃z.(z=x V z=y)) 
+
+    4.1 ∃x.(I(x) ∧ ∃y.(I(y) ∧ ¬(x=y)) ∧ (∀a.i(a) ⟾ a=x V a=y))
 
