@@ -7,7 +7,7 @@ Es 1
     Testo: Dimostrare X ⊆ X
 
     Sia X un insieme.
-        Bisogna dimostrare:
+        BISOGNA DIMOSTRARE:
             X ⊆ X, ovvero ∀Z.(Z ∈ X ⟾ Z ∈ X).
 
     Sia Z un insieme t.c: Z ∈ X (H1).
@@ -24,31 +24,97 @@ Es 2
 
     BISOGNA DIMOSTRARE:
             X = Y
-        ovvero, per l'assioma di estensionalistà:
+        ovvero, per l'assioma di estensionalità:
             ∀Z.(Z ∈ X ⇔ Z ∈ Y)
-        Dunque bisogna dimostrare i sue lati del sse:
+        Dunque BISOGNA DIMOSTRARE i sue lati del sse:
             Sia Z un insieme.
                 Z ∈ X ⟾ Z ∈ Y, valido per H1 (lato sx)
                 Z ∈ Y ⟾ Z ∈ X, valido per H2 (lato dx)
 
 Es 3
 
+    Testo: ∀X,Y (X ⊆ Y ∧ Y ⊆ Z ⟾ X ⊆ Z)
 
+    Siano X ed Y due insiemi t.c:
+        X ⊆ Y, ovvero ∀A.(A ∈ X ⟾ A ∈ Y) (H1)
+        Y ⊆ Z, ovvero ∀A.(A ∈ Y ⟾ A ∈ Z) (H2)
+    
+    BISOGNA DIMOSTRARE:
+        X ⊆ Z
+    ovvero:
+        ∀B.(B ∈ X ⟾ B ∈ Z)
 
+        Sia B un insieme t.c:
+            B ∈ X (H3)
+        BISOGNA DIMOSTRARE:
+            B ∈ Z
+        Da H3 e H1 ho B ∈ Y.
+        Quindi, per H2 ho B ∈ Z.
 
 Es 4
 
+    Testo: ∅ ⊆ X
 
+        BISOGNA DIMOSTRARE:
+            ∅ ⊆ X
+        ovvero:
+            ∀Z.(Z ∈ ∅ ⟾ Z ∈ X)
 
-Es 5
+        Sia Z un insieme t.c:
+            Z ∈ ∅        (H1)
+        BISOGNA DIMOSTRARE:
+            Z ∈ X
+        Per l'assioma dell'insime vuoto ho:
+            Z ∉ X
+        Quindi per H si ha un assurdo e concludo qualsiasi cosa, dunque concludo: Z ∈ X
 
+Es 5 da finire
 
+    Testo:  ∀X.(X ⊆ ∅ ⟾ X = ∅)
+
+    Sia X un insieme t.c:
+        X ⊆ ∅   (H1)
+    BISOGNA DIMOSTRARE:
+        X = ∅
+    Sia X ⊆ ∅, ovvero ∀Z.(Z ∈ X ⟾ Z ∈ ∅) (H1)
+
+    Per l'assioma di estensionalità da X = ∅ si ha:
+        ∀W.(W ∈ X ⇔ W ∈ ∅)
 
 Es 6
 
+    Testo: ∀X.(X ∩ ∅ = ∅)
+
+    Sia X un insime.
+    BISOGNA DIMOSTRARE:
+        X ∩ ∅ = ∅
+    ovvero, per il teorema di estensionalità:
+        ∀Z.(Z ∈ (X ∩ ∅) ⇔ Z ∈ ∅)    (con X = X ∩ ∅)
+
+        Caso ⟾:
+            Sia Z un insieme t.c: Z ∈ (X ∩ ∅) (H1)
+            BISOGNA DIMOSTRARE:
+                Z ∈ ∅
+            Per l'assioma di estensionalitàa binaria, da H1 ottengo:
+                Z ∈ X (H2) e Z ∈ ∅ (H3)
+            Per l'assioma dell'insieme vuoto ed H3 ho un'asssurdo:
+                Z ∉ ∅
+            Quindi concludo qualsiasi cosa: Z ∈ ∅
+
+        Caso ←:
+            Sia Z un insieme t.c:
+                Z ∈ ∅   (H1.1)
+            BISOGNA DIMOSTRARE:
+                Z ∈ (X ∩ ∅)
+
+            Per l'assioma dell'insieme vuoto ed H1.1 ho un'asssurdo:
+                Z ∉ ∅
+            Quindi concludo qualsiasi cosa: Z ∈ (X ∩ ∅)
+
+⊢ ∀ ∃ ¬ V ∧ ⟾ ⊥    ∪ ∩ ∈ ∉ ∅ ≡ ⊂ ⊃  ⊇  ← ➜ ⇔
 
 
-Es 7
+Es 6
 
 
 
@@ -61,8 +127,7 @@ Es 9
 
 
 Es 10
-
-
+ 
 
 
 
@@ -70,18 +135,10 @@ Es 10
 
 Deduzione naturale
 
-⊢  ∀  ∃
-
-¬  V  ∧  ⟾  ⊥
+⊢ ∀ ∃ ¬ V ∧ ⟾ ⊥    ∪ ∩ ∈ ∅ ≡ ⊂ ⊃ ⊆ ⊇  ➜ ⇔
 
 ———————————————
 Insiemistica
 
-∪ ∩
 
-∈  ∅  ≡
-
-⊂  ⊃  ⊆  ⊇
-
-➜  ⇔
 
