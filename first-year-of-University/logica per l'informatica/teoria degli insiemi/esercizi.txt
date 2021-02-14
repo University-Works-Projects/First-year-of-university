@@ -1,0 +1,87 @@
+Fissazione
+Specificare cosa dimostrare, espandere
+Applicazione regole
+
+Es 1
+
+    Testo: Dimostrare X ⊆ X
+
+    Sia X un insieme.
+        Bisogna dimostrare:
+            X ⊆ X, ovvero ∀Z.(Z ∈ X ⟾ Z ∈ X).
+
+    Sia Z un insieme t.c: Z ∈ X (H1).
+        BISOGNA DIMOSTRARE:
+            Z ∈ X 
+        ovvio per H1. 
+
+Es 2
+    Testo: Se X ⊆ Y e Y ⊆ X allora X = Y
+
+    Siano X ed Y due insiemi t.c:
+        X ⊆ Y, ovvero ∀Z.(Z ∈ X ⟾ Z ∈ Y) (H1)
+        Y ⊆ X, ovvero ∀Z.(Z ∈ Y ⟾ Z ∈ X) (H2)
+
+    BISOGNA DIMOSTRARE:
+            X = Y
+        ovvero, per l'assioma di estensionalistà:
+            ∀Z.(Z ∈ X ⇔ Z ∈ Y)
+        Dunque bisogna dimostrare i sue lati del sse:
+            Sia Z un insieme.
+                Z ∈ X ⟾ Z ∈ Y, valido per H1 (lato sx)
+                Z ∈ Y ⟾ Z ∈ X, valido per H2 (lato dx)
+
+Es 3
+
+
+
+
+Es 4
+
+
+
+Es 5
+
+
+
+Es 6
+
+
+
+Es 7
+
+
+
+Es 8
+
+
+
+Es 9
+
+
+
+Es 10
+
+
+
+
+
+
+
+Deduzione naturale
+
+⊢  ∀  ∃
+
+¬  V  ∧  ⟾  ⊥
+
+———————————————
+Insiemistica
+
+∪ ∩
+
+∈  ∅  ≡
+
+⊂  ⊃  ⊆  ⊇
+
+➜  ⇔
+
