@@ -81,6 +81,23 @@ Es 5 da finire
     Per l'assioma di estensionalità da X = ∅ si ha:
         ∀W.(W ∈ X ⇔ W ∈ ∅)
 
+        Caso ⟾:
+            Sia W un insieme t.c: W ∈ X (H1)
+            BISOGNA DIMOSTRARE:
+                W ∈ X ⟾ W ∈ ∅
+            Ovvio per H1.
+
+        Caso ←:
+            BISOGNA DIMOSTRARE:
+                W ∈ ∅ ⟾ W ∈ X
+            Sia W un insieme t.c: W ∈ ∅ (H1.1)
+            BISOGNA DIMOSTRARE:
+                W ∈ X
+            Per l'assioma dell'insieme vuoto ed H1.1 ho un'assurdo:
+                W ∉ ∅
+            Quindi concludo qualsiasi cosa: W ∈ ∅
+
+
 Es 6
 
     Testo: ∀X.(X ∩ ∅ = ∅)
@@ -95,7 +112,7 @@ Es 6
             Sia Z un insieme t.c: Z ∈ (X ∩ ∅) (H1)
             BISOGNA DIMOSTRARE:
                 Z ∈ ∅
-            Per l'assioma di estensionalitàa binaria, da H1 ottengo:
+            Per l'assioma di estensionalità binaria, da H1 ottengo:
                 Z ∈ X (H2) e Z ∈ ∅ (H3)
             Per l'assioma dell'insieme vuoto ed H3 ho un'asssurdo:
                 Z ∉ ∅
@@ -111,12 +128,41 @@ Es 6
                 Z ∉ ∅
             Quindi concludo qualsiasi cosa: Z ∈ (X ∩ ∅)
 
+
+Es 7
+
+    Testo: ∀X,K,Y.(X ⊆ K ⟾ X ∩ Y ⊆ K ∩ Y)
+
+    Siano X, K, Y degli insiemi t.c:
+        X ⊆ K, ovvero ∀Z.(Z ∈ X ⟾ Z ∈ K) (H1)
+    BISOGNA DIMOSTRARE:
+        X ∩ Y ⊆ K ∩ Y, ovvero ∀J.(J ∈ (X ∩ Y) ⟾ J ∈ (K ∩ Y))
+    
+    Sia J un insieme t.c:
+        J ∈ (X ∩ Y)     (H? <-- Guadagno un'ipotesi?)
+    Per il teorema di intersezione binaria si ottiene:
+        J ∈ X       (H2)
+        J ∈ Y       (H3)
+    
+    BISOGNA DIMOSTRARE:
+        J ∈ (K ∩ Y)
+    ovvero, per il teorema di intersezione binaria, basta dimostrare:
+        J ∈ K --> Ovvio per H2 (J ∈ X) ed H1 (J ∈ X ⟾ J ∈ K)
+        J ∈ Y --> Ovvio per H3
+
+
+
+    ovvero:
+        ∀Z.(Z ∈ (Y ⊆ K) ⟾ Z ∈ (K ∩ Y))
+        Sia Z un insieme t.c:
+            Z ∈ (Y ⊆ K)     (H2)
+        BISOGNA DIMOSTRARE: 
+            Z ∈ (K ∩ Y)
+        ovvero:
+
+
+
 ⊢ ∀ ∃ ¬ V ∧ ⟾ ⊥    ∪ ∩ ∈ ∉ ∅ ≡ ⊂ ⊃  ⊇  ← ➜ ⇔
-
-
-Es 6
-
-
 
 Es 8
 
