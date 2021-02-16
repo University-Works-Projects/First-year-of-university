@@ -1,0 +1,46 @@
+Il prof ha fatto diversamente
+
+Dimostrare: ∀A,B.(A ∪ B = A ∩ B ⟾ A = B)
+
+    Siano A,B insiemi t.c:
+        A ∪ B = A ∩ B
+    ovvero (assioma di estensionalità):
+        ∀W.(W ∈ (A ∪ B) ⇔ W ∈ (A ∩ B))
+    ovvero (assiome di unione ed intersezione binaria):
+        ∀W.((W ∈ A V W ∈ B) ⇔ (W ∈ A ∧ W ∈ B)) (H1)
+            W ∈ A ⟾ (W ∈ A ∧ W ∈ B) (H1.1)
+            W ∈ B ⟾ (W ∈ A ∧ W ∈ B) (H1.2)
+
+    BISOGNA DIMOSTRARE:
+        A = B
+    ovvero (assioma di estensionalità):
+        ∀Z.(Z ∈ A ⇔ Z ∈ B)
+    
+    Caso ⟾:
+        Dato: ∀Z.(Z ∈ A ⟾ Z ∈ B)
+        Sia Z un insieme t.c:
+            Z ∈ A (H2)
+        BISOGNA DIMOSTRARE:
+            Z ∈ B --> ovvio per H2 e H1 (più precisamente per H1.1)
+
+    Caso ←:
+        Dato: ∀Z.(Z ∈ B ⟾ Z ∈ A)
+        Sia Z un insieme t.c:
+            Z ∈ B (H3)
+        BISOGNA DIMOSTRARE:
+            Z ∈ A --> ovvio per H3 e H1 (più precisamente per H1.2)
+
+
+
+
+
+
+
+
+
+
+
+
+⊢ ∀ ∃ ¬ V ∧ ⟾ ⊥    ∪ ∩ ∈ ∉ ∅ ≡ ⊂ ⊃ ⊆ ⊇ ← ➜ ⇔
+
+

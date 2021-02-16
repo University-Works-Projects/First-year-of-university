@@ -2,9 +2,7 @@ Fissazione
 Specificare cosa dimostrare, espandere
 Applicazione regole
 
-Es 1
-
-    Testo: Dimostrare X ⊆ X
+Es 1    Dimostrare: Dimostrare ∀X.(X ⊆ X)
 
     Sia X un insieme.
         BISOGNA DIMOSTRARE:
@@ -15,9 +13,8 @@ Es 1
             Z ∈ X 
         ovvio per H1. 
 
-Es 2
-    Testo: Se X ⊆ Y e Y ⊆ X allora X = Y
-
+Es 2    Dimostrare: ∀X,Y.(X ⊆ Y ∧ Y ⊆ X ⟾ X = Y)
+    
     Siano X ed Y due insiemi t.c:
         X ⊆ Y, ovvero ∀Z.(Z ∈ X ⟾ Z ∈ Y) (H1)
         Y ⊆ X, ovvero ∀Z.(Z ∈ Y ⟾ Z ∈ X) (H2)
@@ -31,9 +28,7 @@ Es 2
                 Z ∈ X ⟾ Z ∈ Y, valido per H1 (lato sx)
                 Z ∈ Y ⟾ Z ∈ X, valido per H2 (lato dx)
 
-Es 3
-
-    Testo: ∀X,Y (X ⊆ Y ∧ Y ⊆ Z ⟾ X ⊆ Z)
+Es 3    Dimostrare: ∀X,Y.(X ⊆ Y ∧ Y ⊆ Z ⟾ X ⊆ Z)
 
     Siano X ed Y due insiemi t.c:
         X ⊆ Y, ovvero ∀A.(A ∈ X ⟾ A ∈ Y) (H1)
@@ -51,9 +46,7 @@ Es 3
         Da H3 e H1 ho B ∈ Y.
         Quindi, per H2 ho B ∈ Z.
 
-Es 4
-
-    Testo: ∅ ⊆ X
+Es 4    Dimostrare: ∀X.(∅ ⊆ X)
 
         BISOGNA DIMOSTRARE:
             ∅ ⊆ X
@@ -68,39 +61,37 @@ Es 4
             Z ∉ X
         Quindi per H si ha un assurdo e concludo qualsiasi cosa, dunque concludo: Z ∈ X
 
-Es 5 da finire
-
-    Testo:  ∀X.(X ⊆ ∅ ⟾ X = ∅)
+Es 5    Dimostrare: ∀X.(X ⊆ ∅ ⟾ X = ∅)
 
     Sia X un insieme t.c:
-        X ⊆ ∅   (H1)
+        X ⊆ ∅   (Se si espande questa ipotesi, risulta inutile continuare a considerarla tale)
+    ovvero:
+        ∀W.(W ∈ X ⟾ W ∈ ∅) (H1)
+
     BISOGNA DIMOSTRARE:
         X = ∅
-    Sia X ⊆ ∅, ovvero ∀Z.(Z ∈ X ⟾ Z ∈ ∅) (H1)
-
-    Per l'assioma di estensionalità da X = ∅ si ha:
+    ovvero (per l')assioma di estensionalità):
         ∀W.(W ∈ X ⇔ W ∈ ∅)
 
         Caso ⟾:
-            Sia W un insieme t.c: W ∈ X (H1)
-            BISOGNA DIMOSTRARE:
-                W ∈ X ⟾ W ∈ ∅
-            Ovvio per H1.
+            Dato: W ∈ X ⟾ W ∈ ∅
+                Sia W un insieme t.c:
+                    W ∈ X (H2)
+                BISOGNA DIMOSTRARE:
+                    W ∈ ∅
+                Ovvio per H1.
 
         Caso ←:
-            BISOGNA DIMOSTRARE:
-                W ∈ ∅ ⟾ W ∈ X
-            Sia W un insieme t.c: W ∈ ∅ (H1.1)
-            BISOGNA DIMOSTRARE:
-                W ∈ X
-            Per l'assioma dell'insieme vuoto ed H1.1 ho un'assurdo:
-                W ∉ ∅
-            Quindi concludo qualsiasi cosa: W ∈ ∅
+            Dato: W ∈ ∅ ⟾ W ∈ X
+                Sia W un insieme t.c:
+                    W ∈ ∅ (H3)
+                BISOGNA DIMOSTRARE:
+                    W ∈ X
+                Per l'assioma dell'insieme vuoto ed H3 ho un'assurdo:
+                    W ∉ ∅
+                Quindi concludo qualsiasi cosa: W ∈ X
 
-
-Es 6
-
-    Testo: ∀X.(X ∩ ∅ = ∅)
+Es 6    Dimostrare: ∀X.(X ∩ ∅ = ∅)
 
     Sia X un insime.
     BISOGNA DIMOSTRARE:
@@ -109,14 +100,17 @@ Es 6
         ∀Z.(Z ∈ (X ∩ ∅) ⇔ Z ∈ ∅)    (con X = X ∩ ∅)
 
         Caso ⟾:
-            Sia Z un insieme t.c: Z ∈ (X ∩ ∅) (H1)
-            BISOGNA DIMOSTRARE:
-                Z ∈ ∅
-            Per l'assioma di estensionalità binaria, da H1 ottengo:
+            Dato: Z ∈ (X ∩ ∅) ⟾ Z ∈ ∅
+            Sia Z un insieme t.c:
+                Z ∈ (X ∩ ∅)
+            ovvero (assioma di intersezione binaria):
                 Z ∈ X (H2) e Z ∈ ∅ (H3)
-            Per l'assioma dell'insieme vuoto ed H3 ho un'asssurdo:
-                Z ∉ ∅
-            Quindi concludo qualsiasi cosa: Z ∈ ∅
+
+                BISOGNA DIMOSTRARE:
+                    Z ∈ ∅
+                Per l'assioma dell'insieme vuoto ed H3 ho un'assurdo:
+                    Z ∉ ∅
+                Quindi concludo qualsiasi cosa: Z ∈ ∅
 
         Caso ←:
             Sia Z un insieme t.c:
@@ -128,18 +122,17 @@ Es 6
                 Z ∉ ∅
             Quindi concludo qualsiasi cosa: Z ∈ (X ∩ ∅)
 
-
-Es 7
-
-    Testo: ∀X,K,Y.(X ⊆ K ⟾ X ∩ Y ⊆ K ∩ Y)
+Es 7    Dimostrare: ∀X,K,Y.(X ⊆ K ⟾ X ∩ Y ⊆ K ∩ Y)
 
     Siano X, K, Y degli insiemi t.c:
-        X ⊆ K, ovvero ∀Z.(Z ∈ X ⟾ Z ∈ K) (H1)
+        X ⊆ K, ovvero (def. sottoinsieme) ∀Z.(Z ∈ X ⟾ Z ∈ K) (H1)
     BISOGNA DIMOSTRARE:
-        X ∩ Y ⊆ K ∩ Y, ovvero ∀J.(J ∈ (X ∩ Y) ⟾ J ∈ (K ∩ Y))
+        X ∩ Y ⊆ K ∩ Y
+    ovvero:
+        ∀J.(J ∈ (X ∩ Y) ⟾ J ∈ (K ∩ Y))
     
     Sia J un insieme t.c:
-        J ∈ (X ∩ Y)     (H? <-- Guadagno un'ipotesi?)
+        J ∈ (X ∩ Y)
     Per il teorema di intersezione binaria si ottiene:
         J ∈ X       (H2)
         J ∈ Y       (H3)
@@ -150,41 +143,72 @@ Es 7
         J ∈ K --> Ovvio per H2 (J ∈ X) ed H1 (J ∈ X ⟾ J ∈ K)
         J ∈ Y --> Ovvio per H3
 
+Es 8    Dimostrare: ∀X,K,Y.(X ⊆ K ⟾ X ∪ Y ⊆ K ∪ Y)
 
+    Siano X,K,Y degli insiemi t.c:
+        X ⊆ K, ovvero (def. sottoinsieme) ∀Z.(Z ∈ X ⟾ Z ∈ K) (H1)
 
-    ovvero:
-        ∀Z.(Z ∈ (Y ⊆ K) ⟾ Z ∈ (K ∩ Y))
+    BISOGNA DIMOSTRARE:
+        X ∪ Y ⊆ K ∪ Y
+    ovvero (def. sottoinsieme):
+        ∀W.(W ∈ (X ∪ Y) ⟾ W ∈ (K ∪ Y))
+
+    Caso ⟾:
+        Dato: W ∈ (X ∪ Y) ⟾ W ∈ (K ∪ Y)
+        Sia W un insieme t.c:
+            W ∈ (X ∪ Y)
+        ovvero, per il teorema di intersezione binario:
+            W ∈ X   (H2)
+            W ∈ Y   (H3)
+        BISOGNA DIMOSTRARE:
+            W ∈ (K ∪ Y)
+        ovvero (teorema di unione binaria):
+            W ∈ K --> ovvio per H2 (W ∈ X) e per H1 (W ∈ X ⟾ W ∈ K)
+            W ∈ Y --> ovvio per H3
+
+Es 9    Dimostrare: ∀X,Y.(X ∈ Y ⟾ X ∈ Y ∪ Z)
+
+    Siano X,Y t.c:
+        X ∈ Y   (H1)
+    BISOGNA DIMOSTRARE:
+        X ∈ Y ∪ Z
+    ovvero (teorema unione binaria):
+        X ∈ Y V X ∈ Z
+
+    Mi basta dimostrare uno dei due casi:
+    Caso X ∈ Y:
+    BISOGNA DIMOSTRARE:
+        X ∈ Y --> ovvio per H1
+
+Es 10   Dimostrare: ∀A,B,C.(A ⊆ B ⇒ -B ⊆ -A)
+
+    Sia U un insieme e definiamo il complementare di C rispetto a U come segue usando l'assioma di separazione:
+    -C ≝ { x ∈ U | x ∉ C }.
+
+    Siano A,B,C insiemi t.c:
+        A ⊆ B
+    ovvero (def. sottoinsieme):
+        ∀Z.(Z ∈ A ⟾ Z ∈ B)     (H1)
+
+    BISOGNA DIMOSTRARE:
+        -B ⊆ -A
+    ovvero (def. sottoinsieme):
+        ∀Z.(Z ∈ -B ⟾ Z ∈ -A)
+
         Sia Z un insieme t.c:
-            Z ∈ (Y ⊆ K)     (H2)
-        BISOGNA DIMOSTRARE: 
-            Z ∈ (K ∩ Y)
-        ovvero:
+            Z ∈ -B              (H2)
+        ovvero (def. complementare):
+            Z ∉ B               (H3)
+        BISOGNA DIMOSTRARE:
+            Z ∈ -A
+        ovvero (def. complementare):
+            Z ∉ A
 
 
 
-⊢ ∀ ∃ ¬ V ∧ ⟾ ⊥    ∪ ∩ ∈ ∉ ∅ ≡ ⊂ ⊃  ⊇  ← ➜ ⇔
-
-Es 8
+⊢ ∀ ∃ ¬ V ∧ ⟾ ⊥    ∪ ∩ ∈ ∉ ∅ ≡ ⊂ ⊃ ⊆ ⊇ ← ➜ ⇔
 
 
-
-Es 9
-
-
-
-Es 10
- 
-
-
-
-
-
-Deduzione naturale
-
-⊢ ∀ ∃ ¬ V ∧ ⟾ ⊥    ∪ ∩ ∈ ∅ ≡ ⊂ ⊃ ⊆ ⊇  ➜ ⇔
-
-———————————————
-Insiemistica
 
 
 

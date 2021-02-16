@@ -1,0 +1,53 @@
+Dimostrare: (∃D.(D ∈ A ∧ D ∈ B)) ⟾ (A ∪ C) ∩ B = ∅
+
+    Sia D un insieme t.c: D ∈ A ∧ D ∈ B (H)
+    Siano A,B,C insiemi t.c:
+        D ∈ A (H1)
+        D ∈ B (H2)
+    BISOGNA DIMOSTRARE:
+        (A ∪ C) ∩ B = ∅
+    ovvero (assioma di estensionalità):
+        ∀Z.(Z ∈ ((A ∪ C) ∩ B) ⇔ Z ∈ ∅)
+
+        Caso ⟾:
+            Dato: ∀Z.(Z ∈ ((A ∪ C) ∩ B) ⟾ Z ∈ ∅)
+            Sia Z un insieme t.c:
+                Z ∈ ((A ∪ C) ∩ B) (H)
+            ovvero (teorema dell'intersezione binaria):
+                Z ∈ B (H3)
+                Z ∈ A ∪ C (H)
+            ovvero (teorema dell'unione binaria):
+                Z ∈ B (H3)
+                Z ∈ A V Z ∈ C
+
+                Caso Z ∈ A (H4.1):
+                    BISOGNA DIMOSTRARE:
+                        Z ∈ ∅
+                    
+                    boh mi verrebbe da dire che:
+                    Per H1 e H2 A e B non sono insiemi vuoti, e per H3 e H4 Z ∈ B ∧ Z ∈ A e per l'ass. dell'insieme vuoto Z ∉ ∅
+                    o più semplicemente per l'ass. dell'insieme vuoto Z ∉ ∅
+
+                Caso Z ∈ C (H4.2):
+                    BISOGNA DIMOSTRARE:
+                        Z ∈ ∅
+
+                        analogo
+                        analogo
+                        analogo
+
+
+        Caso ←:
+            Dato: ∀Z.(Z ∈ ∅ ⟾ Z ∈ ((A ∪ C) ∩ B))
+            Sia Z un insieme t.c:
+                Z ∈ ∅ (H5)
+            BISOGNA DIMOSTRARE:
+                Z ∈ ((A ∪ C) ∩ B)
+            Per H5 e l'assioma dell'insime vuoto ho un assurdo e concludo:
+                Z ∈ ((A ∪ C) ∩ B)
+
+        qed
+
+
+
+⊢ ∀ ∃ ¬ V ∧ ⟾ ⊥    ∪ ∩ ∈ ∉ ∅ ≡ ⊂ ⊃ ⊆ ⊇ ← ➜ ⇔

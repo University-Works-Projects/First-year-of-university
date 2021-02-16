@@ -1,0 +1,41 @@
+Dimostrare: ∀A,B.(A ∪ B) ∩ B = B
+
+    Siano A,B insiemi.
+    BISOGNA DIMOSTRARE:
+        (A ∪ B) ∩ B = B
+    ovvero (assioma di estensionalità):
+        ∀Z.(Z ∈ ((A ∪ B) ∩ B) ⇔ Z ∈ B)
+
+        Caso ⟾:
+            Dato: ∀Z.(Z ∈ ((A ∪ B) ∩ B) ⟾ Z ∈ B)
+            Sia Z un insieme t.c:
+                Z ∈ ((A ∪ B) ∩ B) (H)
+            ovvero (teorema dell'intersezione binaria):
+                Z ∈ B (H1)
+                Z ∈ (A ∪ B) (H) (non c'è bisogno di stare ad espandere in quanto basta H1 per la dimostrazione)
+
+            BISOGNA DIMOSTRARE:
+                Z ∈ B --> ovvio per H1
+            
+        Caso ←:
+            Dato: ∀Z.(Z ∈ B ⟾ Z ∈ ((A ∪ B) ∩ B))
+            Sia Z un insieme t.c:
+                Z ∈ B (H2)
+                
+            BISOGNA DIMOSTRARE:
+                Z ∈ ((A ∪ B) ∩ B)
+            ovvero (teorema di intersezione binaria):
+                Z ∈ B
+                Z ∈ (A ∪ B)
+            ovvero (teorema di unione binaria):
+                Z ∈ B --> ovvio per H2
+                Z ∈ A V Z ∈ B
+
+                Ci si può ridurre a dimostrare uno dei due casi dell'V.
+                Caso Z ∈ B:
+                    BISOGNA DIMOSTRARE:
+                        Z ∈ B --> ovvio per H1
+
+
+
+⊢ ∀ ∃ ¬ V ∧ ⟾ ⊥    ∪ ∩ ∈ ∉ ∅ ≡ ⊂ ⊃ ⊆ ⊇ ← ➜ ⇔

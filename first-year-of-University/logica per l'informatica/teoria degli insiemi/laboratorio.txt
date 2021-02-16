@@ -1,0 +1,138 @@
+Simboli utilizzabili: ∈ ∅ ∪ ∩ ⊆ ∀ ∃ V ∧ ⟾ ¬ ⇔
+
+Es 1    Dimostrare: ∀X,Y.((X ∩ Y) = X ⟾ X ⊆ Y)
+
+    Siano X,y insiemi t.C:
+        (X ∩ Y) = X
+    ovvero (assioma di estensionalità):
+        ∀Z.(Z ∈ (X ∩ Y)) ⇔ Z ∈ X)
+    ovvero (teorema di intersezione binaria):
+        ∀Z.((Z ∈ X ∧ Z ∈ Y) ⇔ Z ∈ X) (H1)
+
+    BISOGNA DIMOSTRARE:
+        X ⊆ Y
+    ovvero (def. sottoinsieme):
+        ∀W.(W ∈ X ⟾ W ∈ Y)
+
+        Sia W un insieme t.c:
+            W ∈ X (H2)
+        BISOGNA DIMOSTRARE:
+            W ∈ Y --> ovvio H2 (Z ∈ X) ed H1 (Z ∈ X ⟾ (Z ∈ X ∧ Z ∈ Y))
+    
+    qed
+
+Es 2    Dimostrare: ∀X,Y,Z.(X ∩ (Y ∪ Z) ⊆ (X ∩ Y) ∪ (X ∩ Z))
+
+    Siano X,Y,Z insiemi.
+    BISOGNA DIMOSTRARE:
+        X ∩ (Y ∪ Z) ⊆ (X ∩ Y) ∪ (X ∩ Z)
+    ovvero (def. sottoinsieme):
+        ∀W.(W ∈ (X ∩ (Y ∪ Z)) ⟾ W ∈ ((X ∩ Y) ∪ (X ∩ Z)))
+        
+        Sia W un insieme t.c:
+            W ∈ (X ∩ (Y ∪ Z))
+        ovvero (teorema di intersezione binaria):
+            W ∈ X
+            W ∈ (Y ∪ Z)
+        ovvero (teorema dell'unione binaria):
+            W ∈ X (H1)
+            W ∈ Y V W ∈ Z
+
+        Caso W ∈ Y (H2):
+            BISOGNA DIMOSTRARE:
+                W ∈ ((X ∩ Y) ∪ (X ∩ Z))
+            ovvero (teorema dell'unione binaria):
+                W ∈ (X ∩ Y) V W ∈ (X ∩ Z)
+            ovvero (teorema intersezione binaria):
+                (W ∈ X ∧ W ∈ Y) V (W ∈ X ∧ W ∈ Z)
+
+            Ci si può ridurre a dimostrare uno solo dei due casi:
+                Caso W ∈ X ∧ W ∈ Y:
+                    BISOGNA DIMOSTRARE:
+                        W ∈ X --> ovvio per H1
+                        W ∈ Y --> ovvio per H2
+
+        Caso W ∈ Z (H3):
+            BISOGNA DIMOSTRARE:
+                W ∈ ((X ∩ Y) ∪ (X ∩ Z))
+            ovvero (teorema dell'unione binaria):
+                W ∈ (X ∩ Y) V W ∈ (X ∩ Z)
+            ovvero (teorema intersezione binaria):
+                (W ∈ X ∧ W ∈ Y) V (W ∈ X ∧ W ∈ Z)
+
+            Ci si può ridurre a dimostrare uno solo dei due casi:
+                Caso W ∈ X ∧ W ∈ Z:
+                    BISOGNA DIMOSTRARE:
+                        W ∈ X --> ovvio per H1
+                        W ∈ Z --> ovvio per H3
+
+Es 3    Dimostrare: ∀X,Y.(X ⊆ Y ⟾ c(Y) ⊆ c(X))
+
+    Sia c(F) = {Y ∈ U | ¬(Y ∈ F)} il complementare di W risetto a U
+
+    Siano X,Y insiemi t.c:
+        X ⊆ Y
+    ovvero (def. sottoinsieme):
+        ∀Z.(Z ∈ X ⟾ Z ∈ Y) (H1)
+    BISOGNA DIMOSTRARE:
+        c(Y) ⊆ c(X)
+    ovvero (def. sottoinsieme):
+        ∀W.(W ∈ c(Y) ⟾ W ∈ c(X))
+        Sia W un insieme t.c:
+            W ∈ c(Y)
+        ovvero (assioma di separazione):
+            W ∈ U (H1)
+            ¬(W ∈ Y) (H2)
+        BISOGNA DIMOSTRARE:
+            W ∈ c(X)
+        ovvero (assioma di separazione):
+            W ∈ U --> ovvio per H1
+            ¬(W ∈ X) --> Supponendo W ∈ X (K) e si dimostra l'assurdo. Da K e H1 si ha W ∈ Y. Quindi per H2 assurdo e concludo qualsiasi cosa.
+
+Es 4    Dimostrare: ... da fare
+
+Es 5    Dimostrare: ∀X,Y.(X ⊆ Y ⟾ X ∩ c(Y) = ∅) il prof ha risolto diversamente
+
+    Sia c(X) = {Y ∈ U | ¬(Y ∈ X)}
+
+    Siano X,Y,U insiemi t.c:
+        X ⊆ Y
+    ovvero (def. sottoinsieme):
+        ∀Z.(Z ∈ X ⟾ Z ∈ Y) (H1)
+    BISOGNA DIMOSTRARE:
+        X ∩ c(Y) = ∅
+    ovvero (assiome di estensionalità):
+        ∀W.(W ∈ X ∩ c(Y) ⇔ W ∈ ∅)
+
+        Caso ⟾:
+            Dato: ∀W.(W ∈ X ∩ c(Y) ⟾ W ∈ ∅)
+            Sia W un insieme t.c:
+                W ∈ X ∩ c(Y)
+            ovvero (teorema di intersezione binaria):
+                W ∈ X (H2)
+                W ∈ c(Y)
+            ovvero (teorema di separazione):
+                W ∈ X 
+                W ∈ U (H3)
+                ¬(W ∈ Y) (H4)
+            BISOGNA DIMOSTRARE:
+                W ∈ ∅
+            Per H2 (W ∈ X), H1 (Z ∈ X ⟾ Z ∈ Y) ed H4 (¬(W ∈ Y)) ho un asssurdo, concludo:
+                W ∈ ∅
+
+
+        Caso ←:
+            Dato: ∀W.(W ∈ ∅ ⟾ W ∈ X ∩ c(Y))
+            Sia W un insiemet.c:
+                W ∈ ∅ (H5)
+            BISOGNA DIMOSTRARE:
+                W ∈ X ∩ c(Y)
+            Per l'assiome dell'insieme vuoto e H5 ho un assurdo e concludo:
+                W ∈ X ∩ c(Y)
+
+Es 6
+ 
+
+⊢ ∀ ∃ ¬ V ∧ ⟾ ⊥    ∪ ∩ ∈ ∉ ∅ ≡ ⊂ ⊃ ⊆ ⊇ ← ➜ ⇔
+
+

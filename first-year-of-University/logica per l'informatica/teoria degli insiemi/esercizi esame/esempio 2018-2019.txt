@@ -1,0 +1,49 @@
+
+Dimostrare: ∀A,B,C,D(A ⊆ B ∧ C ⊆ D ⟾ A ∪ C ⊆ B ∪ D)
+
+    Siano A,B,C,D insiemi t.c:
+        A ⊆ B (H)
+        C ⊆ D (H)
+    ovvero:
+        ∀Z.(Z ∈ A ⟾ Z ∈ B) (H1)
+        ∀Z.(Z ∈ C ⟾ Z ∈ D) (H2)
+
+    BISOGNA DIMOSTRARE:
+        A ∪ C ⊆ B ∪ D
+    ovvero (def. sottoinsieme):
+        ∀W.(W ∈ (A ∪ C) ⟾ W ∈ (B ∪ D))
+        Sia W un insieme t.c:
+            W ∈ (A ∪ C)
+        ovvero (teorema di unione binaria):
+            W ∈ A V W ∈ C (H)
+
+            Caso W ∈ A (H3):
+                BISOGNA DIMOSTRARE:
+                    W ∈ (B ∪ D)
+                ovvero (teorema di unione binaria):
+                    W ∈ B V W ∈ D
+                
+                Ci si può ridurre a dimostrare solo uno dei due casi.
+                    Caso W ∈ B:
+                        BISOGNA DIMOSTRARE:
+                            W ∈ B --> ovvio per H3 (W ∈ A) e H1 (W ∈ A ⟾ w ∈ B)
+
+            Caso W ∈ C (H4):
+                BISOGNA DIMOSTRARE:
+                    W ∈ (B ∪ D)
+                ovvero (teorema di unione binaria):
+                    W ∈ B V W ∈ D
+                Ci si può ridurre a dimostrare solo uno dei due casi.
+                    Caso W ∈ D:
+                        BISOGNA DIMOSTRARE:
+                            W ∈ D --> ovvio per H4 (W ∈ C) e H1 (W ∈ C ⟾ w ∈ D)
+
+
+        qed
+
+
+
+
+
+
+⊢ ∀ ∃ ¬ V ∧ ⟾ ⊥    ∪ ∩ ∈ ∉ ∅ ≡ ⊂ ⊃ ⊆ ⊇ ← ➜ ⇔
