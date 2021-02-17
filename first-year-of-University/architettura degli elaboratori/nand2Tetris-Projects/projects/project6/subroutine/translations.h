@@ -31,10 +31,12 @@ int labelCounter = 0, continueCounter = 0;
     }
     void modifyLabel(char in_label[]){      // Toglie il carattere '\n' dalla fine della stinga
         int i = 0;
-        while (in_label[i] != 0){
+        while (in_label[i] != '\0'){
             if (in_label[i] == '\n') in_label[i] = '\0';
             i++;
         }
+        printf("%s", in_label);
+
 
     }
 
@@ -261,7 +263,7 @@ void ifgoto(FILE *in_outFile, char in_label[]){
     takeLastSV(in_outFile);                             // Ci va l'incrementoda qualche parte???
     fprintf(in_outFile, "%c%s", '@', in_label);
     fprintf(in_outFile, "%s", "D;JLT\n");               // JLT perchè un'espressione vera ha valore -1
-    //fprintf(in_outFile, "%s", "D;JNE\n");               // JNE perchè un'espressione vera ha valore diverso da 0
+    //fprintf(in_outFile, "%s", "D;JNE\n");             // JNE perchè un'espressione vera ha valore diverso da 0
 }
 void goto_(FILE *in_outFile, char in_label[]){          // Ci va l'incrementoda qualche parte???
     fprintf(in_outFile, "%c%s", '@', in_label);

@@ -59,7 +59,7 @@ p_atm modelloEconomico (char in_marca[], p_atm in_lista){
 
     while (in_lista != NULL && strcmp(in_lista -> marca, in_marca) != 0) in_lista = in_lista -> next;  // Si scorre la lista sino ad arrivare al primo elemento col modello di auto corrispondente a quello cercato
     
-    if (in_lista == NULL) prezzoMin = -1;   // Se non vi sono macchine di quel modello il prezzo viene settato negativo
+    if (in_lista == NULL) return NULL;   // Se non vi sono macchine di quel modello il prezzo viene settato negativo
     else {
         prezzoMin = in_lista -> prezzo;     // Altrimenti il prezzo viene settato pari a quello della prima macchina di quel modello
 

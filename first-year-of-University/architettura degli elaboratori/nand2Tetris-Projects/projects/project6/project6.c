@@ -76,6 +76,21 @@ void translateRow(FILE *in_outFile, char in_row[]){
 
     printf("%s%d%s%s", "Row length: ", in_rowLength, " ; Row: ", in_row);
 
+    if (in_rowLength < 6){                       // Il +1 è lo spazio per '\0'
+        if (isString2inString1(in_row, "eq")) { fprintf(in_outFile, "%s", "// eq\n"); eq(in_outFile); }
+        else if (isString2inString1(in_row, "gt")) { fprintf(in_outFile, "%s", "// gt\n"); gt(in_outFile); }
+        else if (isString2inString1(in_row, "lt")) { fprintf(in_outFile, "%s", "// lt\n"); lt(in_outFile); }
+        else if (isString2inString1(in_row, "or")) { fprintf(in_outFile, "%s", "// or\n"); or(in_outFile); }
+
+        else if (isString2inString1(in_row, "add")) { fprintf(in_outFile, "%s", "// add\n"); add(in_outFile); }
+        else if (isString2inString1(in_row, "sub")) { fprintf(in_outFile, "%s", "// sub\n"); sub(in_outFile); }    
+        else if (isString2inString1(in_row, "neg")) { fprintf(in_outFile, "%s", "// neg\n"); neg(in_outFile); }    
+        else if (isString2inString1(in_row, "and")) { fprintf(in_outFile, "%s", "// and\n"); and(in_outFile); }      
+        else if (isString2inString1(in_row, "not")) { fprintf(in_outFile, "%s", "// not\n"); not(in_outFile); }
+        else printf("%s", "ERROR LENGTH < 6\n");
+        }
+
+    /*
     if (in_rowLength == 3){                       // Il +1 è lo spazio per '\0'
         if (isString2inString1(in_row, "eq")) { fprintf(in_outFile, "%s", "// eq\n"); eq(in_outFile); }
         else if (isString2inString1(in_row, "gt")) { fprintf(in_outFile, "%s", "// gt\n"); gt(in_outFile); }
@@ -92,6 +107,7 @@ void translateRow(FILE *in_outFile, char in_row[]){
         else if (isString2inString1(in_row, "not")) { fprintf(in_outFile, "%s", "// not\n"); not(in_outFile); }
         //else fprintf(in_outFile, "%s", "ERROR LENGTH 4\n");
         }
+    */
 
     else {
 
@@ -223,9 +239,9 @@ int main (int argc, char **argv){
 
     char inFileName[SIZE]; strcpy(inFileName, argv[1]);
     char outFileName[SIZE];
-    changeName(inFileName, outFileName);
-    strcat(outFileName, ".asm");
-    
+    changeName(inFileName, outFileName);    // inFileName = "fileName.exe" --> outFileName = "fileName"
+    strcat(outFileName, ".asm");            // outFileName = "fileName.asm"
+
     outFile = fopen(outFileName, "w");
 
     char row[SIZE];                         // Stringa contenente l'intera riga di codice in VM

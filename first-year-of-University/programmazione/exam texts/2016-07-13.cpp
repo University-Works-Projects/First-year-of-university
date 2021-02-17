@@ -6,7 +6,7 @@ using namespace std;
 
 #define STRING 30
 
-/* Es 1
+/* Es 1 oooooo non l'ho fatto bene
     Scrivere una funzione ricorsiva che segue la seguente definizione:
     
     f(0) = 1
@@ -20,7 +20,7 @@ using namespace std;
     int rcrv_f (int n){
         if (n == 0) return 1;
         else if (n < 0) return 0;
-        else return (rcrv_f (n-1) * 2 - 1);
+        else  rcrv_f (n-1) * 2 - 1;
     }
     int itrv_f (int n){
         if (n == 0) return 1;
@@ -30,6 +30,7 @@ using namespace std;
             else n--;
             int res = 0;
             while (n > 0){
+                cout << n << endl;
                 res += n * 2 + 1;
                 n--;
             }
@@ -37,7 +38,6 @@ using namespace std;
             return res;
         }
     }
-
 
 /* Es 2
     Un hotel usa una lista per registrare le prenotazioni dei clienti.
@@ -82,7 +82,7 @@ using namespace std;
     }
 
 
-/* Es 3 DA RIVEDERE
+/* Es 3 DA RIVEDERE da faaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     Definire una classe counter che contiene un intero.
     La classe ha un costruttore che inizializza il counter a 0 e i seguenti metodi:
         (a) un metodo void inc() che incrementa di 1 il contatore;
@@ -108,8 +108,11 @@ using namespace std;
     };
 
     Counter f (Counter c){
-        if (c -> n > 0) return c--;
+        Counter newCounter;
+        if (c.n = 0) newCounter.Counter(0);
         else if (c -> n == 0) return 0;
+
+        return newCounter:
     }
 
 

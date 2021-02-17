@@ -48,12 +48,27 @@ void newExtension(char in_nameFile[], char emptyNameFile[]){
     strcat(emptyNameFile, ".asm");
 }
 
+void modifyLabel(char in_label[]){      // Toglie il carattere '\n' dalla fine della stinga
+        int i = 0;
+        while (in_label[i] != '\0'){
+            if (in_label[i] == '\n') in_label[i] = '\0';
+            i++;
+        }
+
+    }
+
 int main (int argc, char **argv){
 
     //inputFile = fopen(argv[1], "r");
     //inputFileCopy1 = fopen(argv[1], "r");
     
+    char row1[DIM]; strcpy(row1, "CASE\n");
+    printf("%s", row1);
 
+    modifyLabel(row1);
+    printf("%s", row1);
+
+/*
     char row1[DIM]; strcpy(row1, "CASE");
     char row2[DIM]; strcpy(row2, "CASE");
     char row3[DIM]; strcpy(row3, "CASE");
@@ -65,6 +80,7 @@ int main (int argc, char **argv){
     printf("%s%c", row2, '\n');
     lol = newLabel(row3, lol);
     printf("%s%c", row3, '\n');
+*/
 
     return 0;
 }
