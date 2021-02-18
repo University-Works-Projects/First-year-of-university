@@ -46,7 +46,7 @@ using namespace std;
         else if (n == 1) cout << '*';
         else {
             int pow = n * n;
-            es1(m);             // print of n*n --> p.e: 2*2 = 4 -> print: ****
+            es1(pow);             // print of n*n --> p.e: 2*2 = 4 -> print: ****
             es3(n - 1);
         }
     }
@@ -54,7 +54,7 @@ using namespace std;
 
 int main() {
 
-    cout << es1(5);
+    es1(5);
 
 	cout << "Enter a number: ";
 	int n; cin >> n;

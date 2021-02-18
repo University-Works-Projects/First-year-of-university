@@ -52,7 +52,7 @@ typedef Automobile *p_atm;
 
 // Si da per scontato che nella lista di macchine vi sia almeno un'auto del modello ricercato
 
-// :)
+// be happy :D
 p_atm modelloEconomico (char in_marca[], p_atm in_lista){
     p_atm head = in_lista;
     float prezzoMin = 0;
