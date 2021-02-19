@@ -6,7 +6,7 @@ using namespace std;
 
 #define STRING 30
 
-/* Es 1 oooooo non l'ho fatto bene
+/* Es 1 NON CORRETTO
     Scrivere una funzione ricorsiva che segue la seguente definizione:
     
     f(0) = 1
@@ -59,30 +59,26 @@ using namespace std;
     };
     typedef Prenotazioni *p_pren;
 
-    p_pren highestPrice (char in_name[], p_pren in_list){
+    char* highestPrice (p_pren in_list){
         float winner = -1;
 
         p_pren head = in_list, copy = in_list;      // C'è qualcosa di superfluo??
 
-        while(in_list != NULL){
-            if (strcmp(in_list -> name, in_name) == 0) float winner = in_list -> costoGiornaliero * in_list -> giorniPrenotati;
-            in_list = in_list -> next;
-        }
-
-        while (in_list != NULL){
-            if (strcmp(in_list -> name, in_name) == 0 && (in_list -> costoGiornaliero * in_list -> giorniPrenotati) > winner) winner = in_list -> costoGiornaliero * in_list -> giorniPrenotati;
+        while(in_list != NULL){                     // Se trova un prezzo maggiore di winner, aggiorna quest'ultimo
+            if ((in_list -> costoGiornaliero * in_list -> giorniPrenotati) > winner) float winner = in_list -> costoGiornaliero * in_list -> giorniPrenotati;
             in_list = in_list -> next;
         }
 
         while (copy != NULL){
-            if (strcmp(in_list -> name, in_name) == 0 && (in_list -> costoGiornaliero * in_list -> giorniPrenotati) == winner) return copy;
-            head = copy -> next;
+            if (copy -> costoGiornaliero * copy -> giorniPrenotati == winner) return (copy -> name);
+            copy = copy -> next;
         }
 
     }
 
 
-/* Es 3 DA RIVEDERE da faaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+/* Es 3 DA risolvere piccola incomprensione
+
     Definire una classe counter che contiene un intero.
     La classe ha un costruttore che inizializza il counter a 0 e i seguenti metodi:
         (a) un metodo void inc() che incrementa di 1 il contatore;
@@ -96,23 +92,26 @@ using namespace std;
     protected:
         int n;
     public:
-        Counter(int in_n){
-            this -> n = in_n;
+        Counter(){
+            this -> n = 0;
         }
         void inc(){
-            this -> n++;
+            this -> n = this -> n + 1;
         }
         int read(){
             return this -> n;
         }
     };
 
-    Counter f (Counter c){
-        Counter newCounter;
-        if (c.n = 0) newCounter.Counter(0);
-        else if (c -> n == 0) return 0;
+    Counter f (Counter in_counter){
+        Counter newCounter = newCounter.Counter();          // Perchè dà errore???
 
-        return newCounter:
+        int cn = in_counter.read();      // cn = c -> n
+
+        if (cn > 0) while (cn > 1) newCounter.inc();
+        else if (cn == 0) return newCounter;            // Riga di codice teoricamente superflua
+
+        return newCounter;
     }
 
 
