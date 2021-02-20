@@ -24,7 +24,8 @@ public class Gnomo {
     public Gnomo amicoGnomo;
     private boolean magico = false;             // private --> variabile modificabile solo tramite i metodi di QUESTA classe
     protected double altezza = 2.5;
-    public static final int ALTEZZA_MAX = 3; // static --> Variabile "globale" della vlasse ; final --> Non modificabile dopo la prima ssegnazione (const in C)
+    public static final int ALTEZZA_MAX = 3;    // static --> Variabile "globale" della vlasse
+                                                // final --> Non modificabile dopo la prima ssegnazione (const in C)
 
     // Costruttori
     Gnomo (String in_nome, int in_anni, Gnomo amico, double in_altezza){
@@ -44,7 +45,7 @@ public class Gnomo {
     // Metodi
     public static void makeKing(Gnomo in_gn){
         in_gn.nome = "Re " + h.ottieniNomeReale();
-        in_gn.magico = true;    // Si ricorda che solo la classe Gnomo può far riferimento a questo campo
+        in_gn.magico = true;                            // Si ricorda che solo la classe Gnomo può far riferimento a questo campo
     }
     public void diventaRe(){
         nome = "Re " + h.ottieniNomeReale();
