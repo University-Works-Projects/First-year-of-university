@@ -47,8 +47,25 @@ public class esC1_1 {
 
     final int length = 52;
 
+    int[] riempiArray (int[] in_a){
+        for (int i = 0; i < length; i++) in_a[i] = i;
+        return in_a;
+    }
+
     int[] es1_3 (int[] in_a){
+        int tmp1 = 0, tmp2 = 0, tmp3 = 0, limitSx = 0;
+        for (int i = 0; i < length; i++){
+            tmp1 = limitSx + Math.random() * length; // Il range del valore assegnato a tmp è )limitSx, length(
+            tmp2 = limitSx + Math.random() * length;
+            whiile ( tmp1 != tmp2){
+                tmp2 = limitSx + Math.random() * length;
+            }
+            tmp3 = in_a[(int)tmp1];
+            in_a[(int)tmp1] = in_a[(int)tmp2];
+            in_a[(int)tmp2] = tmp3;
+        }
 
     }
 
 }
+
