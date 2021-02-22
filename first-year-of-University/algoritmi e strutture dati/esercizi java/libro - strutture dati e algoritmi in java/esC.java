@@ -110,7 +110,7 @@ public class esC {
     */
 
     public static int[] es1_6 (int[] in_a, int[] in_b, int in_length){
-        int[] c = new int[in_length];   // Dichiarazione di un nuovo array contenente il 
+        int[] c = new int[in_length];                                       // Dichiarazione di un nuovo array contenente il prodotto scalare di in_a e in_b
         for (int i = 0; i < in_length; i++) c[i] = a[i] * b[i];
         return c;
     }
