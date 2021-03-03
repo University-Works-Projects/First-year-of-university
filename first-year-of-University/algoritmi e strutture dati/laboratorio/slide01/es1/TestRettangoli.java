@@ -1,3 +1,9 @@
+/*
+
+    An example of using the java classes
+
+*/
+
 import esRettangoli.Rettangolo1;
 import esRettangoli.Rettangolo2;
 
