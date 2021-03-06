@@ -1,0 +1,27 @@
+PRINCIPALI COMANDI TERMINALE LINUX
+
+cd directory --> Ci si sosta in quella cartella
+
+ls --> Mostra il contenuto disponibile
+
+cd .. --> Torna indietro, nella directory precedente
+
+chmod +x ./NomeFileDaEseguire --> Dai il permesso ad un file di essere eseguibile
+
+./NomeFileDaEseguire --> Esegue un file
+_____________________________________________________________________________
+
+Eseguire un programma scritto in C (e forsi in altri linguaggi):
+	- Vai (tramite terminale) nella cartella contenente il file
+	- Scrivere sul terminale: gcc -c nomeFile.c --> Creazione del file compilato nomeFile.o
+	- Scrivere sul terminale: gcc -o nomeFileEseguibile nomefile.o --> Creazione del file eseguibile privo di estensione
+	- Scrivere sul terminale: ./nomeFileEseguibile --> Esecuzione del programma eseguibile	_____________________________________________________________________________
+
+AGGIORNAMENTO VISUAL STUDIO CODE:
+Per aggiornare visual studio code copiare ed incollare nel terminale questo:
+wget https://vscode-update.azurewebsites.net/latest/linux-deb-x64/stable -O /tmp/code_latest_amd64.deb
+sudo dpkg -i /tmp/code_latest_amd64.deb
+
+_____________________________________________________________________________
+
+git branch -m
