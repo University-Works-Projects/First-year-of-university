@@ -1,9 +1,9 @@
-import java.util.Scanner;
-import java.lang.Math.*;
-
 /*
 	This program takes two words and print them in randomize order (chars including)
 */
+
+import java.util.Scanner;
+import java.lang.Math.*;
 
 public class Due_parole_rimescolate{
 
@@ -54,7 +54,7 @@ public class Es1LancioDelDado{
      	
      	System.out.println("The results of the rolls are...");    	
      	while (roll_times > 0){
-     		dice_result = 1 + Math.random() * (dice_faces); // Il range del valore del dado è [1, dice_faces}
+     		dice_result = 1 + Math.random() * (dice_faces); // Il range del valore del dado è [1, dice_faces]
      		System.out.println((int)dice_result); 
      		average += (int)dice_result;
      		roll_times--;

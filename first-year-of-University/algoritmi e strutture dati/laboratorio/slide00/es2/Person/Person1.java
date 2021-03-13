@@ -5,7 +5,6 @@ public class Person1 {
     private String name;
     private Citizenship citizenship;
 
-
     public Person1(String name, Citizenship in_citizenship){
         this.name = name;
         this.citizenship = in_citizenship;
