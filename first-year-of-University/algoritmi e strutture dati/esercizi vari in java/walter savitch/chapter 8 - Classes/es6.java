@@ -7,10 +7,10 @@ public class es6 {
     public int lot;
     public int discountedLot;
 
-    public es6 (int in_sellItems, int in_totalSellItems, int in_totalsDiscounted, int in_oneItemPrice int in_lot, int in_discountedLot) {
+    public es6 (int in_sellItems, int in_totalSellItems, int in_totalsDiscounted, int in_oneItemPrice, int in_lot, int in_discountedLot) {
         this.sellItems = in_sellItems;
-        this.totalSellItems = in_sellItems;
-        this.totalsDiscounted = in_totalsDiscounte;
+        this.totalSellItems = in_totalSellItems;
+        this.totalsDiscounted = in_totalsDiscounted;
         this.oneItemPrice = in_oneItemPrice;
         this.lot = in_lot;
         this.discountedLot = in_discountedLot;
@@ -18,9 +18,12 @@ public class es6 {
 
     public void updateSellItems (int in_sellItems) {
         if (in_sellItems > this.lot) {
+            this.sellItems += in_sellItems;
             this.oneItemPrice = (this.oneItemPrice / 100) * (100 - this. discountedLot);    // 1% of the original price * dicsountedPrice% = new scounted price 
+            this.totalSellItems +=  in_sellItems;
         } else {
-            this.sellItems = in_sellItems;           
+            this.sellItems = in_sellItems;
+            this.totalSellItems +=  in_sellItems;
         }
     }
 
@@ -31,6 +34,10 @@ public class es6 {
     }
 
     public static void main (String[] args) {
-        System.out.println("lol");
+        es6 tmp = new es6 (40, 45, 0, 10, 200, 30);
+        tmp.showSellItems();
+        System.out.println();
+        tmp.updateSellItems(5000);
+        tmp.showSellItems();
     }
 }
