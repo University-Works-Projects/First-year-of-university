@@ -1,5 +1,7 @@
 package es4;
 
+import java.time.LocalDate;
+
 public class Dog extends Animal{
     public Dog (int in_legs, String[] in_verse, String[] in_name, int in_dateOfBirth){
         this.legs = in_legs;
