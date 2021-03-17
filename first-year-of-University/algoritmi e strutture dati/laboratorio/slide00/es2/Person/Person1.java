@@ -1,4 +1,4 @@
-package es2.Person;
+package Person;
 
 public class Person1 {
     

@@ -12,7 +12,7 @@
     
 */
 
-import es2.Person.Person1;
+import Person.Person1;
 
 public class  testPerson{
     public static void main (String[] args){

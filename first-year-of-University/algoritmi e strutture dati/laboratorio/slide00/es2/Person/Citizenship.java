@@ -1,5 +1,7 @@
-package es2.Person;
+package Person;
 
 public enum Citizenship {
-    Italiana, EU, ExtraEU;
+    Italiana,
+    EU,
+    ExtraEU;
 }
