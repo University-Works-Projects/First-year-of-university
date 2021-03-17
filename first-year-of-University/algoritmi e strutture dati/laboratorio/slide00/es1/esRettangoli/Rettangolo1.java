@@ -1,4 +1,4 @@
-package es1.esRettangoli;
+package esRettangoli;
 
 public class Rettangolo1 {
     private float side, height;                             // lato lato ed altezza

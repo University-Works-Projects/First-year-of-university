@@ -1,4 +1,4 @@
-package es1.esRettangoli;
+package esRettangoli;
 
 public class Rettangolo2 {
     private float  perimeter, area;

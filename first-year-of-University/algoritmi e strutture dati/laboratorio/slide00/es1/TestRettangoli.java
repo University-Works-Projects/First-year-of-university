@@ -8,6 +8,7 @@ import esRettangoli.Rettangolo1;
 import esRettangoli.Rettangolo2;
 
 public class TestRettangoli {
+    
     public static void main(String[] args) {
         Rettangolo1 r1 = new Rettangolo1(20, 50);
         Rettangolo2 r2 = new Rettangolo2(80, 10);
