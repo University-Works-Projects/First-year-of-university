@@ -1,6 +1,9 @@
+// Circolar record
+
 package slide01;
 
-private final class Record {
+protected final class Record {
+    
     public Object element;
     public Comparable key;
     public Record next;
