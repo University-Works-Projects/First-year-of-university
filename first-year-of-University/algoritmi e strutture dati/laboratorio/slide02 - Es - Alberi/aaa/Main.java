@@ -4,7 +4,7 @@
     • L’algoritmo ritorna il riferimento alla radice dell’albero
  */
 
-package es01;
+package aaa;
 
 import TreeNode;
 
