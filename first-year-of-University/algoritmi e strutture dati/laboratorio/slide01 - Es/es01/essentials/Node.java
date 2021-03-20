@@ -1,6 +1,6 @@
 // Monodirection record
 
-package essentials;
+package es01.essentials;
 
 public final class Node {
     
