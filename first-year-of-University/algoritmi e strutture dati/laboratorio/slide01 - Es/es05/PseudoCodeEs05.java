@@ -1,4 +1,5 @@
 /*  EXERCISES TEXT (Esame 11/09/2020 turno I)
+    
     Si scriva una procedura ricorsiva che data una lista di interi
     monodirezionale, la modifichi sostituendo ogni valore pari
     con il doppio e replicando due volte gli elementi dispari
@@ -6,7 +7,12 @@
     • Esempi:
     • L = 4; 6; 7; 13; 2; 5, allora si ha L = 8; 12; 7; 13; 13; 4; 5;
     • L = 14; 2; 17; 3; 15, allora si ha L = 28; 4; 17; 17; 3; 15; 15;
+
 */
+
+// LIST'S GRAMMAR:   L ::= [] | X : L
+// LIST'S GRAMMAR:   L ::= [] | X : L
+// LIST'S GRAMMAR:   L ::= [] | X : L
 
 /*  PSEUDOCODE simil haskell
 
@@ -38,7 +44,7 @@ es05 (x : l) =
 
 
 
-/*  Funzioni sviuppate ma superflue
+/*  Funzioni sviuppate rivelatesi poi superflue
 
 Problema 2:
     Data una lista l ritornare la quantità di volte che un numero

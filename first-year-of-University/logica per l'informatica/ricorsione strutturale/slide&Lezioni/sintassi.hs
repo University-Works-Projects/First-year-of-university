@@ -1,4 +1,4 @@
--- Esercizi visti nelle slide 4 Sintassi
+-- Esercizi visti nella slide 4 Sintassi
 
 -- ESERCIZI RICORSIONE STRUTTURALE ED ALTRO
 

@@ -1,7 +1,5 @@
-{- LISTE 
+{- LISTE    -- LIST'S GRAMMAR:   L ::= [] | X : L
 
-    -- GRAMMATICA LISTE:   L ::= [] | X : L
-    
     -- SOTTOINSIEMI
 
         {- 1.1  UNIONE Di 2 LISTE
@@ -269,9 +267,7 @@
 
 
 
-{- ALBERI
-
-    -- GRAMMATICA ALBERI:   T ::= Int int | Node T T
+{- ALBERI   -- TREE'S GRAMMAR:   T ::= Int int | Node T T
 
     -- MONOTONIA CRESCENTE DELLE FOGLIE (sx -> dx)
         -- Es:  Node (Node (Int 2) (Int 3)) (Int 4)

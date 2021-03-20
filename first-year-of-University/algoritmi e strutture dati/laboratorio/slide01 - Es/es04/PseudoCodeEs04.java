@@ -1,4 +1,5 @@
 /*  EXERCISES TEXT
+    
     Si scriva una procedura ricorsiva che data una lista L di
     interi, la modifichi eliminando ogni elemento pari e
     replicando ogni elemento dispari tante volte quanti sono
@@ -7,7 +8,12 @@
     3; 5; 5; 5; 5.
     • Scrivere lo pseudocodice della procedura nel caso di lista 
     concatenata monodirezionale
+
 */
+
+// LIST'S GRAMMAR:   L ::= [] | X : L
+// LIST'S GRAMMAR:   L ::= [] | X : L
+// LIST'S GRAMMAR:   L ::= [] | X : L
 
 /*  PSEUDOCODE simil haskell
 
