@@ -1,12 +1,11 @@
-/*  EXERCISES TEXT
-    Si scriva una procedura ricorsiva che data una lista L di
-    interi, la modifichi eliminando ogni elemento pari e
-    replicando ogni elemento dispari tante volte quanti sono
-    gli elementi pari che lo precedono
-    • Esempio: L = 4; 6; 7; 3; 2; 5, allora si ha L = 7; 7; 7; 3; 3; 
-    3; 5; 5; 5; 5.
-    • Scrivere lo pseudocodice della procedura nel caso di lista 
-    concatenata monodirezionale
+/*  EXERCISES TEXT (Esame 11/09/2020 turno I)
+    Si scriva una procedura ricorsiva che data una lista di interi
+    monodirezionale, la modifichi sostituendo ogni valore pari
+    con il doppio e replicando due volte gli elementi dispari
+    maggiori di 10.
+    • Esempi:
+    • L = 4; 6; 7; 13; 2; 5, allora si ha L = 8; 12; 7; 13; 13; 4; 5;
+    • L = 14; 2; 17; 3; 15, allora si ha L = 28; 4; 17; 17; 3; 15; 15;
 */
 
 /*  PSEUDOCODE simil haskell
@@ -15,23 +14,23 @@ isEven [] = null        // Case not defined
 isEven x = x % 2 == 0 
 
 Problema 2:
-    Data una lista l ritornare il primo valore dispari
+    Dato un valore dispari x ritornare x se x < 10, oppure due volte x.
 
     Esempio:
-        (2 : 4 : 5 : 2 : 7 : []) = 5
-        (3 : 2 : 1 : []) = 3
+    3 = 3
+    13 = 13 : 13
 
-firstOddNumber [] = []
-firstOddNumber (x : l) =
-    if x % 2 == 0
-        then firstOddNumber l
-    else x
+oddCase [] = []
+oddCase x =
+    if x < 10
+        then x
+    else x : x
 
-es04 [] = []
-es04 (x : l) =
+es05 [] = []
+es05 (x : l) =
     if isEven x
-        then (firstOddNumber l) : es04 l
-    else x : es04 l
+        then 2 * x : es05 l
+    else oddCase x : es05 l
 
 */
 
