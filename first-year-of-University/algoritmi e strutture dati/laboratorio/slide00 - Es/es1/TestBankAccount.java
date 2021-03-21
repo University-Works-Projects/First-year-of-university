@@ -13,7 +13,7 @@
  * saldo di ognuna.
 */
 
-package es1;
+package es00_es01;
 
 public class TestBankAccount {
 
