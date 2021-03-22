@@ -13,7 +13,7 @@
 
     /*  PSEUDOCODE similar Java
 
-    // Costro computazionale Θ(n) dove n = numero di note di in_tree
+    //Costro computazionale Θ(n) dove n = numero di note di in_tree
 
     Si assuma che:
         in_tree.isLeaf() --> Ritorni true sse l'albero è giunto alla foglia
