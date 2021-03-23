@@ -1,4 +1,4 @@
-public class TryCatchTest {
+public class TryCatchFinallyTest {
 
     public static void main (String[] args) {
 
@@ -22,7 +22,9 @@ public class TryCatchTest {
         } catch (IllegalArgumentException error) {
             System.out.println(error.getMessage());                 // Se viene eseguito il throw permette di stampare il messaggio di quest'ultimo
             System.out.println("Istruzioni catch 2 ...");
-        } 
+        } finally {                                                 // Il blocco di istruzioni finally viene eseguito una volta comple
+            System.out.println("Istruzioni finally ...");
+        }
         
 
 
