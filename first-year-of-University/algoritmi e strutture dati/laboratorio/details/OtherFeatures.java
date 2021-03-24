@@ -1,13 +1,13 @@
 /*
 
+    # Accedere alla lunghezza di una dimensione di array multidimensionali:
+        int x[][][] = new int[a][b][c];
+        System.out.println(x.length + " " + x[1].length + " " + x[0][1].length);
+                            ^^^^^^^	         ^^^^^^^^	          ^^^^^^^^^^^
+                               a 	             b		             c
+
     # Generazione di numeri casuali:
     var = 1 + Math.random() * (max); // Il range di var è: max >= var >= 1
-
-    # Accedere alla lunghezza di una dimensione di array multidimensionali:
-        int a[][][] = new int[a][b][c];
-        System.out.println(x.length + " " + x[1].length + " " + x[0][1].length);
-                        ^^^^^^	     ^^^^^^^^	          ^^^^^^^^^^^
-                            a 		b		       c
 
     # Come prendere diversi tipi di input:
         UserInput.nextBoolean() 	boolean
