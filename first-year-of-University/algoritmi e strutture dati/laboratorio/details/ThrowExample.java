@@ -1,3 +1,9 @@
+/*
+    N.B: Il messaggio del comando throw non è tanto un output del programma per l'utente, ma più
+    un messaggio del programma per il programmatore con delle informazioni sull'eccezzione generata
+
+ */
+
 import java.util.Scanner;
 import java.lang.Math.*;
 
