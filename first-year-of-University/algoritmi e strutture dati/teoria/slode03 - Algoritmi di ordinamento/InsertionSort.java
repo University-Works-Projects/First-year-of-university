@@ -15,8 +15,25 @@
 import java.util.Scanner;
 
 public class InsertionSort {
-    
+
     public static void selectionSort (int[] in_array) {
+        for (int i = 0; i < in_array.length; i++) {
+            for (int k = i + 1; k < in_array.length; k++) {
+                if (in_array[i] > in_array[k]) {
+                    int tmp = in_array[i];          // tmp = i
+                    in_array[i] = in_array[k];  // i = k
+                    in_array[k] = tmp;          // k = tmp
+                }
+            }
+
+            // Stampa dell'array
+            for (int j = 0; j < in_array.length; j++) {
+                System.out.print (in_array[j]);
+            }
+        }
+    }
+    
+    public static void insertionSort (int[] in_array) {
         System.out.println ("Array in input:");
         for (int j = 0; j < in_array.length; j++) {
             System.out.print (in_array[j]);
