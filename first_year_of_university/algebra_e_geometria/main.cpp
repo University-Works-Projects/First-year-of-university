@@ -1,4 +1,5 @@
 #include "Matrix.hpp"
+#include "matricesOperaion.hpp"
 
 #include <iostream>
 
@@ -32,9 +33,10 @@ int main () {
   cout << "Righe:   "; cin >> m;
   cout << "Colonne: "; cin >> n;
 
-  Matrix newMatrix = Matrix (m, n);
+  Matrix newMatrix = Matrix (m, n, true);
   newMatrix.printMatrix();
   cout << newMatrix.isInScale();
+
 
 
   return 0;

@@ -1,6 +1,11 @@
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 
 using namespace std;
+
+#define LIMIT 20
+// Sistema pivot
 
 class Matrix {
 private:
@@ -19,24 +24,55 @@ private:
         return matrix;
     }
 
+    int** casualGeneration (int in_m, int in_n) {
+        int** matrix = 0;
+        matrix = new int*[in_m];
+
+        for (int r = 0; r < in_m; r++) {
+            matrix[r] = new int[in_n];
+            for (int c = 0; c < in_n; c++) {
+                srand (time (NULL));                // Inizializza la generazione di numeri casuali
+                matrix[r][c] = rand() % 10;         // Genera numeri compresi tra 0 e LIMIT
+            }
+        }
+        return matrix;
+    }
+
+    bool onlyZeroInRow (int row[], int in_n) {
+        for (int c = 0; c < in_n - 1; c++) {
+            if (row[c] == 0) return true;
+        }
+        return false;
+    }
+
 protected:
     int m;
     int n;
     int** matrix;
     Matrix* next;
-
+    
 public:
-    Matrix (int in_m, int in_n, Matrix* in_next) {
+    Matrix (int in_m, int in_n, Matrix* in_next, bool in_zeroMatrix) {  // Crea matrice con collegamento
         this -> m = in_m;
         this -> n = in_n;
-        this -> matrix = createMatrix (in_m, in_n);
+        if (in_zeroMatrix) this -> matrix = setZero (in_m, in_n);
+        else this -> matrix = createMatrix (in_m, in_n);
         this -> next = in_next;
     }
 
-    Matrix (int in_m, int in_n) {
+    Matrix (int in_m, int in_n, bool in_zeroMatrix) {                 // Crea matrice collegata a null (singolo elemento)
         this -> m = in_m;
         this -> n = in_n;
-        this -> matrix = createMatrix (in_m, in_n);
+        if (in_zeroMatrix) this -> matrix = setZero (in_m, in_n);
+        else this -> matrix = createMatrix (in_m, in_n);
+        this -> next = NULL;
+    }
+
+    Matrix (int in_m, int in_n, bool in_zeroMatrix, bool in_casualGeneration) {     // Crea matrice con elementi casuali
+        this -> m = in_m;
+        this -> n = in_n;
+        if (in_casualGeneration) this -> matrix = casualGeneration (in_m, in_n);
+        else this -> matrix = createMatrix (in_m, in_n);
         this -> next = NULL;
     }
 
@@ -48,6 +84,21 @@ public:
 
     Matrix* getNext () { return this -> next; }
 
+    void setCell (int in_m, int in_n, int in_newVal) {
+        this -> matrix[in_m][in_n] = in_newVal;
+    }
+
+    int** setZero (int in_m, int in_n) {
+        int** matrix = 0;
+        matrix = new int*[in_m];
+
+        for (int r = 0; r < in_m; r++) {
+            matrix[r] = new int[in_n];
+            for (int c = 0; c < in_n; c++) matrix[r][c] = 0;
+        }
+        return matrix;
+    }
+
     void printMatrix () {
         for (int r = 0; r < this -> m; r++) {
             for (int c = 0; c < this -> n; c++) cout << " " << this -> matrix[r][c];
@@ -57,10 +108,10 @@ public:
     }
 
     bool isInScale () {
-        int firstNumPos = -1, zeroCounter;          // Il punto coi valori minori è (0,0)
+        int firstNumPos = -1, zeroCounter = 0;      // Il punto coi valori minori è (0,0)
         bool onlyZero = false;                      // Per gestire il caso in cui la matrice per essere in scala debba avere solo righe (da una certa in poi) con solo 0
         for (int r = 0; r < this -> m; r++) {
-            if (onlyZero) {
+            if (onlyZero) {                             // Caso in cui bisogna avere solo righe con soli zero
                 for (int c = 0; c < this -> n; c++) {
                     if (this -> matrix[r][c] != 0) {
                         cout << "Matrice NON in scala." << endl;   
@@ -89,12 +140,17 @@ public:
         return true;
     }
 
-    int getPivot (){
+    int getPivot () {
         if (isInScale() == false) {
-            cout << "Matrice non in scala -> Nessun pivot.";
+            cout << "Matrice non in scala -> Nessun pivot.\nRitorno -1";
             return -1;
         } else {
-            
+            int pivotCounter = 0;      // Il punto coi valori minori è (0,0)
+            for (int r = 0; r < this -> m; r++) {
+                if (onlyZeroInRow (this -> matrix[r], this -> n)) pivotCounter++;           // Controllare se passa l'array corretto
+            }
+
+            return pivotCounter;
         }
     }
 
