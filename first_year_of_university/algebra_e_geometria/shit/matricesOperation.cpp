@@ -5,9 +5,9 @@
 
 using namespace std;
 
-Matrix matricesSum (Matrix in_m1, Matrix in_m2) {
+Matrix sumMatrices (Matrix in_m1, Matrix in_m2) {
     if (in_m1.getM() != in_m2.getM() || in_m1.getN() != in_m2.getN()) {
-        cout << "Somma impossibile. Hai inserito matrici con dimensioni differenti.\nRitorno la prima matrice inserita.";
+        cout << "Somma impossibile. Hai inserito due matrici con dimensioni differenti.\nRitorno la prima matrice inserita.";
         return in_m1;
     }
     Matrix sumMatrix = Matrix (in_m1.getM(), in_m1.getN(), true, false);

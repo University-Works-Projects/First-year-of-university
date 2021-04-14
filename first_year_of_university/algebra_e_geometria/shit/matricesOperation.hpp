@@ -1,3 +1,3 @@
 #include "Matrix.hpp"
 
-Matrix matricesSum (Matrix in_m1, Matrix in_m2);
+Matrix sumMatrices (Matrix in_m1, Matrix in_m2);

@@ -39,6 +39,18 @@ private:
         return matrix;
     }
 
+    int** zeroGeneration () {
+        int** matrix = 0;
+        matrix = new int*[this -> m];
+
+        for (int r = 0; r < this -> m; r++) {
+            matrix[r] = new int[this -> n];
+            for (int c = 0; c < this -> n; c++) matrix[r][c] = 0;
+        }
+        cout << "Matrice settata a 0" << endl;
+        return matrix;
+    }
+
     bool onlyZeroInRow (int row[]) {
         for (int c = 0; c < this -> n; c++) {
             if (row[c] != 0) return false;
@@ -58,7 +70,7 @@ public:
             this -> m = in_m;
             this -> n = in_n;
             if (in_casualGeneration) this -> matrix = casualGeneration (in_m, in_n);
-            else if (in_zeroMatrix) this -> matrix = setZero (in_m, in_n);
+            else if (in_zeroMatrix) this -> matrix = zeroGeneration ();
             else this -> matrix = createMatrix (in_m, in_n);
             this -> next = in_next;
         } else {
@@ -71,7 +83,7 @@ public:
             this -> m = in_m;
             this -> n = in_n;
             if (in_casualGeneration) this -> matrix = casualGeneration (in_m, in_n);
-            else if (in_zeroMatrix) this -> matrix = setZero (in_m, in_n);
+            else if (in_zeroMatrix) this -> matrix = zeroGeneration ();
             else this -> matrix = createMatrix (in_m, in_n);
             this -> next = NULL;
         } else {
@@ -92,18 +104,15 @@ public:
         this -> matrix[in_m][in_n] = in_newVal;
     }
 
-    int** setZero (int in_m, int in_n) {
-        int** matrix = 0;
-        matrix = new int*[in_m];
-
-        for (int r = 0; r < in_m; r++) {
-            matrix[r] = new int[in_n];
-            for (int c = 0; c < in_n; c++) matrix[r][c] = 0;
+    void setZero () {
+        for (int r = 0; r < this -> m; r++) {
+            for (int c = 0; c < this -> n; c++) this -> matrix[r][c] = 0;
         }
-        return matrix;
+        cout << "Matrice settata a 0" << endl;
     }
 
     void printMatrix () {
+        cout << endl;
         for (int r = 0; r < this -> m; r++) {
             for (int c = 0; c < this -> n; c++) {
                 cout << " " << this -> matrix[r][c];
@@ -148,7 +157,7 @@ public:
 
     int getPivot () {
         if (isInScale() == false) {
-            cout << "Matrice non in scala -> Nessun pivot.\nRitorno -1";
+            cout << "Matrice non in scala -> Nessun pivot: ritorno -1" << endl;
             return -1;
         } else {
             int pivotCounter = 0;      // Il punto coi valori minori è (0,0
