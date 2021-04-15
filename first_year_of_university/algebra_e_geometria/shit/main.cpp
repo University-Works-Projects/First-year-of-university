@@ -4,6 +4,20 @@
 
 using namespace std;
 
+void dd (Matrix in_matrix, int in_r1, int in_r2) {
+    int tmpArray[in_matrix.getN()];
+    for (int pos = 0; pos < in_matrix.getN(); pos++) {              // tmpArr = m1[r1]
+        tmpArray[pos] = in_matrix.getMatrix()[in_r1][pos];
+    }
+    for (int pos = 0; pos < in_matrix.getN(); pos++) {              // m1[r1] = m1[r2]
+        in_matrix.getMatrix()[in_r1][pos] = in_matrix.getMatrix()[in_r2][pos];
+    }
+    for (int pos = 0; pos < in_matrix.getN(); pos++) {              // m1[r2] = tmpArr
+        in_matrix.getMatrix()[in_r2][pos] = tmpArray[pos];
+    }
+    cout << "Cambio di righe effettuato." << endl;
+}
+
 int main () {
 
   int m = 0, n = 0;
@@ -14,10 +28,11 @@ int main () {
   Matrix matrix1 = Matrix (m, n, false, false);
   matrix1.printMatrix();
 
-  Matrix matrix2 = Matrix (m, n, false, false);
-  matrix2.printMatrix();
+  //Matrix matrix2 = Matrix (m, n, false, false);
+  //matrix2.printMatrix();
 
-  sumMatrices (matrix1, matrix2).printMatrix();
+  dd (matrix1, 0, 1);
+  matrix1.printMatrix();
 
 
 
