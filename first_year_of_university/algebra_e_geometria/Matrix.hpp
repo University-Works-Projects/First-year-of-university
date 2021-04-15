@@ -47,7 +47,7 @@ private:
             matrix[r] = new int[this -> n];
             for (int c = 0; c < this -> n; c++) matrix[r][c] = in_set;
         }
-        cout << "Matrice settata a 0" << endl;
+        //cout << "Matrice settata a 0" << endl;
         return matrix;
     }
 
