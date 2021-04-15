@@ -39,13 +39,13 @@ private:
         return matrix;
     }
 
-    int** zeroGeneration () {
+    int** nGeneration (int in_set) {
         int** matrix = 0;
         matrix = new int*[this -> m];
 
         for (int r = 0; r < this -> m; r++) {
             matrix[r] = new int[this -> n];
-            for (int c = 0; c < this -> n; c++) matrix[r][c] = 0;
+            for (int c = 0; c < this -> n; c++) matrix[r][c] = in_set;
         }
         cout << "Matrice settata a 0" << endl;
         return matrix;
@@ -65,31 +65,27 @@ protected:
     Matrix* next;
     
 public:
-    Matrix (int in_m, int in_n, Matrix* in_next, bool in_zeroMatrix, bool in_casualGeneration) {    // Crea matrice con collegamento
-        if (in_zeroMatrix == !in_casualGeneration) {
+    Matrix (int in_m, int in_n, Matrix* in_next, bool in_casualGeneration) {    // Crea matrice personalizzata o con valori casuali
+        if (in_m >= 0 && in_n >= 0) {
             this -> m = in_m;
             this -> n = in_n;
             if (in_casualGeneration) this -> matrix = casualGeneration (in_m, in_n);
-            else if (in_zeroMatrix) this -> matrix = zeroGeneration ();
             else this -> matrix = createMatrix (in_m, in_n);
             this -> next = in_next;
         } else {
-            cout << "Conflitto - Creazione matrice - Controllare input booleani nell'invocazione del costruttore.\nOggetto non creato.";
+            cout << "Conflitto - Creazione matrice - Controllare gli input M ed N.\nOggetto non creato.";
         }
     }
 
-    Matrix (int in_m, int in_n, bool in_zeroMatrix, bool in_casualGeneration) {                     // Crea matrice senza collegamento
-        if ((in_zeroMatrix && in_casualGeneration) == false) {
+    Matrix (int in_m, int in_n, Matrix* in_next, int in_set) {    // Crea matrice con soli valori = in_set
+        if (in_m >= 0 && in_n >= 0) {
             this -> m = in_m;
             this -> n = in_n;
-            if (in_casualGeneration) this -> matrix = casualGeneration (in_m, in_n);
-            else if (in_zeroMatrix) this -> matrix = zeroGeneration ();
-            else this -> matrix = createMatrix (in_m, in_n);
-            this -> next = NULL;
+            this -> matrix = nGeneration (in_set);
+            this -> next = in_next;
         } else {
-            cout << "Conflitto - Creazione matrice - Controllare input booleani nell'invocazione del costruttore.";
+            cout << "Conflitto - Creazione matrice - Controllare gli input M ed N.\nOggetto non creato.";
         }
-        
     }
 
     int getM () { return this -> m; }
