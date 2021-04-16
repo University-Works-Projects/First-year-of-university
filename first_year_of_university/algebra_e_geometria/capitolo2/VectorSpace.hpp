@@ -18,10 +18,6 @@ public:
         
     }
 
-    bool closedSum () {
-        int point1[this -> n];
-        for (int pos = 0; pos < this -> n; pos++) point1
-        this -> point;
-    }
+    
 
 };
