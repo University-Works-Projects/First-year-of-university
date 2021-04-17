@@ -23,7 +23,7 @@ public:
                 cout << "Inserire la coordinata numero " << pos << ": ";
                 cin >> this -> point[pos];
             }
-            cout << "SUCCESSO - Creazione del punto a " << this -> pointDimension << " dimensioni effettuata." << endl;
+            cout << "SUCCESSO - Creazione del punto a " << this -> pointDimension << " dimensioni effettuata." << endl << endl;
         }
     }
 
@@ -37,14 +37,14 @@ public:
             cout << "Dimensione " << pos << " - Coordinata: " << this -> point[pos] << endl;
     }
 
-    int pointSum () {
+    int sumPoint () {
         int res = 0;
         for (int pos = 0; pos < this -> pointDimension; pos++) res += this -> point[pos];
         cout << "Somma delle coordinare del punto: " << res << endl;
         return res;
     }
 
-    int pointMultiplication () {
+    int multiplicatePoint () {
         int res = 1;
         for (int pos = 0; pos < this -> pointDimension; pos++) res *= this -> point[pos];
         cout << "Prodotto delle coordinare del punto: " << res << endl;
