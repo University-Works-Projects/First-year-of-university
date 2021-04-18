@@ -1,4 +1,5 @@
 #include "VectorSpace.hpp"
+#include "VectorSubspace.hpp"
 #include <iostream>
 
 using namespace std;
@@ -13,7 +14,7 @@ VectorSpace pointsSum (VectorSpace in_v1, VectorSpace in_v2) {
     } else {
         VectorSpace res = VectorSpace (in_v1.getpointDimension(), true);        // Crea un vettore di n dimensioni con coordinate pari a 0
         for (int pos = 0; pos < in_v1.getpointDimension(); pos++)
-            res.point[pos] += in_v1.getPoint()[pos] + in_v2.getPoint()[pos];
+            res.pointCoordinates[pos] += in_v1.getPoint()[pos] + in_v2.getPoint()[pos];
         return res;
     }
 }
@@ -35,37 +36,10 @@ VectorSpace pointsMultiplication (VectorSpace in_v1, VectorSpace in_v2) {
     } else {
         VectorSpace res = VectorSpace (in_v1.getpointDimension(), true);        // Crea un vettore di n dimensioni con coordinate pari a 0
         for (int pos = 0; pos < in_v1.getpointDimension(); pos++)
-            res.point[pos] += in_v1.getPoint()[pos] + in_v2.getPoint()[pos];
+            res.pointCoordinates[pos] += in_v1.getPoint()[pos] + in_v2.getPoint()[pos];
         return res;
     }
 }
-
-// ESITO - funzione - causa malfunzionamento
-
-bool propertyTest_commutative_sum (VectorSpace in_v1) {
-    if (in_v1.getpointDimension() > 1) {
-        int a = 0, b = 0;
-        for (int e1 = 0; e1 < this -> pointDimension; e1++) {
-            a = this -> point[e1]; 
-            for (int e2 = 0; e2 < this -> pointDimension; e2++) {
-                b = this -> point[e2];
-                int res1 = a + b, res2 = b + a;
-                if (res1 !=res2) return false;
-            }
-        }
-        return true;
-    } else {
-        cout << "IMPOSSIBILE - propertyTest_commutative_sum() - Dimensioni del vettore < 1." << endl;
-        return false;
-    }
-}
-
-
-int r = 0
-int s = 0
-int r-s = r-s
-
-
 
 
 
