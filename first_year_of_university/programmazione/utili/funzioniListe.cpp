@@ -2,16 +2,32 @@
 
 using namespace std;
 
+/**
+ * FL0: Takes list's length from user and asks elements value. (head-insertion (new element are inserted on the list's top)).
+ * FL0.1: Takes list's length from user and generate random elements's value. (head-insertion oe (new element are inserted on the list's top)).
+ * FL1: Prints all elements from the inserted pointer onwards (dal puntatre inserito in poi).
+ * FL2: create a new element
+ * FL3: headInserto of an element
+ * FL3.1: bottomInser of an element
+ * FL4: Remove an element
+ * FL4.1: Bottom remove
+ * FL5: Return the average ole
+ * FL6: Return a reversed list
+ * 
+ * 
+ * 
+*/
+
 #define limit 10
 
-struct list{
+struct list {
 	int val;
 	list* next;
 };
 typedef list *p_list;
 
 // FL0: Takes list's length from user and asks elements value. (head-insertion (new element are inserted on the list's top)).
-p_list user_headGen_list(int n){
+p_list user_headGen_list (int n) {
 	p_list new_list, el;
 	new_list = NULL;
 	for (int i = 0; i < n; i++) {
@@ -24,7 +40,7 @@ p_list user_headGen_list(int n){
 }
 
 // FL0.1: Takes list's length from user and generate random elements's value. (head-insertion oe (new element are inserted on the list's top)).
-p_list radom_headGen_list(int n){
+p_list radom_headGen_list (int n) {
 	p_list new_list, el;
 	new_list = NULL;
 	for (int i = 0; i < n; i++) {
@@ -33,11 +49,11 @@ p_list radom_headGen_list(int n){
 		el -> next = new_list;
 		new_list = el;
 	}
-	return (new_list); ;
+	return (new_list);
 }
 
 // FL1: Prints all elements from the inserted pointer onwards (dal puntatre inserito in poi).
-void print_ole(p_list p){
+void print_ole (p_list p) {
 	while (p != NULL){
 		cout << "Element: " << p -> val;
 		cout << "  ;  Next: " << p -> next << endl;
@@ -46,7 +62,7 @@ void print_ole(p_list p){
 }
 
 // FL2: create a new element
-p_list newElement(int n){
+p_list newElement (int n) {
   p_list newList = new list;
   newList -> val = n;
   newList -> next = NULL;
@@ -54,33 +70,31 @@ p_list newElement(int n){
 }
 
 // FL3: headInserto of an element
-p_list headInsert(p_list in_list, int n){
-  p_list newEl = newElement(n);
+p_list headInsert (p_list in_list, int n) {
+  p_list newEl = newElement (n);
   if (in_list == NULL) return newEl;
   newEl -> next = in_list;
   return newEl; // Ritorna tutta la lista col nuovo elemento in testa
-
 }
 
 // FL3.1: bottomInser of an element
-p_list bottomInsert(p_list in_list, int n){
-  p_list head = in_list, new_el = newElement(n);
-  while (in_list -> next != NULL){
+p_list bottomInsert (p_list in_list, int n) {
+  p_list head = in_list, new_el = newElement (n);
+  while (in_list -> next != NULL) {
     in_list = in_list -> next;
   }
   in_list -> next = new_el;
   return head;
-
 }
 
 // FL4: Remove an element
-p_list remove(p_list in_list, int n){
+p_list remove (p_list in_list, int n) {
     if (in_list == NULL) return in_list;
     p_list head = in_list, pre_el = in_list, post_el = NULL;
     // Non serve controllare il primo elemento in quanto se in_list == NULL salta il ciclo e ritorna direttamente in_list
-    while (in_list != NULL){
-    	if (in_list -> val == n){
-			if (in_list == head){ 			    // Controllo qualora il primo elemento fosse in cima
+    while (in_list != NULL) {
+    	if (in_list -> val == n) {
+			if (in_list == head) { 			    // Controllo qualora il primo elemento fosse in cima
 				head = in_list -> next; 	    // head punta al secondo elemento della lista
 				delete in_list;  				// Il primo elemento della lista
 				in_list = head; 				// lista ed head sono di nuovo uguali
@@ -94,15 +108,14 @@ p_list remove(p_list in_list, int n){
 		in_list = in_list -> next;
 	}
 	return head;
-
 }
 
 // FL4.1: Bottom remove
-p_list bottom_remove(p_list in_list, int n){
+p_list bottom_remove (p_list in_list, int n) {
   p_list head = in_list, new_el = newElement(n);
 
   if (in_list == NULL) return in_list;
-	else if (in_list -> next == NULL){
+	else if (in_list -> next == NULL) {
 		delete in_list;
 		in_list = NULL;
 	} else {
@@ -114,18 +127,18 @@ p_list bottom_remove(p_list in_list, int n){
 }
 
 // FL5: Return the average ole
-double average_ole(p_list p){
+double average_ole (p_list p) {
 	double average = 0; int counter = 0;
-	while (p != NULL){
+	while (p != NULL) {
 		average += p -> val;
 		counter++;
 		p = p -> next;
 	}
-	return(average / counter);
+	return (average / counter);
 }
 
 // FL6: Return a reversed list.
-p_list reverse_list(p_list in_list){
+p_list reverse_list (p_list in_list) {
   p_list new_reversed_list = NULL, new_el = NULL;
   while (in_list != NULL) {
     new_el = new list;

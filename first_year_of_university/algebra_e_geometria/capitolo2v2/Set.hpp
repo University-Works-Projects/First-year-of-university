@@ -1,21 +1,22 @@
 #include <iostream>
+#include "listOperations.hpp"
 
 using namespace std;
 
 #define RELATIONS_ROW_SIZE 50
 
-
-
-struct Variabile{
-    char var;
-    Variabile* next;
-};
-typedef Variabile *p_pren;
-
-
-
 class Set {
 private:
+    char** createRelations (int in_vars) {
+        char** tmpRelations;
+        tmpRelations = new char*[in_vars];
+
+        for (int var = 0; var <= in_vars; var++) {
+            tmpRelations[var] = new char[RELATIONS_ROW_SIZE];
+            cin.getline(tmpRelations[var], RELATIONS_ROW_SIZE);     // Si prende in input la relazione che definisce il valore di una coordinata
+        }
+        return tmpRelations;
+    }
 
     /*
     char** createRelations2 (int in_vars) {
@@ -28,16 +29,6 @@ private:
     }
     */
 
-    char** createRelations (int in_vars) {
-        char** tmpRelations;
-        tmpRelations = new char*[in_vars];
-
-        for (int var = 0; var <= in_vars; var++) {
-            tmpRelations[var] = new char[RELATIONS_ROW_SIZE];
-            cin.getline(tmpRelations[var], RELATIONS_ROW_SIZE);     // Si prende in input la relazione che definisce il valore di una coordinata
-        }
-        return tmpRelations;
-    }
 
 protected:
     int dimension;
@@ -47,6 +38,7 @@ protected:
 public:
     Set () {
         cout << "Inserire il numero di dimensioni dell'insieme: "; cin >> this -> dimension;
+        
         this -> coordinatesValue[this -> dimension];    // Creazione dell'array vuoto contenente i valori delle variabili
         
         this -> relations = createRelations (this -> dimension);
@@ -63,9 +55,19 @@ public:
 
     void printRelations () {
         for (int var = 0; var <= this -> dimension; var++) {
-            cout << this -> relations[var];     // Stampa l'intera riga relations[vars]
+            cout << "Relazione coordinata n." << var << ": " << this -> relations[var] << endl;     // Stampa l'intera riga relations[vars]
+        }
+    }
+
+    void assegaValore () {
+        for (int relation = 0; relation < this -> dimension; relation++) {
+            for (int var = 0; var < RELATIONS_ROW_SIZE; var++) {
+                this -> relations[relation][var];
+
+            }
         }
     }
 
 };
+
 
