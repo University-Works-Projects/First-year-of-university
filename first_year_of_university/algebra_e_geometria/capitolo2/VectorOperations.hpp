@@ -40,8 +40,36 @@ VectorSpace pointsMultiplication (VectorSpace in_v1, VectorSpace in_v2) {
     }
 }
 
+// ESITO - funzione - causa malfunzionamento
+
+bool propertyTest_commutative_sum (VectorSpace in_v1) {
+    if (in_v1.getpointDimension() > 1) {
+        int a = 0, b = 0;
+        for (int e1 = 0; e1 < this -> pointDimension; e1++) {
+            a = this -> point[e1]; 
+            for (int e2 = 0; e2 < this -> pointDimension; e2++) {
+                b = this -> point[e2];
+                int res1 = a + b, res2 = b + a;
+                if (res1 !=res2) return false;
+            }
+        }
+        return true;
+    } else {
+        cout << "IMPOSSIBILE - propertyTest_commutative_sum() - Dimensioni del vettore < 1." << endl;
+        return false;
+    }
+}
 
 
+int r = 0
+int s = 0
+int r-s = r-s
+
+
+
+
+
+// DA RIVEDERE
 int sum (VectorSpace in_v, int in_length) {
     if (in_length < 1) {
         cout << "IMPOSSIBILE - Somma tra i due vettori inseriti non consentita - Le dimensioni inserite sono < 1 - Ritorno -1." << endl;
@@ -52,7 +80,7 @@ int sum (VectorSpace in_v, int in_length) {
         return res;
     }
 }
-
+// DA RIVEDERE
 int multiplication (VectorSpace in_v, int in_length) {
     if (in_length < 1) {
         cout << "IMPOSSIBILE - Somma tra i due vettori inseriti non consentita - Le dimensioni inserite sono < 1 - Ritorno -1." << endl;

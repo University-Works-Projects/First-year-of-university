@@ -1,5 +1,5 @@
 #include "Matrix.hpp"
-#include "matricesOperation.hpp"
+#include "matricesOperations.hpp"
 
 #include <iostream>
 
