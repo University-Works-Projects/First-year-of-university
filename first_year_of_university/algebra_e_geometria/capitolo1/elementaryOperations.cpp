@@ -1,7 +1,5 @@
 #include "elementaryOperations.hpp"
 
-#include <iostream>
-
 using namespace std;
 
 // ELEMENTARY OPERATIONS FOR GAUSS'S ALGORITM
