@@ -7,7 +7,8 @@ using namespace std;
 int main () {
 
     Set s1 = Set ();
-    s1.printRelations();
+    //s1.printRelations();
+    s1.calculateCoordinates();
 
     /*
     p_var e1 = new Variable;

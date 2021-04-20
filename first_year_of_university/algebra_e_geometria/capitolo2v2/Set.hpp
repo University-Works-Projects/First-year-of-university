@@ -11,14 +11,14 @@ private:
         char** tmpRelations;
         tmpRelations = new char*[in_vars];
 
-        bool first = false, f = true;
+        bool first = false, ffirst = true;
         for (int var = -1; var < in_vars; var++) {
             tmpRelations[var] = new char[RELATIONS_ROW_SIZE];
             if (first) {
                 cout << "Inserire il valore della coordinata n." << var << ": ";
                 first = true;
             }
-            if (f) { f = false; first = true; }
+            if (ffirst) { ffirst = false; first = true; }
             cin.getline(tmpRelations[var], RELATIONS_ROW_SIZE);     // Si prende in input la relazione che definisce il valore di una coordinata
         }
         return tmpRelations;
@@ -36,6 +36,45 @@ private:
         return tmpRelations;
     }
 
+
+
+    bool syntaxControll (char* in_var) {
+        for (int pos = 0; in_var[pos] != '\0'; pos++) {
+            // % ()*+ - /01..9 = AB..Z ^ ab...z
+            if (!(in_var[pos] == '%' || (40 <= (int)in_var[pos] && (int)in_var[pos] <= 43) || in_var[pos] == '-' || (47 <= (int)in_var[pos] && (int)in_var[pos] <= 57) || in_var[pos] == '=' || (65 <= (int)in_var[pos] && (int)in_var[pos] <= 90) || in_var[pos] == '^' || (97 <= (int)in_var[pos] && (int)in_var[pos] <= 122))) return false;
+        }
+        return true;
+    }
+
+    bool isLetter (char in_var) {
+        if ((65 <= (int)in_var && (int)in_var <= 90) || (97 <= (int)in_var && (int)in_var <= 122)) return true;
+        else return false;
+    }
+
+    bool isInList (p_var in_list, char in_var) {
+        if (in_list == NULL) return false;
+        while (in_list != NULL) {
+            if (in_list -> var == in_var) return true;
+            in_list = in_list -> next;
+        }
+        return false;
+    }
+
+    // Controlla la sintassi della relazione di ogni coordinata, se corretta la interpreta ed assegna il valore alla relativa coordinata
+    void assigneCoordinatesValue (char* in_var) {
+        p_var head, var;
+        head = NULL;
+        for (int pos = 0; in_var[pos] != '\0'; pos++) {
+            if (isLetter (in_var[pos])) {
+                if (!(isInList (head, in_var[pos]))) head = create_headInsert (head, in_var[pos]);
+                
+                
+                
+                var = new Variable;
+            }
+
+        }
+    }
 
 protected:
     int dimension;
@@ -65,18 +104,20 @@ public:
             cout << "Relazione coordinata n." << var << ": " << this -> relations[var] << endl;     // Stampa l'intera riga relations[vars]
         }
     }
-
-    // Controlla la sintassi della relazione di ogni coordinata, se corretta la interpreta ed assegna il valore alla relativa coordinata
-    void assigneCoordinatesValue () {
-        for (int relation = 0; relation < this -> dimension; relation++) {
-            //for (int var = 0; var < RELATIONS_ROW_SIZE; var++) {
-            for (int var = 0; var != '\0'; var++) {
-                this -> relations[relation][var];
-
-
+    
+    void calculateCoordinates () {
+        for (int var = 0; var < this -> dimension; var++) {
+            if (syntaxControll (this -> relations[var])) {
+                assigneCoordinatesValue (this -> relations[var]);
+                cout << "Relazione n." << var << " scritta senza errori." << endl;
+            } else {
+                cout << "Erorre di sintassi nella relazione della coordinata n." << var << endl;
             }
         }
+        //chiama funzione
     }
+
+
 
 };
 
