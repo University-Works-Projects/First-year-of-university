@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Set.hpp"
-#include "listOperations.hpp"
+//#include "listOperations.hpp"
 
 using namespace std;
 
