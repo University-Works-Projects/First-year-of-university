@@ -1,4 +1,4 @@
-PRINCIPALI COMANDI TERMINALE LINUX
+dPRINCIPALI COMANDI TERMINALE LINUX
 
 cd directory --> Ci si sosta in quella cartella
 

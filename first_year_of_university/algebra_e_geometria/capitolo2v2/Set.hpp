@@ -102,11 +102,9 @@ protected:
 public:
     Set () {
         cout << "Inserire il numero di dimensioni dell'insieme: "; cin >> this -> dimension;
-        
-        this -> coordinatesValue[this -> dimension];    // Creazione dell'array vuoto contenente i valori delle variabili
-        
+        //this -> coordinatesValue[this -> dimension];    // Creazione dell'array vuoto contenente i valori delle variabili
         this -> relations = createRelations (this -> dimension);
-        
+
         /*
         this -> relations[this -> dimension][RELATIONS_ROW_SIZE];
         for (int var = 0; var < this -> dimension; var++) {
@@ -122,7 +120,7 @@ public:
             cout << "Relazione coordinata n." << var << ": " << this -> relations[var] << endl;     // Stampa l'intera riga relations[vars]
         }
     }
-    
+
     void calculateCoordinates () {
         p_var head = new Variable;
 
@@ -131,7 +129,7 @@ public:
                 //cout << "Relazione n." << var << " scritta senza errori." << endl;
 
                 for (int pos = 1; this -> relations[var][pos] != '\0'; pos++) {         // Per ogni carattere della relazione
-                    if (isLetter (this -> relations[var][pos])) {                       // Se è una lettera 
+                    if (isLetter (this -> relations[var][pos])) {                       // Se è una lettera
                         if (!(isInList (head, this -> relations[var][pos]))) {          // E non è  presente nella lista che ne tiene traccia
                             //varChar = newVar (this -> relations[var][pos], 0);          // La aggiunge
                             //varChar -> next = head;
@@ -159,5 +157,3 @@ public:
 
 
 };
-
-
