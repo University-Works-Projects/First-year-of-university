@@ -26,3 +26,8 @@ sudo dpkg -i /tmp/code_latest_amd64.deb
 _____________________________________________________________________________
 
 git branch -m
+_____________________________________________________________________________
+
+Se tentando di eseguire un file java, si ottiene il seguente errore: "java.lang.ClassNotFoundException: ...", puoi eseguire il programma
+in questione da terminale, tramite il comando:
+		java -cp "c:/location/of/file" YourProgram.extension
