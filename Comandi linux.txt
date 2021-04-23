@@ -28,6 +28,7 @@ _____________________________________________________________________________
 git branch -m
 _____________________________________________________________________________
 
-Se tentando di eseguire un file java, si ottiene il seguente errore: "java.lang.ClassNotFoundException: ...", puoi eseguire il programma
-in questione da terminale, tramite il comando:
-		java -cp "c:/location/of/file" YourProgram.extension
+Se tentando di eseguire un file java, si ottiene il seguente errore: "java.lang.ClassNotFoundException: ...":
+	- Puoi eseguire il programma in questione da terminale, tramite il comando:
+			java -cp "c:/location/of/file" YourProgram.extension
+	- Puoi risolvere l'errore inserendo nel medesimo programma tutto il percorso col comando package --> "package carellaPadre.precorso1.percorso2.ecc.cartellaDelProgramma;"
