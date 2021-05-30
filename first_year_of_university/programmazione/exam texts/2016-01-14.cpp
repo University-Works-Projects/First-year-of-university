@@ -6,9 +6,11 @@ using namespace std;
 
 #define STRING 30
 
-/* Es 1
+/*
+    Es 1
+
     Dire qual’è il valore restituito dalla seguente funzione, per i diversi valori di a e b. Giustificare la risposta.
-    
+
     int f (int a, int b){
         int *p;
         p = &a;
@@ -21,7 +23,7 @@ using namespace std;
 
     */
 
-    int f (int a, int b){           // Prende in input due interi
+    int f (int a, int b) {          // Prende in input due interi
             int *p;                 // p è un puntatore di interi
             p = &a;                 // p ora punta valore in locazione di memoria di a
             while (b > 0) {         // Finchè b > 0
@@ -35,7 +37,8 @@ using namespace std;
 
 
 
-/* Es 2
+/*
+    Es 2
     Un’automobile è caratterizzata da una marca, un modello, un prezzo e una velocità massima.
     Definire le strutture dati necessarie a rappresentare una lista di automobili.
     Definire inoltre una funzione che data una marca restiuisce il modello più economico di quella marca.
@@ -53,37 +56,38 @@ typedef Automobile *p_atm;
 // Si da per scontato che nella lista di macchine vi sia almeno un'auto del modello ricercato
 
 // be happy :D
-p_atm modelloEconomico (char in_marca[], p_atm in_lista){
+p_atm modelloEconomico (char in_marca[], p_atm in_lista) {
     p_atm head = in_lista;
     float prezzoMin = 0;
 
     while (in_lista != NULL && strcmp(in_lista -> marca, in_marca) != 0) in_lista = in_lista -> next;  // Si scorre la lista sino ad arrivare al primo elemento col modello di auto corrispondente a quello cercato
-    
+
     if (in_lista == NULL) return NULL;   // Se non vi sono macchine di quel modello il prezzo viene settato negativo
     else {
         prezzoMin = in_lista -> prezzo;     // Altrimenti il prezzo viene settato pari a quello della prima macchina di quel modello
 
-        while (in_lista != NULL){
+        while (in_lista != NULL) {
             if (strcmp(in_marca, in_lista -> marca) == 0 && in_lista -> prezzo < prezzoMin) prezzoMin = in_lista -> prezzo;    // Se si ha un'auto dello stesso modello e con un prezzo minore prezzoMin viene aggiornato
             in_lista = in_lista -> next;
         }
 
         int finish = 1;
 
-        while (head != NULL && finish == 1){
+        while (head != NULL && finish == 1) {
             if (strcmp(in_lista -> marca, in_marca) == 0 && in_lista -> prezzo == prezzoMin) return in_lista;
             in_lista = in_lista -> next;
         }
-        
+
         return in_lista;
-    
+
     }
 
 }
 
 
 
-/* Es 3 TESTO PER NULLA CHIARO
+/*
+    Es 3 TESTO PER NULLA CHIARO
     Definire una classe euroConverter, che contiene una somma di denaro,
     con un opportuno costruttore e 4 altri metodi:
     (a) inserisci la somma di denaro in lire;
@@ -93,48 +97,49 @@ p_atm modelloEconomico (char in_marca[], p_atm in_lista){
     Si assuma che 1 euro valga 1936.27 lire.
 */
 
-class EuroConverter{
+class EuroConverter {
 protected:
     float lire;
     float euro;    // sdd = somma di denario --> Quantità espressa in euro
 public:
-    EuroConverter(float in_lire, float in_euro){
+    EuroConverter (float in_lire, float in_euro) {
         this -> lire = in_lire;
         this -> euro = in_euro;
     }
 
-    void in_lire(float in_lire){
+    void in_lire (float in_lire) {
         this -> lire = in_lire;
         this -> euro = lireEuro(in_lire);
     }
 
-    void in_euro(float in_euro){
+    void in_euro (float in_euro) {
         this -> euro = in_euro;
         this -> lire = euroLire(in_euro);
     }
 
-    int read_lire(){
+    int read_lire () {
         return this -> lire;
     }
 
-    int read_euro(){
+    int read_euro () {
         return this -> euro;
     }
 
-    float euroLire(float in_euro){
+    float euroLire (float in_euro) {
         return (in_euro * 1936.27);
     }
-    float lireEuro(float in_lire){
+    float lireEuro (float in_lire) {
         return (in_lire / 1936.27);
     }
 };
 
 
 
-
 int main () {
 
     f (4, 5);
+
+    cout << "lol";
 
     return 0;
 

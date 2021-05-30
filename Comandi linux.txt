@@ -1,4 +1,4 @@
-dPRINCIPALI COMANDI TERMINALE LINUX
+PRINCIPALI COMANDI TERMINALE LINUX
 
 cd directory --> Ci si sosta in quella cartella
 
@@ -9,14 +9,28 @@ cd .. --> Torna indietro, nella directory precedente
 chmod +x ./NomeFileDaEseguire --> Dai il permesso ad un file di essere eseguibile
 
 ./NomeFileDaEseguire --> Esegue un file
-_____________________________________________________________________________
+_________________________________________________________________________________________________________________
 
-Eseguire un programma scritto in C (e forsi in altri linguaggi):
-	- Vai nella cartella contenente il file tramite terminale.
-	- Scrivere sul terminale: gcc -c nomeFile.c --> Creazione del file compilato nomeFile.o
-	- Scrivere sul terminale: gcc -o nomeFileEseguibile nomefile.o --> Creazione del file eseguibile privo di estensione
-	- Scrivere sul terminale: ./nomeFileEseguibile --> Esecuzione del programma eseguibile
+Vai tramite terminale, nella cartella contenente il programma da eseguire.
 
+Eseguire un programma scritto in:
+C:
+	- gcc -c nomeFile.c 												--> Creazione del file compilato nomeFile.o
+	- gcc -o nomeFileEseguibile nomefile.o 			--> Creazione del file eseguibile privo di estensione
+	- ./nomeFileEseguibile 											--> Esecuzione del programma eseguibile
+	DEBUG (atom): tasto destro sul file .o dopo averlo appena compilato
+
+C++:
+	- g++ -g nomeFile.cpp
+	- g++ -o nomeFileEseguibile nomeFile.o
+	- ./nomeFileEseguibile
+	DEBUG (atom): tasto destro sul file "a.out"
+
+JAVA:
+	- javac -cp ".." *.java																				--> compila tutti i file .java e per ogni di essi crea il corrispettivo file .class
+	- java -cp ".." mnkgame.MNKGame 3 3 3 mnkgame.GroupPlayer			--> Comando per far partire i bot del progetto
+	- rm -r *.class 																							--> Rimuove i file .class generati dalla compilazione
+	DEBUG (Eclipse): use Eclipse debugger
 _____________________________________________________________________________
 
 AGGIORNAMENTO VISUAL STUDIO CODE:

@@ -88,7 +88,8 @@ p_list remove (p_list in_list, int n) {
 
 // FL4.1
 p_list bottom_remove (p_list in_list, int n) {
-  p_list head = in_list, new_el = newElement(n);
+	//p_list head = in_list, new_el = newElement(n);
+  p_list head = in_list;
 
   if (in_list == NULL) return in_list;
 	else if (in_list -> next == NULL) {
@@ -99,6 +100,7 @@ p_list bottom_remove (p_list in_list, int n) {
 		delete in_list -> next;
 		in_list -> next = NULL;
 	}
+	return head;
 
 }
 
