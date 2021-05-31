@@ -51,7 +51,7 @@ bool atLeast_3goal (p_list in_list, char in_nameS[]) {
 */
 
 class Comparator {
-  
+
 private:
   int s;
   int d;
@@ -65,7 +65,7 @@ public:
   void set (char in_pos, int in_n) {
     if (in_pos == 'S') this -> s = in_n;
     else if (in_pos == 'D') this -> d = in_n;
-    else cout << "Errore nella posizione scelta";
+    else cout << "Errore, inserire una posizione valida.";
   }
 
   char getInfo () {
@@ -75,6 +75,8 @@ public:
   }
 
 };
+
+
 
 int main () {
 
