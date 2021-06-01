@@ -35,9 +35,12 @@ char** f2 (p_list in_list, int in_pos) {
   }
   if (in_list == NULL && pos != in_pos) return NULL;      // Se la posizone inserità va al di fuori della lista ritorna NULL
 
-  char winner[2][SIZE];
+  char** winner = new char*[2];
+  winner[0] = new char[SIZE];
   strcpy(winner[0], in_list -> partenza);
+  winner[1] = new char[SIZE];
   strcpy(winner[1], in_list -> arrivo);
+
   return winner;
 
 }
@@ -49,11 +52,32 @@ char** f2 (p_list in_list, int in_pos) {
   Sarebbe una buona scelta definire invece quadrato come classe padre e rettangolo come sua sottoclasse? Motivare la risposta.
 */
 
+class Rettangolo {
+protected:                  // protected E NON private perchè altrimenti la sottoclasse non potrebbe accedere ai lati
+  float base;
+  float altezza;
+public:
+  Rettangolo (float in_base, float in_altezza) {
+    this -> base = in_base;
+    this -> altezza = in_altezza;
+  }
+  float getPerimetro () { return 2 * (this -> base + this -> altezza); }
+  float getArea () { return this -> base * this -> altezza; }
+};
+
+class Quadrato: public Rettangolo {
+public:
+  Quadrato (float in_base, float in_altezza): Rettangolo (in_base, in_altezza) {}
+  float getArea () { return this -> base * this -> base; }
+  float getPerimetro () { return this -> base * 4; }
+};
+
+
 
 int main () {
 
-
-
+  Rettangolo r1 = Rettangolo (4, 5);
+  Rettangolo q1 = Quadrato (3, 3);
 
   return 0;
 

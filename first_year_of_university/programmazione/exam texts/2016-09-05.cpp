@@ -89,15 +89,10 @@ public:
     }
 };
 
-class Quadrato: Rettangolo{
+class Quadrato: public Rettangolo{
 protected:
 public:
-    Quadrato(float in_base, float in_altezza): Rettangolo(base, altezza){}
-    float area(){
-        return base * base;
-    }
-    float perimetro(){
-        return base * 4;
-    }
+    Quadrato (float in_base, float in_altezza): Rettangolo(base, altezza){}
+    float area () { return base * base; }
+    float perimetro () { return base * 4; }
 };
-

@@ -10,8 +10,7 @@ using namespace std;
 class Matrix {
 private:
     int** createMatrix (int in_m, int in_n) {
-        int** matrix = 0;
-        matrix = new int*[in_m];
+        int** matrix = new int*[in_m];
 
         for (int r = 0; r < in_m; r++) {
             matrix[r] = new int[in_n];
@@ -63,7 +62,7 @@ protected:
     int n;
     int** matrix;
     Matrix* next;
-    
+
 public:
     Matrix (int in_m, int in_n, Matrix* in_next, bool in_casualGeneration) {    // Crea matrice personalizzata o con valori casuali
         if (in_m >= 0 && in_n >= 0) {
@@ -89,7 +88,7 @@ public:
     }
 
     int getM () { return this -> m; }
- 
+
     int getN () { return this -> n; }
 
     int** getMatrix () { return this -> matrix; }
@@ -115,7 +114,7 @@ public:
             }
             cout << endl;
         }
-        cout << endl;     
+        cout << endl;
     }
 
     bool isInScale () {
@@ -125,7 +124,7 @@ public:
             if (onlyZero) {                             // Caso in cui bisogna avere solo righe con soli zero
                 for (int c = 0; c < this -> n; c++) {
                     if (this -> matrix[r][c] != 0) {
-                        cout << "Matrice NON in scala." << endl;   
+                        cout << "Matrice NON in scala." << endl;
                         return false;    // Se trova un numero diverso da zero la matrice NON è in scala
                     }
                 }
@@ -137,7 +136,7 @@ public:
                             break;                      // Si passa alla riga successiva
                         } else {
                             return false;            // Se il numero non è in una posizione "pià a dx" la matrice NON è in scala
-                            cout << "Matrice NON in scala." << endl; 
+                            cout << "Matrice NON in scala." << endl;
                         }
                     } else {
                         zeroCounter++;

@@ -46,3 +46,19 @@ Se tentando di eseguire un file java, si ottiene il seguente errore: "java.lang.
 	- Puoi eseguire il programma in questione da terminale, tramite il comando:
 			java -cp "c:/location/of/file" YourProgram.extension
 	- Puoi risolvere l'errore inserendo nel medesimo programma tutto il percorso col comando package --> "package carellaPadre.precorso1.percorso2.ecc.cartellaDelProgramma;"
+_____________________________________________________________________________
+
+C++ features:
+
+	Restituire dei dannati array da una funzione:
+	// Funzione che restituisce una matrice inizializzata a 0
+	int** createMatrix (int in_m, int in_n) {
+			int** matrix = new int*[in_m];
+
+			for (int r = 0; r < in_m; r++) {
+					matrix[r] = new int[in_n];
+					for (int c = 0; c < in_n; c++) matrix[r][c] = 0;
+			}
+			cout << endl;
+			return matrix;
+	}
