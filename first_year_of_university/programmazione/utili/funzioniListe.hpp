@@ -18,18 +18,18 @@ using namespace std;
  * FL4.1: Bottom remove
  * FL5: Return the average ole
  * FL6: Return a reversed list
- * 
- * 
- * 
+ *
+ *
+ *
 */
 
 #define limit 10
 
-struct list {
+struct List {
 	int val;
-	list* next;
+	List* next;
 };
-typedef list *p_list;
+typedef List *p_list;
 
 // FL0: Takes list's length from user and asks elements value. (head-insertion (new element are inserted on the list's top)).
 p_list user_headGen_list (int n);

@@ -7,7 +7,7 @@ p_list user_headGen_list (int n) {
 	p_list new_list, el;
 	new_list = NULL;
 	for (int i = 0; i < n; i++) {
-		el = new list;
+		el = new List;
 		cout << "Enter element value: "; cin >> el -> val;
 		el -> next = new_list;
 		new_list = el;
@@ -20,7 +20,7 @@ p_list radom_headGen_list (int n) {
 	p_list new_list, el;
 	new_list = NULL;
 	for (int i = 0; i < n; i++) {
-		el = new list;
+		el = new List;
 		el -> val = (rand() % limit); // srand(time(0))
 		el -> next = new_list;
 		new_list = el;
@@ -39,7 +39,7 @@ void print_ole (p_list p) {
 
 // FL2
 p_list newElement (int n) {
-  p_list newList = new list;
+  p_list newList = new List;
   newList -> val = n;
   newList -> next = NULL;
   return newList;
@@ -65,18 +65,18 @@ p_list bottomInsert (p_list in_list, int n) {
 
 // FL4
 p_list remove (p_list in_list, int n) {
-    if (in_list == NULL) return in_list;
-    p_list head = in_list, pre_el = in_list, post_el = NULL;
-    // Non serve controllare il primo elemento in quanto se in_list == NULL salta il ciclo e ritorna direttamente in_list
-    while (in_list != NULL) {
-    	if (in_list -> val == n) {
+  if (in_list == NULL) return in_list;
+  p_list head = in_list, pre_el = in_list, post_el = NULL;
+  // Non serve controllare il primo elemento in quanto se in_list == NULL salta il ciclo e ritorna direttamente in_list
+  while (in_list != NULL) {
+  	if (in_list -> val == n) {
 			if (in_list == head) { 			    // Controllo qualora il primo elemento fosse in cima
 				head = in_list -> next; 	    // head punta al secondo elemento della lista
-				delete in_list;  				// Il primo elemento della lista
-				in_list = head; 				// lista ed head sono di nuovo uguali
-			} else {							// Se non è al primo elemento
-				post_el = in_list -> next;	    // post_el punta all'elemento successivo
-				delete in_list;					// Cancella l'elemento corrente
+				delete in_list;  							// Il primo elemento della lista
+				in_list = head; 							// lista ed head sono di nuovo uguali
+			} else {												// Se non è al primo elemento
+				post_el = in_list -> next;	  // post_el punta all'elemento successivo
+				delete in_list;								// Cancella l'elemento corrente
 				pre_el -> next = post_el;
 			}
 		}
@@ -101,7 +101,6 @@ p_list bottom_remove (p_list in_list, int n) {
 		in_list -> next = NULL;
 	}
 	return head;
-
 }
 
 // FL5
@@ -119,7 +118,7 @@ double average_ole (p_list p) {
 p_list reverse_list (p_list in_list) {
   p_list new_reversed_list = NULL, new_el = NULL;
   while (in_list != NULL) {
-    new_el = new list;
+    new_el = new List;
     new_el -> val = in_list -> val;
     new_el -> next = new_reversed_list;
     new_reversed_list = new_el;
@@ -130,7 +129,12 @@ p_list reverse_list (p_list in_list) {
 
 int main() {
 
+	p_list t1 = new List; t1 -> val = 1; t1 -> next = NULL;
+	p_list t2 = new List; t2 -> val = 2; t2 -> next = t1;
+	p_list t3 = new List; t3 -> val = 3; t3 -> next = t2;
+	p_list t4 = new List; t4 -> val = 4; t4 -> next = t3;
 
+	print_ole (remove (t4, 2));
 
 	return(0) ;
 }
