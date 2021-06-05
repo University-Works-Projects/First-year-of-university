@@ -2,7 +2,6 @@
 // Assembly HACK code:
 // Exercise: Translate a C program (see INDEX.txt)
 // Assuming that RAM[0] = i and RAM[1] = j.
-// WORK
 
     @0
     D=M

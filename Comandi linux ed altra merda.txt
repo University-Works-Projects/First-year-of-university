@@ -48,6 +48,13 @@ Se tentando di eseguire un file java, si ottiene il seguente errore: "java.lang.
 	- Puoi risolvere l'errore inserendo nel medesimo programma tutto il percorso col comando package --> "package carellaPadre.precorso1.percorso2.ecc.cartellaDelProgramma;"
 _____________________________________________________________________________
 
+C/C++:
+	- Convertire un int in char:
+		int tre = 3;
+		char t = tre + '0';
+		cout << t;
+		OUTPUT: 3 (sottoforma di char ovviamente)
+
 C++ features:
 
 	Restituire dei dannati array da una funzione:

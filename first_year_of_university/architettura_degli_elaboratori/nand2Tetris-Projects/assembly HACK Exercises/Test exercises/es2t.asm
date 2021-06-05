@@ -1,7 +1,6 @@
 // es2 test
 // Assembly HACK code:
 // Exercise: Write a assembly HACK code that writes the numbers 0 to 9 in the first 10 RAM's location.
-// WORK
 
     @10
     D=A

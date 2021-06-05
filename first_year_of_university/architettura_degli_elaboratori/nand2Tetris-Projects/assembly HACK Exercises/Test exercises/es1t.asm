@@ -1,7 +1,6 @@
 // es1 test
 // Assembly HACK code:
 // Exercise: Translate a C program (see INDEX.txt)
-// WORK
 
     @2
     M=0     // Clear RAM[2]=0

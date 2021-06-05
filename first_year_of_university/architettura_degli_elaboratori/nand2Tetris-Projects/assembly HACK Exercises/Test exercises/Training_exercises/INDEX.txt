@@ -1,0 +1,29 @@
+BACKGROUND: ---------------------------------------------------------------------------------
+ - Load a constant: (D = value)
+	@13	// A = 17
+	D = A	// D = 17
+
+ - Load a value from RAM: (D = RAM[A])
+	@13	// A = 17
+	D = M	// D = RAM[17]
+
+ - Select a ROM's location (PC = A)
+	@13	// A = 17
+	0;JMP	// Put 17 in PC, so the next instruction that will be executed is ROM[17]
+
+#######################################################################################################################################################################################
+
+EXERCISES TEXTS:
+EXERCISE #1 V - RAM[2] = RAM[1] + RAM[0]
+EXERCISE #2 V - RAM[2] = RAM[1] x RAM[0] (RAM[n] not equal 0)
+EXERCISE #3 V - RAM[0..9] = [10,9,..,1] = RAM[0]=10, RAM[1]=9,..., RAM[9]=1
+EXERCISE #4 V - RAM[10] = RAM[9] + RAM[8] + ... + RAM[0]
+EXERCISE #5 V - RAM[2] = max(RAM[0],RAM[1])
+EXERCISE #6 V - RAM[10] = max(RAM[9],RAM[8],...,RAM[0])
+EXERCISE #7 V - RAM[2] = RAM[1] - RAM[0] - 2
+EXERCISE #8 V - RAM[2] = RAM[1] nand RAM[0] (nand bit a bit)
+EXERCISE #9 V - RAM[RAM[0],...,RAM[1]] = 1,...,1 (Assuming RAM[1] > RAM[0] > 1)
+EXERCISE #10 V - RAM[2] = RAM[1]*(2^RAM[0])
+EXERCISE #11 V - RAM[2] = RAM[1]/RAM[0] (Integer division) - RAM[3] = RAM[1] mod RAM[0]
+
+#######################################################################################################################################################################################

@@ -1,4 +1,4 @@
-TEST EXERCISES
+TEST EXERCISES:
 
 EXERCISE #1 V - Transale C code
 
@@ -10,15 +10,18 @@ EXERCISE #1 V - Transale C code
         } else {
             j = j * 3;
         }
-        
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 EXERCISE #2 V - Write code
 
     Write a assembly HACK code that writes the numbers 0 to 9 in the first 10 RAM's location.
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 EXERCISE #3 V - Write code
 
     Write a assembly HACK code that writes the number 10 from RAM[40] to RAM[50]
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 EXERCISE #4 V - Transale C code
 
     Assuming that RAM[0] = i and RAM[1] = j.

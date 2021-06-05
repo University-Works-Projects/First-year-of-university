@@ -1,7 +1,6 @@
 // es2 test
 // Assembly HACK code:
 // Exercise: Write a assembly HACK code that writes the number 10 from RAM[40] to RAM[50].
-// WORK
 
     // RAM[52] used for take the memory address
     // RAM[51] used for counting how any times the loop will be executed

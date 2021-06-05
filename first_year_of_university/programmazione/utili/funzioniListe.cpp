@@ -127,6 +127,14 @@ p_list reverse_list (p_list in_list) {
   return new_reversed_list;
 }
 
+// FL7
+p_list listUnion (p_list in_list_1, p_list in_list_2) {
+    p_list tmp = in_list_1, head = tmp;
+    while (tmp -> next != NULL) tmp = tmp -> next;			// Si scorre fino al penultimo elemento
+    tmp -> next = in_list_2;
+    return head;
+}
+
 int main() {
 
 	p_list t1 = new List; t1 -> val = 1; t1 -> next = NULL;

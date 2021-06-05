@@ -16,9 +16,9 @@ using namespace std;
  * FL3.1: bottomInser of an element
  * FL4: Remove an element
  * FL4.1: Bottom remove
- * FL5: Return the average ole
- * FL6: Return a reversed list
- *
+ * FL5: Returns the average ole
+ * FL6: Returns a reversed list
+ * FL7: Returns the union of two lists
  *
  *
 */
@@ -61,6 +61,8 @@ double average_ole (p_list p);
 // FL6: Return a reversed list.
 p_list reverse_list (p_list in_list);
 
+// FL7: Returns the union of two lists
+p_list listUnion (p_list in_list_1, p_list in_list_2);
 
 
 #endif

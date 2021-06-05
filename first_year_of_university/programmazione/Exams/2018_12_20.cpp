@@ -31,7 +31,7 @@ void f1_r (int in_n) {
 }
 
 /*
-  Es 2 (punti 8)
+  Es 2 (punti 8)    NON PERFETTO
   (a) Definire una struttura “lista di studenti” i cui nodi contengono nome, cognome e numero di
       matricola(intero positivo) di uno studente.
   (b) Scrivere una funzione che prende una lista di studenti e ritorna la lista che contiene
@@ -84,7 +84,7 @@ void printe (p_list in_list) {
 }
 
 /*
-  Es 3 (punti 10)
+  Es 3 (punti 10)   NON PERFETTO
   Un segmento è caratterizzato da due punti sul piano cartesiano nel quadrante con x e y positivi.
     (a) Definire una classe segmento con:
         1. Un costruttore
