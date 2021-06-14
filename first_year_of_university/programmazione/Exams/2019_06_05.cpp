@@ -10,10 +10,34 @@ using namespace std;
 
 /*
   Es 2 (punti 10)
-  Scrivere  una funzione che prende in input una list di caratteri e restituisce
-  il numero di occorrenzw della stringa "amar" nella lista in input.
-
+  Scrivere  una funzione che prende in input una lista di caratteri e restituisce
+  il numero di occorrenze della stringa "amar" nella lista in input.
 */
+
+struct List {
+  char c;
+  List *next;
+};
+typedef List *p_list_1;
+
+int listLength (p_list_1 list) {
+  if (list == NULL) return 0;
+  else return 1 + listLength (list -> next);
+}
+
+int f1 (p_list_1 list) {
+  if (list == NULL || listLength (list) < 4) return 0;
+  int counter = 0;
+  while (list != NULL) {
+    if (list -> c == 'a')
+      if (list -> next -> c == 'm')
+        if (list -> next -> next -> c == 'a')
+          if (list -> next -> next -> next -> c == 'r')
+            counter++;
+    list = list -> next;
+  }
+  return counter;
+}
 
 
 /*
@@ -32,14 +56,15 @@ using namespace std;
 struct Nodo {
   int val;
   Nodo *next;
-};\
+};
 typedef Nodo *p_list;
 
 class mlista {
 protected:
   p_list lista;
-  int getLegth () {
-    p_list tmp = this -> lista; int counter = 0;
+  int getLength () {
+    int counter = 0;
+    p_list tmp = this -> lista;
     while (tmp != NULL) {
       counter++;
       tmp = tmp -> next;
@@ -54,11 +79,13 @@ public:
   bool checkmul (int in_n) {
     p_list tmp = this -> lista; int counter = 0;
     while (tmp != NULL) {
-      if (tmp -> val == in_n) counter++;
+      if (tmp -> val == in_n) {
+        counter++;
+        if (counter >= 2) return true;
+      }
       tmp = tmp -> next;
     }
-    if (counter >= 2) return true;
-    else return false;
+    return false;
   }
 
   void union_es3 (mlista in_oggetto) {                // union è una parola riservata
@@ -73,24 +100,30 @@ public:
 class mlistasomma: public mlista {
 protected:
   int somma;
+  bool isIn (int val, int arr[]) {
+    for (int i = 0; i < mlista::getLength(); i++) if (arr[i] == val) return true;
+    return false;
+  }
 public:
   mlistasomma (p_list in_list): mlista (in_list) {}
+
   int sum () {
-    int res = 0;
-    int length = mlista::getLegth(this -> lista) - 1;  // -1 perchè nel caso migliore c'è un solo elemento che si ripete
-    int copy[length];
     p_list tmp = this -> lista;
-    while (tmp != NULL) {
-      if (mlista:: checkmul(tmp -> val) == true) {              // Se l'elemento è prensente almeno 2 volte
-        copy[pos] = tmp -> val;
-        pos++;
-      } else res += tmp -> val
+    int copy[mlista::getLength()], sum = 0, counter = 0;
+    while (tmp != NULL) {                     // Somma TUTTI i valori della lista e salva in un'array i doppioni
+      if (mlista::checkmul (tmp -> val) && isIn(tmp -> val, copy) == false) {
+        copy[counter] = tmp -> val;
+        counter++;
+      }
+      sum += tmp -> val;
       tmp = tmp -> next;
     }
-    for (iny)
-
+    for (int i = 0; i < mlista::getLength(); i++) sum -= copy[i]; // Si eliminano i valori dei doppioni sommati più volte
+    return sum;
   }
-}
+
+
+};
 
 
 

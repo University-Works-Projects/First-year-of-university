@@ -28,8 +28,8 @@ void printArray (int in_a[], int in_length) {
 }
 
 
-/*
-  Es 2 (punti 10)   TESTO TROPPO POCO CHIARO -> SKIP
+/*TESTO TROPPO POCO CHIARO -> SKIP
+  Es 2 (punti 10)
   Si definisca il tipo di dato "pool di n sequenze ordinate", che consiste di n
   sequenze di interi, ordinate dal valore più grande a quello più piccolo (n è una costante
   del programma; le sequenze possono avere duplicati).
