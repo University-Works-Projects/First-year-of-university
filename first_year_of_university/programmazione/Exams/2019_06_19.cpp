@@ -10,6 +10,15 @@ using namespace std;
   duplicati, false altrimenti.
 */
 
+bool f1 (int arr[],int length) {
+  for (int i = 0; i < length; i++) {
+    for (int j = 0; j < length; j++) {
+      if (i != j && arr[i] == arr[j]) return true;
+    }
+  }
+  return false;
+}
+
 /*
   Es 2 (punti 3 + 7) - SKIP (esercizio sugli alberi)
 */
@@ -87,7 +96,7 @@ public:
             if (this -> am) this -> am = !(this -> am);
             else {
               this -> am = !(this -> am);
-              this -> ore = 0;s
+              this -> ore = 0;
             }
           }
         }
@@ -97,7 +106,14 @@ public:
 
 int main () {
 
-
+  /* Es 1
+  int arr[4];
+  arr[0] = 3;
+  arr[1] = 6;
+  arr[2] = 4;
+  arr[3] = 5;
+  cout << f1 (arr, 4);
+  */
 
   return 0;
 }
