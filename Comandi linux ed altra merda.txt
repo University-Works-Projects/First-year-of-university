@@ -57,15 +57,24 @@ C/C++:
 
 C++ features:
 
-	Restituire dei dannati array da una funzione:
-	// Funzione che restituisce una matrice inizializzata a 0
-	int** createMatrix (int in_m, int in_n) {
-			int** matrix = new int*[in_m];
+	Restituire dei dannati array bidimensionali da una funzione:
+		// Funzione che restituisce una matrice inizializzata a 0
+		int** createMatrix (int in_m, int in_n) {
+				int** matrix = new int*[in_m];
 
-			for (int r = 0; r < in_m; r++) {
-					matrix[r] = new int[in_n];
-					for (int c = 0; c < in_n; c++) matrix[r][c] = 0;
-			}
-			cout << endl;
-			return matrix;
-	}
+				for (int r = 0; r < in_m; r++) {
+						matrix[r] = new int[in_n];
+						for (int c = 0; c < in_n; c++) matrix[r][c] = 0;
+				}
+				cout << endl;
+				return matrix;
+		}
+
+	Restituire un array unidimensionale:
+		int* createArr (int length) {
+				int *arr = new int[length];
+				for (int i = 0; i < length; i++) {
+						arr[i] = 5;
+				}
+				return arr;
+		}

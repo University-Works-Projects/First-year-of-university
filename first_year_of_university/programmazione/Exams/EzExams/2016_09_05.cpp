@@ -72,8 +72,6 @@ public:
   float getPerimetro () { return this -> base * 4; }
 };
 
-
-
 int main () {
 
   Rettangolo r1 = Rettangolo (4, 5);
