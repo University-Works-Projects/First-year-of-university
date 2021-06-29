@@ -1,5 +1,5 @@
 Es 1
-   esercizio di un testo di cui non so la data.
+   Eesercizio di un testo di cui non so la data.
 
     Testo: ∀x.∃y.∀z.Q(f(y,z,x),x), ∀z(Q(z,g(a)) ⟾ p(z)) ⊢ ∃y,x.P(f(x,c,y))
 

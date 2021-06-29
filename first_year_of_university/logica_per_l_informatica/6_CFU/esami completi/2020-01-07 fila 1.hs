@@ -24,7 +24,7 @@
 
 {- Es 3
     
-    Testo da dimostrare: ∀A, ∀B, A∩B∪B = B
+    Dimostrare: ∀A, ∀B, A∩B∪B = B
 
 
 -}
@@ -125,11 +125,6 @@
             Per H e H1 ho
                 v*(A) = 0
 
-
-
-
-
-
 -}
 
 {- Es 8
@@ -186,7 +181,3 @@
 
 
 -}
-
-
-
-

@@ -6,7 +6,3 @@
 
     t ::= x | c | f^n (t1, ... , tn)
     F ::= P^n (t1, ... , tn) | ⊥ | T | ¬F | F ∧ F | F ∨ F | F ⇒ F | ∃x.F | ∀x.F
-
-
-
-

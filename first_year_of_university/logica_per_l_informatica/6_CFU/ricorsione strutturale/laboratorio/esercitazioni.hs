@@ -1,4 +1,4 @@
--- Es1 - ESPRESSIONI ARITMETICHE
+-- Es 1 - ESPRESSIONI ARITMETICHE
 
     {-
     Consegna esercizio: da scrivere
@@ -22,7 +22,7 @@
 
 ------------------------------------------------------------------------------------
 
--- Es2
+-- Es 2
 
     {-
     Consegna esercizio: da scrivere
@@ -34,7 +34,7 @@
 
 ------------------------------------------------------------------------------------
 
--- Es3
+-- Es 3
 
     {-
     Consegna esercizio: da scrivere

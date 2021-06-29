@@ -1,3 +1,5 @@
+-- Esercizio sull'induzione strutturale preso dal testo di un'esame della sessione invernale dell'anno 2020-2021
+
 {- TESTO ESERCIZIO:
    
     Si consideri la seguente grammatica per connotazioni algebriche: E ::= zero | E plus E | minus E | V(ℕ)

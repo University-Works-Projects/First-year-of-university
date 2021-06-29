@@ -4,19 +4,19 @@ Esercizi di programmazione:
 
         Codice da sviluppare:
 
-            int f(int z, int y){
-                return g(x+z,y);    // Equivalente a: return g(X+d+c,x)
+            int f (int z, int y) {
+                return g (x + z,y);    // Equivalente a: return g(X+d+c,x)
             }
-            int main(){
+            int main() {
                 int x, c;
-                return f(d+c,x);    
+                return f (d + c, x);    
             }
 
         Soluzione:
 
-            int main(){
+            int main() {
                 int m, c;
-                return g(x+d+c, m);
+                return g (x + d + c, m);
             }
 
 Esercizi di logica:

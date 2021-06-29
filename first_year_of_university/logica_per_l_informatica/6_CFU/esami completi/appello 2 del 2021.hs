@@ -1,4 +1,4 @@
-Es 3 Insiemistica
+{-  Es 3 Insiemistica
 
     Teoremi ed assiomi utilizzati:
         teorema dell'intersezione binaria: X ∈ A ∩ B ⇔ X ∈ A ∧ X ∈ B
@@ -28,8 +28,10 @@ Es 3 Insiemistica
             A ∪ B ≠ ∅
 
         qed
+
+-}
  
-Es 7 Induzione strutturale
+{-  Es 7 Induzione strutturale
 
     Considerate le seguenti funzioni su liste di numeri naturali definite dalla grammatica L ::= [] | ℕ :: L
 
@@ -77,8 +79,11 @@ Es 7 Induzione strutturale
             ovvero:
                 false =?= head x (x :: uniq l)
             ...
+-}
 
-Es 8 Formalizzazione testo + albero
+
+
+{-  Es 8 Formalizzazione testo + albero
 
     ¬A = i politici non partecipano
     ¬B = i tecnici non partecipano
@@ -106,8 +111,11 @@ Es 8 Formalizzazione testo + albero
                      ¬B                    D ⟾ ¬C
                     ———————————————————————————————— (∧i)
                         ¬B ∧ (D ⟾ ¬C)
+-}
 
-Es 10 Albero in logica del prim'ordine
+
+
+{- Es 10 Albero in logica del prim'ordine
 
     Dimostrare: ∃x.P(x), ∀x,y.(P(x) ⟾ Q(f(x),g(y))) ⊢ ∃x.Q(x,g(h(y)))
 
@@ -125,8 +133,8 @@ Es 10 Albero in logica del prim'ordine
       —————————————————————————————————————————— (∃e) --> [P(k)]
                 ∃x.Q(x,g(h(y)))
 
+-}
 
 
 
-
-⊢ ∀ ∃ ¬ V ∧ ⟾ ⊥    ∪ ∩ ∈ ∉ ∅ ≡ ⊂ ⊃ ⊆ ⊇ ← ➜ ⇔ —————————————
+-- ⊢ ∀ ∃ ¬ V ∧ ⟾ ⊥    ∪ ∩ ∈ ∉ ∅ ≡ ⊂ ⊃ ⊆ ⊇ ← ➜ ⇔ —————————————
