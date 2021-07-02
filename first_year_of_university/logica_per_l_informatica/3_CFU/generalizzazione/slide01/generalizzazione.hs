@@ -43,4 +43,3 @@
         -- In questo caso potrebbe sembrare che le due generalizzazioni siano equivalenti, ma le due esse differiscono
         -- nelle proprietà che "supportano", infatti come si evince dalla slide gen_conj non è associativa.
             
--}
