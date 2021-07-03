@@ -1,84 +1,57 @@
 -- Es 1
 
- -- Si consideri i seguenti due frammenti di codice:
+    -- Consegna
+        -- Considerare le seguenti due implementazioni di una funzione che inserisce in una coda tutti gli elementi di una lista data,
+        -- in ordine inverso, a meno che la coda non sia piena:
+        accoda1 queue [] = queue
+        accoda1 queue (x:l) =
+            if length queue == 10 then []       -- Se la coda è piena la si svuota
+            else accoda1 (x : queue) l
 
-    trova_sufficienti [] = []
-    trova_sufficienti (x : l) =
-        if x >= 18 then x : trova_sufficienti l
-        else trova_sufficienti l
+        -- Dove:
+            length [] = 0
+            length (x:l) = 1 + length l
 
-    trova_validi [] = []
-    trova_validi (y : v) =
-        if x < 0 || x > 30 then trova_validi v
-        else "ok" : trova_validi v
-{-
-    Rispondere alle seguenti domande:
-        1) Cosa calcola  trova_sufficienti (3 : 28 : 32 : 4 : []) ?
-        2) Cosa calcola trova_validi (-4 : 9 : 7 : 32 : []) ?
-        3) Trovare una generalizzazione del codice che abbia come istanze sia trova_sufficienti che trova_validi. La generalizzazione può essere espressa sia facendo prendere in input altre funzioni esplicitamente, sia attraverso un meccanismo di type classes
-        4) Mostrare una terza istanza che data una lista di numeri restituisca la lista ottenuta
-           dividendo per due i soli numeri pari contenuti nella lista in input.
-           Esempio:   dimezza (3 : 4 : 7 : 8 : 10 : []) = 2 : 4 : 5 : []
--}
-    -- Domanda 1 e 2 omesse
-    -- Domanda 3:
+        accoda2 (queue,len) [] = (queue,len)
+        accoda2 (queue,len) (x:l) =
+            if len < 10 then accoda2 (x : queue, len + 1) l
+            else ([], 0)                        -- Se la coda è piena la si svuota
 
-        -- Soluzione con la chiamata delle funzioni
+        {-
+            Rispondere alle seguenti domande:
 
-            -- Funzione generalizzante
-            gen_trova c b [] = []       -- condition (per gli if-else), binary (per una scelta binaria)
-            gen_trova c b (x : l) =
-                if c x then b x : gen_trova c b l
-                else gen_trova c b l
-
-            -- Istanza della prima funzione
-                trova_sufficienti l = gen_trova c1 id l
-                -- Dove:
-                    c1 x = x >= 18
-                    id x = x
-                -- e dunque:
-                    gen_trova c1 id [] = [] 
-                    gen_trova c1 id (x : l) =
-                        if c1 x then (id x) : gen_trova c1 id l
-                        else gen_trova c1 id l
+            1. I due codici usano implementazioni differenti di una coda.
+               Nel primo caso una coda è implementata come una lista, nel secondo caso come una coppia formata da una lista e dalla sua lunghezza
+               (per evitare di ricalcolare ogni volta la lunghezza delle coda).
+               Quali precondizioni devono soddisfare gli input delle due funzioni affinchè i due codici siano equivalenti?
+                   (es: (1.1) Applicate a code equivalenti, le due funzioni danno sempre lo stesso output o servono condizioni aggiuntive?
+                   (1.2) E sotto quali condizioni due code, una per ogni implementazione, sono equivalenti?)
                 
-            -- Istanza della seconda funzione
-                trova_validi l = gen_trova c2 b2 l
-                -- Dove:
-                    c2 x = (x < 0 || x > 30)!   -- Si nega così da poter invertire il costrutto dell'if con quello dell'else (per quanto riguarda trova_validi)
-                    b2 x = "ok"
-                -- e dunque:
-                    gen_trova c2 b2 [] = []
-                    gen_trova c2 b2 (x : l) =
-                        if c2 x then b2 : gen_trova c2 b2 l
-                        else gen_trova c2 b2 l
+            2. Scrivere una generalizzazione dei due codici usando passaggio esplicito di funzioni aggiuntive.
+               La generalizzazione deve permettere code di lunghezza massima qualsiasi, o anche assente.
+               Mostrare come si ottengono come istanze le due implementazioni precedenti.
 
-        -- Soluzione con l'uso di una type class
-            class trovaClass c b where
-                c: a -> Bool
-                b: a -> b       -- Si scrive che si ritorna un z per generalizzare l'output, in quanto (si assume) che z possa assumere qualsiasi valore
-            
-            gen_trova :: trovaClass a b => [a] => [b]
-            gen_trova [] = []
-            gen_trova (x : l) =
-                if c x then b x : gen_trova l
-                else gen_trova l
+            3. Riscrivere la generalizzazione del punto precedente usando type classes e istanze.
 
-            instance trovaClass int int where        -- Istanza di trova_sufficienti
-                c x = x >= 18
-                b x = x
-            
-            instance trovaClass int String where        -- Istanza di trova_validi
-                c x = (x < 0 || x > 30)!
-                b x = "ok"
+            4. Mostrare una terza istanza (come istanza di type class) dove la coda sia implementata attraverso una coppia (a,i) dove a sia un array
+               imperativo (mutabile) e i sia l'ultimo indice occupato dell'array.
+               Potete utilizzare la sintassi c per gli assegnamenti (es. a[3] = 4 assegna 4 nella quarta posizione dell'array)
+                
+            5. [bonus] Se non c'è già, aggiungere alla type class un'ulteriore funzione len che restituisca la lunghezza di una coda.
+               Quali assiomi devono soddisfare le funzioni specificate nella type class affinchè sia dimostrabile che per ogni coda q e per ogni
+               lista l, supponendo che la coda abbia sufficiente spazio,   len (accoda q l) = len q + length l ?
+        -}
 
-            {- Spiegazione: DA COMPLETARE DA COMPLETARE DA COMPLETARE DA COMPLETARE DA COMPLETARE DA COMPLETARE DA COMPLETARE DA COMPLETARE
-                Si "ricicla" quello che è stato fatto nella parte precedente:
-                    - I parametri della classe sono gli stessi della funzione generalizzante
-                    - I parametri in questione hann oi medesimi input ed output
-                    - La funzione generalizzante (definita separatamente dalla classe) gen_trova è definita allo stesso modo
-                    
-                    - Sostanzialmente si tratta di "spostare" le definizioni del codice generalizzato tramite chiamata esplicita
-            -}
+    -- Svolgimento
 
-    
+        -- Domanda 1
+            -- 1.1 BIsogna aggiungere alla seconda implementazione
+            -- 1.2 Le due code devono avere lunghezza <= 10
+
+        -- Domanda 2
+
+
+-- Es 2
+
+
+-- Es 3

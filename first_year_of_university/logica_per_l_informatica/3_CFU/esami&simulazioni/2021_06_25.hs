@@ -1,8 +1,9 @@
-{- Es 1
+-- Es 1
 
+    {-
     Considerate il seguente frammento di codice che legge da un database un elenco di dipendenti con i rispettivi volumi di vendita,
     seleziona il dipendente migliore e gli invia una mail di ringraziamento.
--}
+    -}
 
     thanks (dbname, password) = process (query_db (open_db (dbname, password), "SELECT * FROM dipendenti"), DUMMY)
 
@@ -13,7 +14,7 @@
 
     ringrazia (migliore) = send_mail (migliore.indirizzo_mail, "Sei stato il più bravo, grazie a te i proprietari hanno guadagnato di più, continua così!")
 
-{- 
+    {- 
     Dove:
         - Un dipendente è un record avente (almeno) i campi vendite e indirizzo_mail
         - La funzione open_db prende l'indirizzo di un database e una password e restituisce una connessione al database
