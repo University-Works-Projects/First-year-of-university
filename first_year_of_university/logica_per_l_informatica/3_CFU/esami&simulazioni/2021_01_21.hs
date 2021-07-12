@@ -45,11 +45,43 @@
     -- Svolgimento
 
         -- Domanda 1
-            -- 1.1 BIsogna aggiungere alla seconda implementazione
+            -- 1.1 Bisogna aggiungere alla seconda implementazione
             -- 1.2 Le due code devono avere lunghezza <= 10
 
         -- Domanda 2
+            -- Soluzione cone chiamata esplicita
+                gen_accoda c e a q [] = e     -- controll empty add queue
+                gen_accoda c e a q (x : l) =
+                    if c q then gen_accoda c e a (a x q) l
+                    else e 
 
+                accoda1 l = gen_accoda c1 e1 a1 q
+                -- Dove:
+                    c1 q = !(length q == 10)
+                    e1 = []
+                    a1 x q = x : q
+                
+                accoda2 l = gen_accoda c2 e2 a2 q
+                -- Dove:
+                    c2 q = len >= 10
+                    e2 = ([], 0)
+                    a2 x q = (x : queue, len + 1)
+
+            -- Soluzione con le type class
+                class accodaGen x q where
+                    c:: q -> Bool               -- Da un parametro q ritorna un Bool
+                    e:: q                       -- Ritorna un tipo q
+                    a:: x -> q -> q             -- Da un parametro x ed uno q ritorna un tipo q
+
+                -- La seguente riga è da leggersi come segue:
+                    -- Per tutti gli e, x, q per cui esiste una istanza di accodaGen, si ha che data una lista di 1, si ottiene una lista di q.
+                gen_accoda :: accodaGen e x q => [q] -> [q]
+                gen_accoda [] = e
+                gen_accoda (x : l) =
+                    if c q then gen_accoda (a x q) l
+                    else e
+                
+                instance accodaGen 
 
 -- Es 2
 

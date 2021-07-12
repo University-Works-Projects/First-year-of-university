@@ -29,7 +29,7 @@
         -- Soluzione con chiamata esplicita delle funzioni
 
             -- Funzione generalizzante
-                gen_trova c b [] = []       -- condition (per gli if-else), binary (per una scelta binaria)
+                gen_trova c b [] = []            -- condition (per gli if-else), binary (per una scelta binaria)
                 gen_trova c b (x : l) =
                     if c x then b x : gen_trova c b l
                     else gen_trova c b l
@@ -48,7 +48,7 @@
             -- Istanza della seconda funzione
                 trova_validi l = gen_trova c2 b2 l
                 -- Dove:
-                    c2 x = (x < 0 || x > 30)!   -- Si nega così da poter invertire il costrutto dell'if con quello dell'else (per quanto riguarda trova_validi)
+                    c2 x = !(x < 0 || x > 30)    -- Si nega così da poter invertire il costrutto dell'if con quello dell'else (per quanto riguarda trova_validi)
                     b2 x = "ok"
                 -- e dunque:
                     gen_trova c2 b2 [] = []
@@ -56,12 +56,15 @@
                         if c2 x then (b2 x) : gen_trova c2 b2 l
                         else gen_trova c2 b2 l
 
+
+
         -- Soluzione con l'uso di una type class
-            class trovaClass c b where
-                c: a -> Bool
-                b: a -> b       -- Si scrive che si ritorna un z per generalizzare l'output, in quanto (si assume) che z possa assumere qualsiasi valore
-            
-            -- La seguente riga si può leggere come: per tutti gli a e b, per cui esiste un istanza di Filtraggio, data una lista di a puoi ottenere una lista di b.
+            class trovaClass a b where
+                c:: a -> Bool
+                b:: a -> b       -- Si scrive che si ritorna un z per generalizzare l'output, in quanto (si assume) che z possa assumere qualsiasi valore
+
+            -- La seguente riga si può leggere come segue:
+                -- Per tutti gli a e b per cui esiste un istanza di Filtraggio, si ha che data una lista di a, si ottiene ottenere una lista di b.
             gen_trova :: trovaClass a b => [a] -> [b]   -- Il codice del prof è errato, la freccia prima di [b] è "->" anzichè "=>"
             gen_trova [] = []
             gen_trova (x : l) =
@@ -72,8 +75,8 @@
                 c x = x >= 18
                 b x = x
             
-            instance trovaClass int String where        -- Istanza di trova_validi
-                c x = (x < 0 || x > 30)!
+            instance trovaClass int String where     -- Istanza di trova_validi
+                c x = !(x < 0 || x > 30)
                 b x = "ok"
 
             {- Spiegazione: DA COMPLETARE DA COMPLETARE DA COMPLETARE DA COMPLETARE DA COMPLETARE DA COMPLETARE DA COMPLETARE DA COMPLETARE
