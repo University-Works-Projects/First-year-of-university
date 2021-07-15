@@ -1,0 +1,68 @@
+PARTS:
+
+    // C1
+    Not(in=instruction[15],out=ni);
+    // Mux1
+	Mux16(a=outtM,b=instruction,sel=ni,out=i);
+
+    // C2
+	Or(a=ni,b=instruction[5],out=intoA);
+    // aREGISTER
+	ARegister(in=i,load=intoA,out=A,out[0..14]=addressM);
+
+    // C3
+	And(a=instruction[15],b=instruction[12],out=AandM);
+    // Mux2
+	Mux16(a=A,b=inM,sel=AandM,out=AM);
+	
+    // C4 = un bit di intruction
+	ALU(x=D,y=AM, zx=instruction[11],nx=instruction[10],zy=instruction[9],ny=instruction[8],f=instruction[7],no=instruction[6], out=outtM,out=outM,zr=zr,ng=ng);
+
+    // C5
+	And(a=instruction[15],b=instruction[4],out=intoD);
+    // dRegister
+	DRegister(in=outtM,load=intoD,out=D);
+
+    // C6
+	And(a=instruction[15],b=instruction[3],out=writeM);
+
+    // PARTE MENO CHIARA ------------------------------------------------------------------------------------------------------------------------------------
+
+    // -ng --> out < 0 ?
+	Not(in=ng,out=pos);
+    // -zr --> out == 0 ?
+	Not(in=zr,out=nzr);
+    // jgt --> out > 0 ?
+	And(a=instruction[15],b=instruction[0],out=jgt);
+
+    // -ng AND -zr
+	And(a=pos,b=nzr,out=posnzr);
+    // jgt AND (-ng AND -zr)
+	And(a=jgt,b=posnzr,out=ld1);
+
+    // jeq --> out = 0
+	And(a=instruction[15],b=instruction[1],out=jeq);
+    // jeq AND zr
+	And(a=jeq,b=zr,out=ld2);
+
+    // jlt --> out < 0
+	And(a=instruction[15],b=instruction[2],out=jlt);
+    // jlt AND ng
+	And(a=jlt,b=ng,out=ld3);
+
+    // is out >= 0 ?
+	Or(a=ld1,b=ld2,out=ldt);
+	// is out < 0 ?
+    Or(a=ld3,b=ldt,out=ld);
+
+    // DUBBI:
+    1. 
+    2. Come si collegano queste ultime 25 righe circa al load del PC? cosa c'entrano?
+    RISPOSTA 2: ld = 1 quando si ha un dato in considerazione, ovvero se si ha un dato
+    in analisi, OVVERO da poter caricare sul PC.
+    Se ld = 0 vuol dire che non si ha un dato da cui decretare se sia <,=,> di 0,
+    ergo non il PC non ha nulla da caricare.
+
+	PC(in=A,load=ld,inc=true,reset=reset,out[0..14]=pc);
+
+}
