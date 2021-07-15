@@ -1,11 +1,11 @@
 /*
-Assuming this --> STACK| x
+    Assuming this --> STACK| x
 
-VM HACK code:
-neg --> x = -x
+    VM HACK code:
+    neg --> x = -x
 
-ASSEMBLY HACK code:
-If RAM[x] = -RAM[x]
+    ASSEMBLY HACK code:
+    If RAM[x] = -RAM[x]
 
 */
 
