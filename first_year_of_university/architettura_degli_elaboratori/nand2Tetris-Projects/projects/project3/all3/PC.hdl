@@ -1,0 +1,49 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/PC.hdl
+
+/**
+ * A 16-bit counter with load and reset control bits.
+ * if      (reset[t] == 1) out[t+1] = 0
+ * else if (load[t] == 1)  out[t+1] = in[t]
+ * else if (inc[t] == 1)   out[t+1] = out[t] + 1  (integer addition)
+ * else                    out[t+1] = out[t]
+ */
+
+CHIP PC {
+    IN in[16],load,inc,reset;
+    OUT out[16];
+
+    PARTS:
+	
+	Inc16 (in = RES, out = incRES);
+	Mux16 (a = RES, b = incRES, sel = inc, out = incOUT1);
+	Mux16 (a = incOUT1, b = in, sel = load, out = loadOUT2);
+	Mux16 (a = loadOUT2, b[0..15] = false, sel = reset, out = resetOUT3);
+	Register (in = resetOUT3, load = true, out = out, out = RES);
+	
+	/* già meglio
+	Mux16 (a = RES, b = false, sel = reset, out = resetOUT1);
+	Register (in = in, load = load, out = registerOUT);
+	Mux16 (a = resetOUT1, b = registerOUT, sel = reset, out = loadOUT2);
+	Inc16 (in = loadOUT2, out = incOUT);
+	Mux16 (a = loadOUT2, b = incOUT, sel = reset, out = out, out = RES);
+	*/
+	
+	
+	/* shit
+	//reset + inc
+    Mux16 (a = in, b = false, sel = reset, out = resetOUT1);
+	Inc16 (in = resetOUT1, out = incresetOUT1);
+	Mux16 (a = resetOUT1, b = incresetOUT1, sel = inc, out = OUT1);
+	
+	//register + inc
+	Register (in = in, load = load, out = loadOUT2);
+	Inc16 (in = loadOUT2, out = incloadOUT2);
+	Mux16 (a = loadOUT2, b = incloadOUT2, sel = inc, out = OUT2);
+	
+	Mux16 (a = OUT1, b = OUT2, sel = load, out = out);
+*/
+
+}
