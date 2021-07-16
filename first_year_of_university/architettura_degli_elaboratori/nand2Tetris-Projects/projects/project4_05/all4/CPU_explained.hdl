@@ -1,0 +1,285 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/05/CPU.hdl
+
+/**
+ * The Hack CPU (Central Processing unit), consisting of an ALU,
+ * two registers named A and D, and a program counter named PC.
+ * The CPU is designed to fetch and execute instructions written in 
+ * the Hack machine language. In particular, functions as follows:
+ * Executes the inputted instruction according to the Hack machine 
+ * language specification. The D and A in the language specification
+ * refer to CPU-resident registers, while M refers to the external
+ * memory location addressed by A, i.e. to Memory[A]. The inM input 
+ * holds the value of this location. If the current instruction needs 
+ * to write a value to M, the value is placed in outM, the address 
+ * of the target location is placed in the addressM output, and the 
+ * writeM control bit is asserted. (When writeM==0, any value may 
+ * appear in outM). The outM and writeM outputs are combinational: 
+ * they are affected instantaneously by the execution of the current 
+ * instruction. The addressM and pc outputs are clocked: although they 
+ * are affected by the execution of the current instruction, they commit 
+ * to their new values only in the next time step. If reset==1 then the 
+ * CPU jumps to address 0 (i.e. pc is set to 0 in next time step) rather 
+ * than to the address resulting from executing the current instruction. 
+ */
+
+// ************************************************************************************************************************************************************************************************************
+
+/*
+    PREMESSE:
+
+    Il bus di input instruction è a 16 bit codificati in questo modo:
+    A-instruction --> 0 b14 b13 b12 b11 b10  b9  b8  b7  b6  b5  b4  b3  b2  b1  b0
+    C-instruction --> 1  1   1   a  c1  c2   c3  c4  c5  c6  d1  d2  d3  j1  j2  j3
+    Le A-instruction contengono un numero in binario.
+    Le C-instruction contengono istruzioni da eseguire.
+
+    Alcune istruzioni vengano negate apparentemente senza motivo, ma in HDL
+    non si può fare altimenti al fine di ottenere il risultato desiderato.
+    Questo caso sarà indicato con (*).
+
+    Le varie C dello schema sono i bit di controllo dei circuiti a cui
+    indicano, sono determinanti per modificare le operazioni dei
+    relativi componenti
+    */
+
+    /*
+    SPIEGAZIONE:
+    - C1(*):
+        Si nega il bit instruction[15], ovvero il bit che indica se l'istruzione
+        sia una A-instruction oppure una C-instruction.
+        Perchè lo si nega?
+        Perchè sul registro A si può caricare qualcosa sse:
+        instruction = A-instruction
+        instruction = C-instruction AND instruction[5] = 1
+        Ma se instruction[15] = 0 (ovvero si ha una A-instruction) e
+        instruction[5] = 0 (un bit della cifra caricata in A-instruction), sul
+        registro A non si carica nulla, nonostante si abbia una A-instruction.
+        Questo problema si risolve negando instruction[15], così che nella
+        combinazione con l'OR (vedi C2) si ottengano sempre load corretti per
+        il registro A.
+
+    - Mux1:
+        Se si carica una A-instuction il sel di Mux1 sarà 1 e manderà in output outALU.
+        Se si carica una C-instuction il sel di Mux1 sarà 0 e manderà in output instruction.
+
+        Questo multiplexer decide se fornire al registro A l'output dell'ALU (a)
+        o il bus di istruzioni (b) date in input alla CPU.
+        Dunque le C instruction (instruction[15] = 1) dicono che sul registro A
+        debba essere caricato l'output dell'ALU, mentre una A instruction (istr[15]=0)
+        dice che sul rergistr0 A debba esser caricato il bus instruction (fornito in 
+        input alla CPU). 
+
+    - C2(*): (ez clap)
+        La semantica di questo circuito nella CPU è semplice, deve decidere se caricare
+        qualcosa sul registro A o meno.
+        Come lo fa?
+        Premessa: Si carica qualcosa sul registro A sse si ha un A-instruction oppure
+        se è specificato nel bit [5] del bus instruction.
+        
+        Ergo si ha: C2 = -instruction[15] OR instruction[5]
+        Ovvero:
+        instruction[15]    -instruction[15]    instruction[5]      OR 
+            0  A-instr          1                   0            1   --> A-instruction
+            0  A-instr          1                   1            1   --> A-instruction
+            1  C-instr          0                   0            0   --> C-instruction con d1 = 0
+            1  C-instr          0                   1            1   --> C-instruction con d1 = 1
+        Basta guardare la tabella e sapere cosa siano e come funzionano le 
+        A-instruction e le C-instruction per capire il funzionamento. 
+
+    - A-REGISTER:
+        L'input è l'output del Mux1 il load è C2 (scontato), mentre:
+            - Il bus da 16 bit in output viene mandato in input al Mux2
+            - I primi 15 bit di sono l'uscita della CPU addressM.
+
+    - C3:
+        instruction[15] AND instruction[12]
+        Ovvero:
+        instruction[15]    instruction[12]   AND 
+            0                  0            0
+            0                  1            0
+            1                  0            0
+            1                  1            1   --> C-instruction, a = 1
+        Dunque questo bit di controllo è vero sse si ha una C-instruction
+        con a = 1, ovvero le operazioni riguardanti il registro M.
+        (a = 1 vuol dire che le operazioni dei bit c1..c6 riguardano
+        il registro M).
+
+    - Mux2:
+        Se C3 = 0, ovvero non vi sono modifiche da fare al registro M,
+        Mux2 darà in output l'output del registro A (ovvero il bus instruction).
+        Mentre se C3 = 1, ovvero bisogna fare delle operazioni sul registro M,
+        tali operazioni verranno svolte nell'ALU, caricadno in output il bus
+        inM (inM è un input della CPU).
+
+    - C4:
+        C4 è il bit di controllo dell'ALU, è uno dei bit c1..c6 del bus
+        instructions. Gestisce semplicemenete una delle 6 operazioni 
+        dell'ALU, può anche non esser visto come un bit di controllo.
+
+    - ALU: (ez clap)
+        Si è concluso dal precedente componente + relativo bit di controllo che
+        uno dei due suoi input sarà: o inM, oppure il bus instruction.
+        L'altro input dell'ALU è il l'output del D-REGISTER.
+
+        Il resto del funzionamento dell'ALU riguarda le operazioni da svolgere
+        determinate dai bits c1..c6 di instructions[6..11].
+        (in teoria sono influenzate anche dal 12esimo bit a, ma ciò è stato tenuto in 
+        considerazione e decretato precedentemente in C3).
+
+        Dunque l'ALU anche se sembra complessa, non fa nulla di più complicato del
+        normale, sono da tenere sott'occhio i suoi due bit di output zr e ng.
+
+        P.S: Teoricamente invertendo l'input del pin x con l'input del pin y
+        gli output dell'ALU non devrebbero variare.
+
+    - C5:
+        C5 = instruction[15] AND instruction[4]
+        Ovvero:
+        instruction[15] instruction[4] AND 
+        0                   0            0
+        0                   1            0
+        1                   0            0
+        1                   1            1 --> C-instruction, d2 = 1
+        
+        Dunque questo bit di controllo, che funge da load al D-REGISTER, sarà vero sse
+        si ha una C-instruction con d2 = 1 (d2 è il bit che dice se bisogna scrivere
+        sul D-register o meno).
+
+    - D-REGISTER:
+        Ha in input l'out a 16 bit dell'ALU e in base a C5 si decide se aggiornare
+        questo valore con un uno nuovo, o se tenere lo stesso.
+
+    - C6: Ez clap
+        C6 = instruction[15] AND instruction[3]
+        Ovvero:
+        instruction[15] instruction[3] AND 
+        0                   0            0
+        0                   1            0
+        1                   0            0
+        1                   1            1 --> C-instruction, d3 = 1
+        Dunque sarà vero sse avendo una C-instruction con il bit d3 vero.
+        (d3 decide se scrivere o meno su M).
+        Questo bit determina l'output writeM della CPU.
+
+    - C7.0/C7.1 (*): not Ez
+        *è la parte più complessa della CPU (a parer mio)*
+        
+        Questo bit di controllo è dato dai primi tre bit del bus instruction,
+        ovvero instruction[0..2] e dai due bit di output dell'ALU, che danno
+        informazioni sull'output dell'ALU
+
+        Questo bit di controllo deve dire al PC se caricare qualcosa o no.
+        Ciò viene decretato in base a:
+            - I bit j1 j2 j3, ovvero instruction[0..2], i bit che determinano
+            se ed in base a cosa ci debba essere un salto. (vedi slide)
+            - I bit di output dell'ALU, che danno abbastanza informazioni
+            per capire se l'output si maggiore(>), minore(<) o uguale(=) a 0.
+        
+        Non ne sono sicuro al 100% al riguardo, ma credo che il Jump sia il
+        caricamento sul registro load.
+        Praticamente se una delle condizioni di jump descritte nel circuito
+        risulta vera, viene posto ad 1 il load del PC, ergo avendo un caricamento
+        solo quando si ha un jump richiesto (dal bus instruction[0..2]) e
+        soddisfatto, si ha anche un load. 
+
+    - PC:
+        Premessa: L'output pc della CPU, ovvero l'uscita del PC, ha a che fare in
+        modo indiretto con l'input instruction.
+        In poche parole instruction può includere un jump. Qualora esso sia un salto
+        condiionato dipenderà dagli output dell'ALU zr ed ng.
+
+        reset == 1 --> si mette 0 in PC (se fa ripartice il computer)
+        reset == 0 --> La CPU controlla se c'è un jump (controllJUMP = 1 se c'è):
+            - controllJUMP == 1 --> inPC = outAREGISTER
+            - controllerJUMP == 0 --> Si incrementa di 1 il registro PC (inc =1)
+
+        P.S: Il motivo per cui vengono scritti solo i primi 15 bit del bus di
+        uscita del PC, che è da 16 bit, è che nella CPU il PC ha il compito di
+        scrivere addressM, che è un bus a 15 bit. ez
+
+    - DUBBI:  
+        1. addressM, da chi è realmente definito?
+        2. Perchè incPC è sempre vera?
+
+        1. addressM è definito dal registro A perchè: p.e:
+            in assembler:
+            @n
+            M = Memory[A] (oppure M = A) // La locazione di A è salvata in M
+        2. In caso di jump = 1 il contenuto di PC è incrementato
+            indipendentemente dalla variabile inc di PC, altrimenti serve
+            per incrementare l'istruzione del PC di 1 (altrimente il programma
+            non andrrebbe mai avanti).
+            
+*/
+
+
+CHIP CPU {
+
+    IN  inM[16],         // M value input  (M = contents of RAM[A])
+        instruction[16], // Instruction for execution
+        reset;           // Signals whether to re-start the current
+                         // program (reset==1) or continue executing
+                         // the current program (reset==0).
+
+    OUT outM[16],        // M value output
+        writeM,          // Write to M? 
+        addressM[15],    // Address in data memory (of M)
+        pc[15];          // address of next instruction
+
+    PARTS:
+	// C1
+    Not(in = instruction[15], out = notISTR15);
+    // Mux1
+    Mux16(a = outALU, b = instruction, sel = notISTR15, out = outMUX1);
+
+    // C2
+    Or(a = notISTR15, b = instruction[5], out= C2loadAR);
+    // A-REGISTER
+    ARegister(in = outMUX1, load = C2loadAR, out = AREGISTERout, out[0..14] = addressM); // chiarire addressM
+
+    // C3
+    And(a = instruction[15], b = instruction[12], out = C3modifyM);
+    // Mux2
+	Mux16(a = AREGISTERout, b = inM, sel = C3modifyM, out = outMUX2);
+
+    // C4 è uno dei sei bit delle operazioni dell'ALU
+	// ALU
+    ALU(x = DREGISTERout, y = outMUX2, zx = instruction[11], nx = instruction[10], zy = instruction[9], ny = instruction[8], f = instruction[7], no = instruction[6], out = outALU, out = outM, zr = zr, ng = ng);
+
+    // C5
+    And(a = instruction[15], b = instruction[4], out = C5loadDR);
+    // D-REGISTER
+    DRegister(in = outALU, load = C5loadDR, out = DREGISTERout);
+
+    // C6
+    And(a = instruction[15], b = instruction[3], out = writeM);
+    
+    // C7.0/7.1
+    
+    // Si controlla se out > 0 
+    // Si negano i due bit di output dell'ALU per un motivo analogo a C1, C2 con il registro A
+    Not(in = zr, out = notZR);
+    Not(in = ng, out = notNG);
+    And(a = notZR, b = notNG, out = outisGT);
+    And(a = instruction[0], b = outisGT, out = jgt);
+    
+    // Si controlla se out = 0
+    And(a = instruction[1], b = zr, out = jeq);
+    
+    // Si controlla se out < 0
+    And(a = instruction[2], b = ng, out = jlt);
+
+    // Controlla se il bus instruction richiede una operazione di controllo e se essa risulti vera o meno 
+    Or(a = jgt, b = jeq, out = jgtORjeq);
+    Or(a = jgtORjeq, b = jlt, out = jgtORjeqORjlt);
+
+    // Controlla che si tratti di una C-instruction
+    And(a = instruction[15], b = jgtORjeqORjlt, out = JUMPres);
+
+    // PC
+    PC(in = AREGISTERout, load = JUMPres, inc = true, reset = reset, out[0..14] = pc); 
+    
+}

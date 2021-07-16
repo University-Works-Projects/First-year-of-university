@@ -1,6 +1,6 @@
 PRINCIPALI COMANDI TERMINALE LINUX
 
-cd directory --> Ci si sosta in quella cartella
+cd directory --> Ci si sposta in quella cartella
 
 ls --> Mostra il contenuto disponibile
 
@@ -53,7 +53,7 @@ C/C++:
 		int tre = 3;
 		char t = tre + '0';
 		cout << t;
-		OUTPUT: 3 (sottoforma di char ovviamente)
+		OUTPUT: 3 (sottoforma di char, ovviamente)
 
 C++ features:
 
