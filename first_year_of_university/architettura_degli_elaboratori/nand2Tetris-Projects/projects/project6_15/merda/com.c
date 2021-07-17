@@ -235,6 +235,126 @@ s);
 }
 
 List returnFunction(int *error)
+
+
+
+
+
+
+
+      /*
+        if (isString2inString1 (in_row, "push")) {   // strcmp --> 0 sse s1 == s2
+            char address[NUM];
+
+            if (isString2inString1 (in_row, "constant")) {
+                fprintf (in_outFile, "%s", "// push constant\n");
+                stringNumeber (in_row, 't', address);
+                push (in_outFile, 0, address);
+            }
+            else if (isString2inString1(in_row, "local")) {
+                fprintf (in_outFile, "%s", "// push local\n");
+                stringNumeber (in_row, 'l', address);
+                push (in_outFile, 1, address);
+            }
+            else if (isString2inString1(in_row, "argument")) {
+                fprintf (in_outFile, "%s", "// push argument\n");
+                stringNumeber (in_row, 't', address);
+                push (in_outFile, 2, address);
+            }
+            else if (isString2inString1(in_row, "static")) {
+                fprintf (in_outFile, "%s", "// push static\n");
+                stringNumeber (in_row, 'c', address);
+                push (in_outFile, 3, address);
+            }
+            else if (isString2inString1(in_row, "this")) {
+                fprintf(in_outFile, "%s", "// push this\n");
+                stringNumeber(in_row, 's', address);
+                push(in_outFile, 4, address);
+            }
+            else if (isString2inString1(in_row, "that")) {
+                fprintf (in_outFile, "%s", "// push that\n");
+                stringNumeber (in_row, 't', address);
+                push (in_outFile, 5, address);
+            }
+            //else fprintf(in_outFile, "%s", "ERROR POP\n");
+        }
+
+        else if (isString2inString1(in_row, "pop")){
+            char address[NUM];
+
+            if (isString2inString1(in_row, "local")){
+                fprintf(in_outFile, "%s", "// pop local\n");
+                stringNumeber(in_row, 'l', address);
+                pop(in_outFile, 0, address);
+            }
+            else if (isString2inString1(in_row, "argument")){
+                fprintf(in_outFile, "%s", "// pop argument\n");
+                stringNumeber(in_row, 't', address);
+                pop(in_outFile, 1, address);
+            }
+            else if (isString2inString1(in_row, "static")){
+                fprintf(in_outFile, "%s", "// pop static\n");
+                stringNumeber(in_row, 'c', address);
+                pop(in_outFile, 2, address);
+
+            }
+            else if (isString2inString1(in_row, "this")){
+                fprintf(in_outFile, "%s", "// pop this\n");
+                stringNumeber(in_row, 's', address);
+                pop(in_outFile, 3, address);
+
+            }
+            else if (isString2inString1(in_row, "that")){
+                fprintf(in_outFile, "%s", "// pop that\n");
+                stringNumeber(in_row, 't', address);
+                pop(in_outFile, 4, address);
+
+            }
+            //else fprintf(in_outFile, "%s", "ERROR PUSH\n");
+
+        }
+
+        else {
+            char labelName[SIZE];
+
+            if (isString2inString1(in_row, "label")){
+                fprintf(in_outFile, "%s", "// label\n");
+                createLabel(in_row, labelName);
+                label(in_outFile, labelName);
+            }
+            else if (isString2inString1(in_row, "if-goto")){
+                fprintf(in_outFile, "%s", "// if-goto\n");
+                createLabel(in_row, labelName);
+                ifgoto(in_outFile, labelName);
+            }
+            else if (isString2inString1(in_row, "goto") && isString2inString1(in_row, "if-goto") == 0 ){    // In teoria controllare la non presenza di "if-goto" è superfluo
+                fprintf(in_outFile, "%s", "// goto\n");
+                createLabel(in_row, labelName);
+                goto_(in_outFile, labelName);
+            }
+            else if (isString2inString1(in_row, "call")){   // call nameFile.nameFunction nArgs
+                fprintf(in_outFile, "%s", "// call\n");
+                char nameFile[SIZE], nameFunction[SIZE], nArgs;
+                nArgs = call(in_row, nameFile, nameFunction);
+                // Ora si hanno separatamente tutte i dati necessari per continuare
+
+                printCall(in_outFile, nameFile, nameFunction, nArgs);
+            }
+            else if (isString2inString1(in_row, "function")){
+                fprintf(in_outFile, "%s", "// function\n");
+                char nameFunction[SIZE];
+                int nTimes = function(in_row, nameFunction);
+                printFunction(in_outFile, nameFunction, nTimes);
+            }
+            else if (isString2inString1(in_row, "return")){
+                fprintf(in_outFile, "%s", "// return\n");
+                printReturn(in_outFile);
+            }
+            //else fprintf(in_outFile, "%s", "ERROR INVALID ROW (final else case)\n");
+        }
+    */
+
+
 {
     List out;
     init(&out);

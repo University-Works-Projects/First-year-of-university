@@ -15,9 +15,10 @@ Vai tramite terminale, nella cartella contenente il programma da eseguire.
 
 Eseguire un programma scritto in:
 C:
-	- gcc -c nomeFile.c 												--> Creazione del file compilato nomeFile.o
-	- gcc -o nomeFileEseguibile nomefile.o 			--> Creazione del file eseguibile privo di estensione
-	- ./nomeFileEseguibile 											--> Esecuzione del programma eseguibile
+	- gcc -c nomeFile.c 								--> Creazione del file compilato nomeFile.o
+	- gcc -o nomeFileEseguibile nomefile.o 				--> Creazione del file eseguibile privo di estensione
+	- ./nomeFileEseguibile 								--> Esecuzione del programma eseguibile
+	- make clean per pulire la cartella (contenete il programma eseguito) dai file di scarto
 	DEBUG (atom): tasto destro sul file .o dopo averlo appena compilato
 
 C++:
@@ -27,17 +28,21 @@ C++:
 	DEBUG (atom): tasto destro sul file "a.out"
 
 JAVA:
-	- javac -cp ".." *.java																				--> compila tutti i file .java e per ogni di essi crea il corrispettivo file .class
+	- javac -cp ".." *.java												--> compila tutti i file .java e per ogni di essi crea il corrispettivo file .class
 	- java -cp ".." mnkgame.MNKGame 3 3 3 mnkgame.GroupPlayer			--> Comando per far partire i bot del progetto
-	- rm -r *.class 																							--> Rimuove i file .class generati dalla compilazione
+	- rm -r *.class 													--> Rimuove i file .class generati dalla compilazione
 	DEBUG (Eclipse): use Eclipse debugger
 _____________________________________________________________________________
 
 AGGIORNAMENTO VISUAL STUDIO CODE:
-Per aggiornare visual studio code copiare ed incollare nel terminale questo:
-wget https://vscode-update.azurewebsites.net/latest/linux-deb-x64/stable -O /tmp/code_latest_amd64.deb
-sudo dpkg -i /tmp/code_latest_amd64.deb
-_____________________________________________________________________________
+	Per aggiornare visual studio code copiare ed incollare nel terminale questo:
+		1. wget https://vscode-update.azurewebsites.net/latest/linux-deb-x64/stable -O /tmp/code_latest_amd64.deb
+		   sudo dpkg -i /tmp/code_latest_amd64.deb
+	Se non funzione provare con questo
+		2. sudo apt-get install code
+	Per vedere la versione di vscode
+		code --version
+__________________________________________________________________________
 
 git branch -m
 _____________________________________________________________________________

@@ -7,20 +7,20 @@
 
 #include "allFunctions.h"
 
-// Rimepe una stringa vuota con il nome di un file (si ferma prima del punto)
-void changeName(char in_nameFile[], char emptyNameFile[]){
+// Rimepe una stringa vuota con il nome di un file (si ferma prima del punto che precede l'estensione di tale file)
+void changeFileName (char in_nameFile[], char emptyNameFile[]) {
     int i = 0, j = 0;
-    while (in_nameFile[i] != '/') i++;
+    while (in_nameFile[i] != '/') { i++; }
     i++;
-    while (in_nameFile[i] != '.'){
+    while (in_nameFile[i] != '.') {
         emptyNameFile[j] = in_nameFile[i];
         i++; j++;
     }
 }
 
 // Controlla se la stringa string1 contiene la stringa string2
-// if (s2 is in s1() return 1; else return 0 
-int isString2inString1 (char in_string1[], char in_string2[]){
+// if (s2 is in s1) then return 1 else return 0
+int isString2inString1 (char in_string1[], char in_string2[]) {
     int i = 0, s1Length = strlen(in_string1);          // index per s1
     int j = 0, s2Length = strlen(in_string2);          // index per s2
 
@@ -46,23 +46,22 @@ int isString2inString1 (char in_string1[], char in_string2[]){
         }
         return 0;              // Se l'esecuzione della funzione arriva fino a qua vuol dire che in s1 non c'è s2, dunque ritorna 0.
     } else return 0;           // Se i parametri minimi da rispettare non sono validi ritorna subito 0.
-
 }
 
-// S -> S - Data una stringa vuota ci inserisce il nome del label dichiarato
-void createLabel(char in_row[], char in_labelName[]){
+// Data una stringa vuota, la modifica inserendoci il nome del label dichiarato
+void createLabel (char in_row[], char in_labelName[]) {
     int i = 0, j = 0;
-    while(in_row[i] != ' '){i++;}
+    while (in_row[i] != ' ') {i++;}
     i++;
-    while(in_row[i] |= '\0'){
+    while (in_row[i] |= '\0') {
         in_labelName[j] = in_row[i];
         i++; j++;
     }
     in_labelName[j] = '\0';
 }
 
-// S -> S - Riempe una stringa (vuota) data con la parte numerica di una stringa data.
-void stringNumeber(char in_row[], char specialCharacter, char emptyString[]){
+// Riempe una stringa vuota con la parte numerica di un'altra stringa.
+void stringNumeber (char in_row[], char specialCharacter, char emptyString[]) {
     int i = 0;
     for (i = 0; ( in_row[i] != specialCharacter || !(charEqNum(in_row[i+2])) ); i++){}      // Incrementa i sino ad arrivare a due posizioni prima del numero
     i += 2; int p = 0;                                                                      // Si posizione i all'indizce di inizio del numero
@@ -74,7 +73,7 @@ void stringNumeber(char in_row[], char specialCharacter, char emptyString[]){
 }
 
 // Data una riga: call nameFile.nameFunction nArgs ritorna in char nArgs, riempe stringhe con nameFile e nameFunction
-char call(char in_row[], char emptyFileName[], char emptyFunctionName[]){
+char call (char in_row[], char emptyFileName[], char emptyFunctionName[]) {
     int i = 0, j = 0;
     char nArgs;
 
@@ -103,12 +102,12 @@ char call(char in_row[], char emptyFileName[], char emptyFunctionName[]){
     return nArgs;
 }
 
-// 
-int function(char in_row[], char emptyFunctionName[]){
+// S -> I: Ritornail valore n di una stringa del tipo: "function nameFile.nameFunction n" 
+int function (char in_row[], char emptyFunctionName[]) {
     int i = 0, j = 0;
-    while(in_row[i] != '.') i++;            // function nameFile.
+    while (in_row[i] != '.') i++;            // function nameFile.
     i++;
-    while(in_row[i] != ' '){                // function nameFile.nameFunction
+    while (in_row[i] != ' ') {                // function nameFile.nameFunction
         emptyFunctionName[j] = in_row[i];
         i++; j++;
     }
