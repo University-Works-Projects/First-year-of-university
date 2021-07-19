@@ -44,7 +44,11 @@ AGGIORNAMENTO VISUAL STUDIO CODE:
 		code --version
 __________________________________________________________________________
 
-git branch -m
+GIT HUB:
+	Dopo aver crato una branch, per pusharla:
+		git push --set-upstream origin PrimaModificaDiEma
+	Per aggiornare una branch con le modifiche del main (possono esserci conflitti):
+		git pull origin main
 _____________________________________________________________________________
 
 Se tentando di eseguire un file java, si ottiene il seguente errore: "java.lang.ClassNotFoundException: ...":
