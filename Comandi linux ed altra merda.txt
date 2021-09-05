@@ -87,3 +87,11 @@ C++ features:
 				}
 				return arr;
 		}
+
+	int main () {
+		int* arr;
+		arr = createArr (length);
+		
+		int** matrix;
+		matrix = createMatrix(m, n);
+	}
