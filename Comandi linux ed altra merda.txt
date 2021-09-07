@@ -51,10 +51,13 @@ GIT HUB:
 		git pull origin main
 _____________________________________________________________________________
 
-Se tentando di eseguire un file java, si ottiene il seguente errore: "java.lang.ClassNotFoundException: ...":
-	- Puoi eseguire il programma in questione da terminale, tramite il comando:
+JAVA - Commands:
+	Se tentando di eseguire un file java, si ottiene il seguente errore: "java.lang.ClassNotFoundException: ...":
+		- Puoi eseguire il programma in questione da terminale, tramite il comando:
 			java -cp "c:/location/of/file" YourProgram.extension
-	- Puoi risolvere l'errore inserendo nel medesimo programma tutto il percorso col comando package --> "package carellaPadre.precorso1.percorso2.ecc.cartellaDelProgramma;"
+		- Puoi risolvere l'errore inserendo nel medesimo programma tutto il percorso col comando package --> "package carellaPadre.precorso1.percorso2.ecc.cartellaDelProgramma;"
+		- Per eseguire un programma .java da terminale, vai nella directory ndi  quest'ultimo e digita:
+			javac className.java
 _____________________________________________________________________________
 
 C/C++:
