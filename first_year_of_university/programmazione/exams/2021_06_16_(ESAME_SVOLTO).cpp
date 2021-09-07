@@ -1,7 +1,4 @@
 // ESAME SVOLTO
-// ESAME SVOLTO
-// ESAME SVOLTO
-// ESAME SVOLTO
 
 #include <iostream>
 #include <stdio.h>
@@ -71,7 +68,7 @@ int altezza (arrNode A[], int pos = 0) {
   else return 0;                                              // Caso 4.A: Si ha una foglia
 }
 
-/*  Spiegazione della funzione rightMost
+/*  Spiegazione della funzione rightMost (SPIEGAZIONE MANCANTE)
 
   Caso 1.B:
   Caso 2.B:
@@ -197,6 +194,7 @@ pList es2a (pList lista, float soglia) {
 
   return res;
 }
+
 
 
 /*
