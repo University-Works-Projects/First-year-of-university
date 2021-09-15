@@ -5,7 +5,35 @@
 using namespace std;
 
 /*
-  Es 1 - SKIP
+  Es 1
+
+    Dire qual’è il valore restituito dalla seguente funzione, per i diversi valori di a e b. Giustificare la risposta.
+
+    /*
+    int f (int a, int b){
+        int *p;
+        p = &a;
+        while (b > 0) {
+            *p = *p + 2;
+            b = b - 1;
+        }
+        return a;
+    }
+
+    */
+
+    int f (int a, int b) {          // Prende in input due interi
+            int *p;                 // p è un puntatore di interi
+            p = &a;                 // p ora punta valore in locazione di memoria di a
+            while (b > 0) {         // Finchè b > 0
+                *p = *p + 2;        // *p + 2
+                b = b - 1;          // b--
+            }
+            return a;               // Ritorna il valore di a
+        }
+
+    // Dunque la precedente funzione incrememnta a di 2 per b volte, in formula: f(a,b) = a + 2 * b
+
 */
 
 /*

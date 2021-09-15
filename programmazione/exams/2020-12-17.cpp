@@ -24,7 +24,7 @@ using namespace std;
         headInser([1,9,8,7], 7, 3) = [7,1,9,8]
     
     */
-    void headInsert(int in_a[], int newHead, int pos){
+    void headInsert (int in_a[], int newHead, int pos) {
         if (pos == 0) in_a[0] = newHead;
         else if (pos > 0){
             in_a[pos] = in_a[pos-1];
@@ -33,12 +33,12 @@ using namespace std;
     }
 
     int* rcrv_es1 (int in_a[], int in_index, const int length){
-        if (length <= 0) return;
+        if (length <= 0) return; 
         else if (length == 1) return in_a;
         else {
             if (in_index < 0) rcrv_es1(in_a, 0, length);
-            else if (in_index >= 0 && in_index <= length){
-                if (in_a[in_index] % 2 == 0){
+            else if (in_index >= 0 && in_index <= length) {
+                if (in_a[in_index] % 2 == 0) {
                     headInsert(in_a, in_a[in_index], in_index);
                     rcrv_es1(in_a, in_index + 1, length);
                 }
@@ -61,7 +61,7 @@ using namespace std;
 
 */
 
-struct ListaRegali{
+struct ListaRegali {
     char nome[SIZE];
     float prezzo;
     char destinatario[SIZE];
@@ -69,7 +69,7 @@ struct ListaRegali{
 };
 typedef ListaRegali *p_lr;
 
-p_lr a(p_lr in_list, char in_nome[], float in_prezzo, char in_destinatario[]){
+p_lr a (p_lr in_list, char in_nome[], float in_prezzo, char in_destinatario[]) {
     p_lr newRegalo = new ListaRegali;
     strcpy(newRegalo -> nome, in_nome);
     strcpy(newRegalo -> destinatario, in_destinatario);
@@ -79,7 +79,7 @@ p_lr a(p_lr in_list, char in_nome[], float in_prezzo, char in_destinatario[]){
     return (newRegalo);
 }
 
-p_lr b(p_lr in_list, char in_nome[]){
+p_lr b (p_lr in_list, char in_nome[]) {
     p_lr head = in_list;
     while (in_list != NULL){
         if (strcmp(in_list -> nome, in_nome) == 0){
@@ -89,7 +89,7 @@ p_lr b(p_lr in_list, char in_nome[]){
     }
 }
 
-float c(p_lr in_list, char in_destinatario[]){
+float c (p_lr in_list, char in_destinatario[]) {
     if (in_list == NULL) return 0;
     else {
         float spesaTot = 0;
@@ -103,7 +103,7 @@ float c(p_lr in_list, char in_destinatario[]){
 
 // Test functions
 // FL0: Takes list's length from user and asks elements value. (head-insertion (new element are inserted on the list's top)).
-p_lr user_headGen_list(int n){
+p_lr user_headGen_list(int n) {
 	p_lr new_list, el;
 	new_list = NULL;
 	for (int i = 0; i < n; i++) {
@@ -116,8 +116,8 @@ p_lr user_headGen_list(int n){
 }
 
 // FL1: Prints all elements from the inserted pointer onwards (dal puntatre inserito in poi).
-void print_ole(p_lr p){
-	while (p != NULL){
+void print_ole(p_lr p) {
+	while (p != NULL) {
 		cout << "Element: " << p -> prezzo;
 		cout << "  ;  Next: " << p -> next << endl;
 		p = p -> next;
@@ -125,7 +125,7 @@ void print_ole(p_lr p){
 }
 
 // FL4: Remove an element
-p_lr remove(p_lr in_list, int n){
+p_lr remove (p_lr in_list, int n) {
     if (in_list == NULL) return in_list;
     p_lr head = in_list, pre_el = in_list, post_el = NULL;
     // Non serve controllare il primo elemento in quanto se in_list == NULL salta il ciclo e ritorna direttamente in_list
@@ -173,24 +173,24 @@ p_lr remove(p_lr in_list, int n){
 
 */
 
-class Automobile{
+class Automobile {
 protected:
     char modello[SIZE];
     float consumo100km;    
 public:
-    Automobile(char in_modello[], float in_consumo){
+    Automobile (char in_modello[], float in_consumo) {
         strcpy(this -> modello, in_modello);
         this -> consumo100km = in_consumo;
     }
-    float consumo(float in_distanza){
+    float consumo (float in_distanza) {
         return in_distanza * (this -> consumo100km / 100);
     }
-    float costo(float in_distanza, float in_costo){
+    float costo (float in_distanza, float in_costo) {
         return (in_distanza * (in_costo * consumo(in_distanza)));
     }
 };
 
-class Benzina: public Automobile{
+class Benzina: public Automobile {
 protected:
     float serbatoioBenzina;
 public:
@@ -200,23 +200,23 @@ public:
 
 };
 
-class Ibrida: public Automobile{
+class Ibrida: public Automobile {
 protected:
     float serbatoioIbrida;
     int risparmioPercentuale;
 public:
-    Ibrida(char in_modello[], float in_consumo, float in_serbatoioIbrida, int in_risparmioPercentuale): Automobile(modello, consumo100km){
+    Ibrida (char in_modello[], float in_consumo, float in_serbatoioIbrida, int in_risparmioPercentuale): Automobile(modello, consumo100km){
         this -> serbatoioIbrida = in_serbatoioIbrida;
         this -> risparmioPercentuale = in_risparmioPercentuale;
     }
     
 };
 
-class Elettrica: public Automobile{
+class Elettrica: public Automobile {
 protected:
     float batteria;
 public:
-    Elettrica(char in_modello[], float in_consumo, float in_batteria): Automobile(modello, consumo100km){
+    Elettrica(char in_modello[], float in_consumo, float in_batteria): Automobile(modello, consumo100km) {
         this -> batteria = in_batteria;
     }
     

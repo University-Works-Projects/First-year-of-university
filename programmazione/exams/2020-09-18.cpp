@@ -103,7 +103,7 @@ using namespace std;
         return res;
     }
 
-/*  Es 3    INCLOMPLETO per mancanza di voglia
+/*  Es 3 - INCLOMPLETO per mancanza di voglia
 
     Si consideri un sistema per la gestione delle opere d'arte esposte presso un Museo.
     Un Museo è caraterrizzata da un nome e dalla lista di opere d'arte che ospita.

@@ -5,7 +5,32 @@
 using namespace std;
 
 /*
-  Es 1 - SKIP
+  Es 1
+
+  Descrivere il valore restituito dall0invocazione x(n) al variare di n. Giustificare la risposta.
+    /*
+    int x (int n);
+    int y (int n);
+
+    int x (int n){
+        if (n <= 0) return 0;
+        else return 2 * y(n);
+    }
+    int y (int n){
+        if (n <= 0) return 1;
+        else return 2 * x(n-1);
+    }
+
+
+    Risposta:
+       Se n <= 0 allora x(n) restituirà 0
+       Se n > 0  allora x(n) restituirà 4 * n * 0 = 0
+
+       n = 1 --> x(1) = 2 * y(1) = 2 * 2 * (1-1) = 2 * 2 * 0
+       n = 2 --> x(2) = 2 * y(2) = 2 * 2 * x(2-1) = 2 * 2 * (2 * 2 * 0)
+       n = 3 --> x(3) = 2 * y(3) = 2 * 2 * x(3-1) = 2 * 2 * (2 * 2 * (2 * 2 * 0))
+
+
 */
 
 /*

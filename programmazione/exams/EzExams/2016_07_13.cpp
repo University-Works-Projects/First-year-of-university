@@ -6,6 +6,9 @@ using namespace std;
 
 /*
   Es 1 - SKIP
+
+  Scrivere una funzione ricorsiva che segue la seguente definizione:
+
 */
 
 /*
